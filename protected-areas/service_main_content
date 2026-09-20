@@ -1,0 +1,14 @@
+<thead>
+    <tr>
+        <th>[services.table.id]</th>
+        <th class="width-service-name">[services.table.Service]</th>
+        <th>[services.table.rate]</th>
+        <th class="hide-on-mobile" >[services.table.min]</th>
+        <th class="hide-on-mobile" >[services.table.max]</th>
+        <th class="hide-on-mobile average_time-section" ><div data-toggle="tooltip" data-placement="bottom" title="" data-original-title="The average time is based on 10 latest completed orders per 1000 quantity.">[services.table.average_time]</div></th>
+        <th class="hidden-xs hidden-sm service-description__th">[services.table.description]</th>
+    </tr>
+</thead>
+<tbody>
+    [[template.services-list]]
+</tbody>

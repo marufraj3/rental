@@ -1,0 +1,7 @@
+<tr>
+														<td >[childpanel.domain]</td>
+														<td >[childpanel.status]</td>
+														<td >[childpanel.created]</td>
+														<td >[childpanel.expiry]</td>
+														<td >[childpanel.login-button]</td>
+													</tr>

@@ -1,0 +1,12 @@
+<tr >
+														<td >[order.id]</td>
+														<td >[order.date]</td>
+														<td  class="width-40 order-url">[order.url]</td>
+														<td >[order.price]</td>
+														<td >[order.amount]</td>
+														<td >[order.service_name]</td>
+														<td  class="nowrap"><a href="order-history?drip-feed=[order.id]">[order.processed_runs]</a> / [order.total_runs] </td>
+														<td class="nowrap">[order.intervals]</td>
+														<td class="nowrap">[order.total_amount]</td>
+														<td ><span class="[order.status_class]">[order.status]<span> [order.buttons] </td>
+													</tr>

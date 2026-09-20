@@ -1,0 +1,74 @@
+		
+		<div class="paddingbody"></div>
+		<div class="">			
+			<div class="container-fluid container-fluid-spacious">
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3">
+						<div id="main-page" class="well well-float table-responsive">
+							<div class="">
+								[error_message]
+								<form id="yw0" action="" method="post">
+									
+									<div class="form-group" style="[signup.username-field]">
+										<label class="control-label" for="username">[signup.form.full_name]</label>
+										<input class="form-control" name="full_name" id="RegForm_login" type="text">
+										<p class="help-block help-block-error"></p>
+									</div>
+									
+									<div class="form-group">
+										<label class="control-label" for="username">[signup.form.username]</label>
+										<input class="form-control" name="username" id="RegForm_login" required type="text">
+										<p class="help-block help-block-error"></p>
+									</div>
+									
+									<div class="form-group">
+										<label class="control-label" for="email">[signup.form.email]</label>
+										<input class="form-control" name="email" id="email" required type="text">
+										<p class="help-block help-block-error"></p>
+									</div>
+									
+									<div class="form-group" style="[signup.skype-field]" >
+										<label class="control-label" for="skype">[signup.form.skype]</label>
+										<input class="form-control" name="skype" id="RegForm_skype" type="text">
+										<p class="help-block help-block-error"></p>
+									</div>
+									
+									<div class="form-group">
+										<label class="control-label" for="password">[signup.form.password]</label>
+										<input class="form-control" name="password" id="password" type="password">
+										<p class="help-block help-block-error"></p>
+									</div>
+									
+									<div class="form-group">
+										<label class="control-label" for="rpassword">[signup.form.rpassword]</label>
+										<input class="form-control" name="rpassword" id="rpassword" type="password">
+										<p class="help-block help-block-error"></p>
+									</div>
+									
+									
+									<div class="form-group" style="[signup.terms-field]">
+									  <div class="checkbox">
+										<label>
+										  <input type="checkbox" class="terms-accept-checkbox" name="tnc" value="1" />[signup.form.terms] 
+										</label>
+									  </div>
+									</div>
+									
+									[panel.signup.csrf_protection]
+									<div class="g-recaptcha form-group" data-sitekey="[panel.google-sitekey]"></div>
+									<input type="hidden" name="singup" value="Sign Up" />
+									<button type="submit" class="btn btn-default">[signup.form.submit_button]</button>
+								</form>
+							</div>
+						</div>
+						
+						<div class="text-center m-t">
+							<span>[signup.form.login_button_label]</span>
+							<a href="/login" class="btn btn-default m-l">[signup.form.login_button]</a>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		

@@ -1,0 +1,8 @@
+<tr>
+														<td >[refill.id]</td>
+														<td >[refill.date]</td>
+														<td > <a href="order-history?search=[refill.order_id]">[refill.order_id]</a></td>
+														<td >[refill.link]</td>
+														<td >[refill.service_name]</td>
+														<td >[refill.status]</td>
+													</tr>

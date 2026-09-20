@@ -1,0 +1,12 @@
+<div class="row ticket-message-block [ticket.response_classs]">
+												<div class="col-md-11">
+													<div class="ticket-message">
+														<div class="message">[ticket.response.message]</div>
+													</div>
+													<div class="info">
+														<strong>[ticket.response.sender]</strong>
+														<small class="text-muted">[ticket.response.date] [ticket.response.time]</small>
+													</div>
+												</div>
+												<div class="col-sm-1"></div>
+											</div>

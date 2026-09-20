@@ -1,0 +1,32 @@
+	
+	
+		<div class="paddingbody"></div>
+		<div class="container-fluid container-fluid-spacious">
+			<div class="row">
+				
+				<div class="col-md-12">
+					<div id="order-page" class="well well-float table-responsive">
+						<table class="table ">
+							<thead>
+								<tr>
+									<th>[refill.table.id]</th>
+									<th>[refill.table.Date]</th>
+									<th>[refill.table.Order_id]</th>
+									<th>[refill.table.Link]</th>
+									<th>[refill.table.Service_name]</th>
+									<th>[refill.table.Status]</th>
+								</tr>
+							</thead>
+							<tbody>
+								[template.refill.table.items]
+							</tbody>
+						</table>
+					</div>
+					
+					<ul class="pagination ">
+						[template.pages.pagination.items]
+					</ul>
+					
+				</div>
+			</div>
+		</div>

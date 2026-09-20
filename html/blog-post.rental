@@ -1,0 +1,29 @@
+	<div class="paddingbody"></div>
+	<div class="container-fluid container-fluid-spacious">
+		<div class="row">
+			
+			<div class="col-lg-8 col-lg-offset-2">
+				
+				<div class="well blog-post-wrapper">
+					<h4 class="blog-post-title">[post.title]</h4>
+					<p class="blog-post-image [blog.rendered_class]"><img src="[post.image-url]" alt="[post.title]" class="img-responsive"></p>
+					<div class="blog-post-content">[post.content]</div>
+					
+					<hr>
+					<div class="row">
+						<div class="col-md-12">
+							<a href="/blog" class="btn btn-primary">[blog.btn-back]</a>
+						</div>
+					</div>
+					
+				</div>
+				
+				
+			</div>
+			
+		</div>
+	</div>
+	
+	
+	
+	

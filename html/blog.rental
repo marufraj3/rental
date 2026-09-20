@@ -1,0 +1,17 @@
+	
+	
+		<div class="paddingbody"></div>
+		<div class="container-fluid container-fluid-spacious">
+			<div class="row">
+				
+				<div class="col-md-8 col-md-offset-2">
+					
+					[template.blog.items]
+					
+					<ul class="pagination ">
+						[template.pages.pagination.items]
+					</ul>
+					
+				</div>
+			</div>
+		</div>

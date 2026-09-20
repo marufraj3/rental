@@ -1,0 +1,16 @@
+<tr  >
+														<td>[order.id]</td>
+														<td class="width-40 order-url" >[order.url]</td>
+														<td>[order.min] / [order.max] </td>
+														<td class="nowrap"><a href="order-history?subscription=[order.id]"> [order.spend_posts] </a> / [order.total_posts] </td>
+														<td>[order.delay]</td>
+														<td>[order.service_name]</td>
+														<td>[order.status]</td>
+														<td>[order.date-created]</td>
+														<td><span class="nowrap">[order.date-updated]</span><span class="nowrap">[order.time-updated]</span>
+														<td ><span class="nowrap">[order.expiry]</span></td>
+														<td >
+															[order.pause-template]
+															[order.cancel-template]
+														</td>
+													</tr>

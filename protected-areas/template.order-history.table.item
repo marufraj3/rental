@@ -1,0 +1,15 @@
+<tr>
+												<td >[order.id] <a class="link-to-copy" onclick="copy_to_clipboard('[order.id]')" data-toggle="tooltip" data-placement="top" title="" data-original-title="Click to copy!" >Copy ID</a></td>
+												<td class="order-history_date">[order.date]</td>
+												<td  class="width-40 order-url"><a href="https://href.li/?[order.external_url]" target="_blank" >[order.url]</a></td>
+												<td > [order.price] </td>
+												<td  class="nowrap">[order.start_count]</td>
+												<td >[order.amount]</td>
+												<td  > <b>ID [order.service_id]</b> - [order.service_name]</td>
+												<td  ><span class="[order.status_class]" >[order.status]</span></td>
+												<td >[order.remaining]</td>
+												<td class="order-history_actions" data-id="[order.id]" data-status="[order.status]">
+													[order.refill-template] [order.cancel-template] 
+													<a class="btn btn-primary btn-xs reorder-btn" href="/?select_service_id=[order.service_id]" >Reorder</a>
+												</td>
+											</tr>

@@ -1,0 +1,91 @@
+		
+		
+		<div class="paddingbody"></div>
+		<div class="container-fluid container-fluid-spacious">
+			<div class="row">
+				
+				<div class="col-md-12">
+					
+					[childpanel.content]
+					
+					<form action="" method="post" class="component_form_group"  style="[childpanel-form_css]" >
+						[error_message]
+						<div class="">
+							<div class="form-group">
+								<label for="domain" class="control-label">[childpanel.form.domain]</label>
+								<input type="text" class="form-control" id="domain" name="CreateOrderForm[domain]" value="">
+							</div>
+							<div class="component_alert_dns">
+								<div class="">
+									<div class="alert alert-info">
+										<div>[childpanel.form.nameserver-text]</div>
+										<ul style="padding-left: 20px">
+											<li>[childpanel.form.ns1]</li>
+											<li>[childpanel.form.ns2]</li>
+											<br>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="createorderform-currency">[childpanel.form.currency]</label>
+								<select id="createorderform-currency" class="form-control" name="CreateOrderForm[currency]" aria-required="true">
+									<option value="USD">United States Dollars (USD)</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="createorderform-username">[childpanel.form.admin_username]</label>
+								<input type="text" id="createorderform-username" class="form-control" name="CreateOrderForm[username]" aria-required="true" value="">
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="createorderform-password">[childpanel.form.admin_password]</label>
+								<input type="password" id="createorderform-password" class="form-control" name="CreateOrderForm[password]" aria-required="true">
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="createorderform-password_confirm">[childpanel.form.admin_confirm_password]</label>
+								<input type="password" id="createorderform-password_confirm" class="form-control" name="CreateOrderForm[password_confirm]" aria-required="true">
+							</div>
+							<div class="form-group">
+								<label for="price" class="control-label">[childpanel.form.price_per_month-text]</label>
+								<input type="text" class="form-control" id="price" value="[childpanel.form.price_per_month]" readonly="">
+							</div>
+						</div>
+						<input type="hidden" name="_csrf" value="">
+						<div class="component_button_submit">
+							<div class="">
+								<button class="btn btn-block btn-primary" type="submit">
+								Submit order
+								</button>
+							</div>
+						</div>
+					</form>
+					
+					
+				</div>
+			</div>
+			
+			<br>
+			
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-bg component_table " style="[childpanel-table_css]">
+						<div class="table-wr table-responsive ">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>[childpanel.table.domain]</th>
+										<th>[childpanel.table.status]</th>
+										<th>[childpanel.table.created]</th>
+										<th>[childpanel.table.expiry]</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									[template.childpanel.table.items]
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>

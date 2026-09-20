@@ -1,0 +1,3 @@
+<tr class="service_cat_header" data-category="[category.name]"  >
+									<td colspan="7" >[category.icon] <strong>[category.name]</strong></td>
+								</tr>

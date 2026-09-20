@@ -1,0 +1,235 @@
+		
+		
+<style>
+.updates-section_498472 .table-responsive{
+	min-height: 250px !important;
+}
+.updates-section_498472 .update.badge {
+	padding: 10px 20px;
+	border-radius: 10px;
+}
+.updates-section_498472 .update.decreased {
+	background: orange;
+	color:#fff;
+}
+.updates-section_498472 .update.increased {
+background: blue;
+	color: #fff;
+}
+.updates-section_498472 .update.enabled {
+	background: green;
+	color: #fff;
+}
+.updates-section_498472 .update.disabled {
+	background: black;
+	color: #fff;
+}
+.updates-section_498472 .update.min {
+	background: #f3b82d;
+	color: #100223;
+}
+.updates-section_498472 .update.name {
+	background: #ff5287;
+	color: #fff;
+}
+.updates-section_498472 .update.max {
+	background: #ff5568;
+	color: #fff;
+}
+
+.updates-section_498472 .col-md-12{
+	width: 100% !important;
+	margin: 0 0 0 0 !important; 
+}
+  
+.updates-section_498472 .table > tbody > tr > td::after{
+	display:none;
+}
+
+ 
+</style>
+
+		<div class="">
+			<div class="paddingbody"></div>
+			<div class="container-fluid container-fluid-spacious">
+				<div class="row">
+					<div class="col-md-12">
+					
+						<section class="updates-section_498472">
+							<div class="row tab-row">
+								<div class="col-md-12">
+									<div class="well well-float table-responsive">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="input-group service-search">
+													<input id="searchServiceS" type="text" class="form-control" placeholder="Search Services Log">
+													<div class="input-group-btn">
+														<button type="button" class="btn btn-default btn-cat_filter dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter <span class="caret"></span></button>
+														<ul class="dropdown-menu dropdown-menu-right" id="category_ul_div">
+															<li><a onclick="search_updates_39339('')">All</a></li>
+															<li><a onclick="search_updates_39339('enabled')">Service Enabled</a></li>
+															<li><a onclick="search_updates_39339('disabled')">Service Disabled</a></li>
+															<li><a onclick="search_updates_39339('increased')">Price Increased</a></li>
+															<li><a onclick="search_updates_39339('decreased')">Price Decreased</a></li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="">
+											  <div class="table-responsive">
+												<table id="table-updates" class="table update-table service-tablwa service-well custom-table ">
+												   <thead>
+													<tr>
+													  <th class="col-md-1">Service ID</th>
+													  <th class="col-md-6">SERVICE</th>
+													  <th class="col-md-2">DATE</th>
+													  <th class="col-md-3">UPDATE</th>
+													</tr>
+												  </thead> 
+													<tbody id="updates_div">
+												  
+													</tbody> 
+												</table>
+											  </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						
+						
+					</div> 
+				</div>
+			</div>
+		</div>
+		
+		
+<script>
+	var post_data =  'apiKey=&actionType=updates&display=150';
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() 
+	{
+		if (this.readyState == 4 && this.status == 200)
+		{
+		
+			var response =  JSON.parse(this.responseText);
+			
+			var content = '';
+			if( typeof response.data !== "undefined"  ){
+				var d = response.data;
+				
+				//console.log(d);
+				
+				if( Object.keys(d).length > 0 ){
+					
+					for( a = 0 ; a < Object.keys(d).length; a++  ){
+						var f = d[a];
+						//console.log(f);
+						
+						//{"id":"1082","type":"possitive","service_id":"1085","old":"2147483647","new":"10000000000000","log_name":"Service maximum quantity changed","service":"Private","created":"2021-12-24 06:3"}
+						
+						try {
+						
+							var service_id = '';
+							if( typeof f.service_id !== "undefined"  ){ service_id = f.service_id; }
+							
+							var service = '';
+							if( typeof f.service !== "undefined"  ){ service = f.service; }
+							
+							s = service.toLowerCase();
+							if( s.includes('private') || s.includes('xyz') ){
+								continue;
+							}
+							
+							var log_name = '';
+							if( typeof f.log_name !== "undefined"  ){ log_name = f.log_name; }
+							
+							var created = '';
+							if( typeof f.created !== "undefined"  ){ created = f.created; }
+							
+							var id = '';
+							if( typeof f.id !== "undefined"  ){ id = f.id; }
+							
+							var old = '';
+							if( typeof f.old !== "undefined"  ){ old = f.old; }
+							
+							var type = "btn-secondary";
+							o = log_name.toLowerCase();
+							if( o.includes('increased') ){
+								var type = "increased";
+							}else if( o.includes('decreased') ){
+								var type = "decreased";
+							}else if( o.includes('enabled') ){
+								var type = "enabled";
+							}else if( o.includes('disabled') ){
+								var type = "disabled";
+							}else if( o.includes('minimum') ){
+								var type = "min";
+								//continue;
+							}else if( o.includes('maximum') ){
+								var type = "max";
+								//continue;
+							}else if( o.includes('name') ){
+								var type = "name";
+								continue;
+							}
+							
+							if( old.length > 0 ){
+								old = " data-toggle='tooltip' data-placement='left' data-original-title='Old: "+old+"' ";
+							}
+							
+							if( service.length > 0 ){
+								content = content+"<tr>" +
+									"  <td class='text-center'><div class='id-boxi'>" + service_id + "</div></td>" +
+									  "    <td>" + service + "</td>" +
+									  "    <td>" + created + "</td>" +
+									  "    <td class='text-center'><a href='javascript:void(0)' class='btn btn-sm update badge " + type + "' "+old+" >" + log_name + "</a></td>" +
+									  "</tr> ";
+							}
+						
+						
+						}
+						catch(err) {
+						  
+						}				
+																	
+											
+												
+					}
+				}
+			}
+			
+			//if( content.length == 0 ){
+				//content = '<li><h4>Notification<span class="date">'+cc+'</span></h4><p>No Notification Found</p></li>';
+			//}
+			
+			
+			document.getElementById("updates_div").innerHTML = content;
+			//news_updates_div
+			
+			
+		}
+	};
+	xhttp.open("POST", "api", true);
+	xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	xhttp.send( post_data );
+	
+	window.addEventListener('load', function () {
+		$("#searchServiceS").on("keyup", function() {
+			var value = $(this).val().toLowerCase();
+			search_updates_39339(  value );
+		});
+		
+		$('[data-toggle="tooltip"]').tooltip()
+	});
+	
+	function search_updates_39339( value ){
+		//console.log(value);
+		$(".table tbody tr").filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+	}
+	
+</script>
+

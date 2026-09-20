@@ -1,0 +1,6 @@
+<div class="well blog-post-wrapper [blog.parity_class]">
+														<h4 class="blog-post-title">[post.title]</h4>
+														<p class="blog-post-image [blog.rendered_class]"><img src="[post.image-url]" alt="[post.title]" class="img-responsive"></p>
+														<div class="blog-post-content">[post.content]</div>
+														<a class="blog-post-url blog-post-btn" href="blog/[post.url]" class="btn btn-primary">[blog.btn-read-more]</a>
+													</div>

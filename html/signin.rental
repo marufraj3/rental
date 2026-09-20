@@ -1,0 +1,77 @@
+		
+		<div class="top-content-area">			
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 pull-right">
+						<div class="well">	
+							<h2 class="login-area-head">[login.form.header]</h2>
+							<form method="post" action="">
+									[error_message]
+								<div class="form-group">
+								  <label class="control-label" for="username">[login.form.username]</label>
+								  <input name="username" class="form-control" id="username" type="text" placeholder="[login.form.username]">
+								  <p class="help-block help-block-error"></p>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label" for="password">[login.form.password]</label>
+								  <input name="password" class="form-control" id="password" type="password" placeholder="[login.form.password]">
+								  <p class="help-block help-block-error"></p>
+								</div>
+								<div class="checkbox">
+									<label>
+										<input name="remember_me" id="remembered" value='1' type="checkbox"> [login.form.remember_me_text]
+									</label>
+								</div>
+								<div class="formlast">
+									[login.form.csrf_protection]
+									<button type="submit" name="login_btn" class="btn btn-primary">[login.form.submit_button]</button>
+									<a href="reset-password" class="forget-pass">[login.form.reset_password_button]</a>
+								</div>
+								
+								<div class="row">
+									<div class="col-md-12">
+										[login.form.wrong_enter]
+									</div>
+								</div>
+								
+							</form>
+							
+							<div class="row">
+								<div class="col-md-12">
+									<div class="text-center m-t">
+
+										<span>[login.form.signup_text]</span>
+
+										<a href="signup" class="btn btn-primary m-l">[login.form.signup_button]</a>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						[login.form.allow_refferal]
+					</div>
+			 
+					<div class="col-md-6">
+						
+						<div class="well login m-t-md">
+								
+								[user_contact_us]
+							
+						</div>
+					</div>
+					
+				</div>
+				
+				[content_login_counter]
+				
+			</div>
+		</div>
+		
+		[content_login_2]
+		
+		[content_login_1]
+		
+		[content_footer]
+		
+	

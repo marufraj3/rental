@@ -1,0 +1,201 @@
+		
+			<div class="paddingbody"></div>
+			<div class="container-fluid container-fluid-spacious">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-12">
+							[tickets.content.top]
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							[error_message]
+							<nav>
+								<select name="category" id="page_Category" class="custom-select w-full">
+									<option value="0">[tickets.tab.add_new]</option>
+									<option value="1">[tickets.tab.history]</option>
+									<option value="2">[tickets.tab.updates]</option>
+								</select>
+								<ul class="nav nav-pills " id="pills-tab" role="tablist">
+									<li class="nav-item active">
+										<a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#new-ticket" role="tab" aria-controls="pills-home" aria-selected="true">[tickets.tab.add_new]</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#your-tickets" role="tab" aria-controls="pills-home" aria-selected="true">[tickets.tab.history]</a>
+									</li>
+									<li class="nav-item">
+										<a  class="nav-link" id="pills-home-tab" data-toggle="pill" href="#info" role="tab" aria-controls="pills-home" aria-selected="true">[tickets.tab.updates]</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+						<div class="col-md-12">
+							<!-- Tab Conetent Starts here -->
+							<div class="tab-content" id="pills-tabContent">
+								<!-- New Order Tab -->
+								
+								<div class="tab-pane fade active in" id="new-ticket" role="tabpanel" aria-labelledby="pills-home-tab">
+									<div id="main-page" class="well well-float table-responsive">
+										<!--- ----------------------------------form started --------------------------------------------- -->
+										<form method="post" action="" id="ticketsend" onSubmit="form_submit()">
+							
+											
+											<div class="form-group">
+												<label for="subject" class="control-label">[tickets.form.subject]</label>
+												<select class="form-control" id="subject" name="subject" onchange="handleOrderType(this)">
+													<option value="Order" selected="">[tickets.form.subject.Order]</option>
+													<option value="Payment">[tickets.form.subject.Payment]</option>
+													<option value="Api">[tickets.form.subject.Api]</option>
+													<option value="Child Panel">[tickets.form.subject.ChildPanel]</option>
+													<option value="Request">[tickets.form.subject.Request]</option>
+													<option value="Real Followers">[tickets.form.subject.RealFollowers]</option>
+													<option value="Blue Badge Verification">[tickets.form.subject.BlueBadge]</option>
+													<option value="Other">[tickets.form.subject.Other]</option>
+												</select>
+											</div>
+											<div class="form-group" id="order-group" style="display: block;">
+												<label>[tickets.form.order_field]</label>
+												<input type="text" class="form-control" id="orderid">
+												<label style="margin-top:15px">[tickets.form.Request]</label>
+												<select class="form-control" name="want" id="want">
+													<option value="Refill">[tickets.form.Request.Refill]</option>
+													<option value="Cancel">[tickets.form.Request.Cancel]</option>
+													<option value="Speed-up">[tickets.form.Request.Speed-Up]</option>
+													<option value="Restart">[tickets.form.Request.Restart]</option>
+													<option value="Not-Started">[tickets.form.Request.Not-Started]</option>
+													<option value="Mark-as-completed-without-done">[tickets.form.Request.false-completed]</option>
+													<option value="Other">[tickets.form.Request.Other]</option>
+												</select>
+											</div>
+											<div class="form-group" id="payment-group" style="display: none;">
+												<label>[tickets.form.Payment]</label>
+												<select class="form-control" name="payment" id="payment">
+													[tickets.form.Payment.gateway-list]
+													<option value="Other">[tickets.form.Payment.Other]</option>
+												</select>
+												<label style="margin-top:15px">[tickets.form.transaction_id]</label>
+												<input type="text" class="form-control" name="transaction_id" id="PaymentID">
+												<label style="margin-top:15px">[tickets.form.payment_email]</label>
+												<input type="text" class="form-control" name="payment_email" id="emailID">
+												<label style="margin-top:15px">[tickets.form.payment_amount]</label>
+												<input type="number" class="form-control" name="payment_amount" id="addamount">
+											</div>
+											<div class="form-group message">
+												<label for="message" class="control-label">[tickets.form.message]</label>
+												<textarea class="form-control" rows="7" id="message" name="raw_message" ></textarea>
+											</div>
+											<input id="hmessage" name="message" type="hidden"  />
+											
+											[panel.csrf_protection]
+											<input type="hidden" name="add_ticket" value="add_ticket" />
+											<button type="submit" class="btn btn-primary">[tickets.form.submit_button]</button>
+										</form>
+									</div>
+								</div>
+								
+								
+								<div id="your-tickets" class="tab-pane fade" role="tabpanel" aria-labelledby="pills-profile-tab">
+									<div class="row">	
+										<div class="col-md-4  col-md-offset-8 ">
+										  <div class="nav-pills ">
+											<form action="" method="get" id="history-search">
+											  <div class="input-group">
+												<input type="text" class="form-control" value="[tickets.form.search.value]" name="search" placeholder="Search tickets">
+												<span class="input-group-btn">
+												   <button type="submit" class="btn btn-default"><i class="fas fa-search" aria-hidden="true"></i></button>
+												</span>
+											  </div>
+											</form>
+										  </div>
+										</div>
+									</div>
+									
+									<div class="well well-float table-responsive">
+										<table class="table">
+											<thead>
+												<tr>
+													<th width="5%">#</th>
+													<th>[tickets.table.subject]</th>
+													<th width="13%">[tickets.table.status]</th>
+													<th width="30%">[tickets.table.last_update]</th>
+												</tr>
+											</thead>
+											<tbody>
+												[template.tickets.table.items]
+											</tbody>
+										</table>
+										<nav style="nav-forced-centered">
+											<ul id="yw0" class="pagination m-b-0">
+												[template.pages.pagination.items]
+											</ul>
+										</nav>
+									</div>
+									
+								</div>
+								
+								<div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="pills-contact-tab">
+									<div id="main-page" class="well well-float table-responsive">
+										[tickets.content.bottom]
+									</div>
+								</div>
+								
+							</div>		
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		
+		<script>
+		document.getElementById("payment-group").style.display = "none";
+
+		function handleOrderType(selectObject) {
+			var element = document.getElementById("order-group");
+			var element2 = document.getElementById("payment-group");
+			var optional = document.getElementById("optional");
+
+			if (selectObject.value == "Order" || selectObject.value == "VIP-Order") {
+				element.style.display = "block";
+				element2.style.display = "none";
+				optional.style.display = "block";
+			} else if (selectObject.value == "Payment" || selectObject.value == "VIP-Payment") {
+				element.style.display = "none";
+				element2.style.display = "block";
+				optional.style.display = "none";
+			} else if (selectObject.value == "Other" || selectObject.value == "VIP-Other") {
+				element.style.display = "none";
+				element2.style.display = "none";
+				optional.style.display = "none";
+			}else{
+				element.style.display = "none";
+				element2.style.display = "none";
+				optional.style.display = "none";
+			}
+		}
+
+		function createTicket(e) {
+			if (e.preventDefault) e.preventDefault();
+
+			var subject = document.getElementById("subject").value;
+			var message = "";
+			if (subject == "Order" || subject == "VIP-Order") {
+				message = "Order ID: " + document.getElementById("orderid").value + " " + "Request: " + document.getElementById("want").value + " " + document.getElementById("message").value;
+			} else if (subject == "Payment" || subject == "VIP-Payment") {
+				message = "Payment : " + document.getElementById("payment").value + " " + "Transaction ID : " + document.getElementById("PaymentID").value + " " + "Payment Email ID : " + document.getElementById("emailID").value + " " + "Amount : " + document.getElementById("addamount").value + " " + document.getElementById("message").value;
+			} else {
+				message = document.getElementById("message").value;
+			}
+			
+			document.getElementById("hmessage").value = message;
+
+			return true;
+		}
+		
+		function form_submit(){
+			var form = document.getElementById("ticketsend");
+			createTicket(form);
+			form.submit();
+		}
+		</script>
+		
+		

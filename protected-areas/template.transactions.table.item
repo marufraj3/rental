@@ -1,0 +1,7 @@
+<tr>
+														<td >[transaction.id]</td>
+														<td >[transaction.type]</td>
+														<td >[panel.currency.symbol] [transaction.amount]</td>
+														<td >[transaction.date]</td>
+														<td >[transaction.details]</td>
+													</tr>

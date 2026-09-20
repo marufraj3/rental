@@ -1,0 +1,74 @@
+	
+	
+		<div class="paddingbody"></div>
+		<div class="container-fluid container-fluid-spacious">
+			<div class="row">
+				<div class="col-md-12">
+					<nav>
+						<ul class="nav nav-pills ">
+							
+							<li class="[dripfeed.tab.all.active_class]"><a href="[dripfeed.tab.all.url-query]">[dripfeed.tab.all]</a></li>
+							<li class="[dripfeed.tab.Active.active_class]"><a href="[dripfeed.tab.Active.url-query]">[dripfeed.tab.Active]</a></li>
+							<li class="[dripfeed.tab.Completed.active_class]"><a href="[dripfeed.tab.Completed.url-query]">[dripfeed.tab.Completed]</a></li>
+							<li class="[dripfeed.tab.Canceled.active_class]"><a href="[dripfeed.tab.Canceled.url-query]">[dripfeed.tab.Canceled]</a></li>
+										
+						</ul>
+						<div class="col-lg-6 col-xs-12 forced-pull-right-search">
+							<form action="" method="get" id="history-search">
+								<div class="input-group">
+									<input name="search" class="form-control" placeholder="Search orders" type="text" />
+									<span class="input-group-btn">
+									<button type="submit" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
+									</span>
+								</div>
+							</form>
+						</div>
+						
+						<select class="custom-select w-full" >
+							<option value="[dripfeed.tab.all.url-query]" [dripfeed.tab.all.select_class] >[dripfeed.tab.all]</a></option>
+							<option value="[dripfeed.tab.Active.url-query]" [dripfeed.tab.Active.select_class] >[dripfeed.tab.Active]</a></option>
+							<option value="[dripfeed.tab.Completed.url-query]" [dripfeed.tab.Completed.select_class]  >[dripfeed.tab.Completed]</a></option>
+							<option value="[dripfeed.tab.Canceled.url-query]" [dripfeed.tab.Canceled.select_class]  >[dripfeed.tab.Canceled]</a></option>
+						</select>
+						<div class="select-search search">
+							<form action="" method="get" id="history-search-mobile">
+								<div class="input-group">
+									<input name="search" class="form-control" placeholder="Search orders" type="text">
+									<span class="input-group-btn">
+									<button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+									</span>
+								</div>
+							</form>
+						</div>
+					</nav>
+				</div>
+				<div class="col-md-12">
+					<div id="order-page" class="well well-float table-responsive">
+						<table class="table ">
+							<thead>
+								<tr>
+									<th >[dripfeed.table.id]</th>
+									<th >[dripfeed.table.Date]</th>
+									<th class="width-40">[dripfeed.table.Link]</th>
+									<th >[dripfeed.table.Charge]</th>
+									<th >[dripfeed.table.Quantity]</th>
+									<th >[dripfeed.table.Service]</th>
+									<th class="nowrap">[dripfeed.table.Runs]</th>
+									<th class="nowrap">[dripfeed.table.Intervals]</th>
+									<th  class="nowrap">[dripfeed.table.Total_Quantity]</th>
+									<th >[dripfeed.table.Status]</th>
+								</tr>
+							</thead>
+							<tbody>
+								[template.dripfeed.table.items]
+							</tbody>
+						</table>
+					</div>
+					
+					<ul class="pagination ">
+						[template.pages.pagination.items]
+					</ul>
+					
+				</div>
+			</div>
+		</div>

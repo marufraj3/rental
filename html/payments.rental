@@ -1,0 +1,30 @@
+	
+	
+		<div class="paddingbody"></div>
+		<div class="container-fluid container-fluid-spacious">
+			<div class="row">
+				
+				<div class="col-md-12">
+					<div id="order-page" class="well well-float table-responsive">
+						<table class="table ">
+							<thead>
+								<tr>
+									<th>[payments.table.id]</th>
+									<th>[payments.table.old_payments]</th>
+									<th>[panel.currency.symbol] [payments.table.amount]</th>
+									<th>[payments.table.Date]</th>
+								</tr>
+							</thead>
+							<tbody>
+								[template.payments.table.items]
+							</tbody>
+						</table>
+					</div>
+					
+					<ul class="pagination ">
+						[template.pages.pagination.items]
+					</ul>
+					
+				</div>
+			</div>
+		</div>

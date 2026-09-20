@@ -1,0 +1,32 @@
+		
+		<div class="">
+			<div class="paddingbody"></div>
+			<div class="container-fluid container-fluid-spacious">
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3">
+						<div id="main-page" class="well well-float table-responsive">
+							<div class="">
+								[error_message]
+								<form id="yw0" action="" method="post">
+									<h3>Two-factor authentication</h3>
+									<p>Please check your email and enter the code below.
+</p>
+									<div class="form-group">
+										<label class="control-label" for="two_fa">Code</label>
+										<input class="form-control" name="two_fa" id="two_fa" required type="text">
+										<p class="help-block help-block-error"></p>
+									</div>
+									
+									[panel.csrf_protection]
+
+									<input type="hidden" name="token_verification_post" value="Reset" />
+									<button type="submit" class="btn btn-default">Verify</button>
+								</form>
+							</div>
+						</div>
+						 
+					</div>
+				</div>
+			</div>
+		</div>
+		

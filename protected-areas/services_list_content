@@ -1,0 +1,25 @@
+<tr class="service-row" data-category="[category.name]" data-id="[service.id]" >
+									<td class="col-md-1"><a onclick="copy_to_clipboard('[service.id]')" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Click to copy!">[service.id] <i class="fas fa-copy"></i></td>
+									
+									<td class="col-md-4">[service.name]</td>
+									<td class="services-price_column">[panel.currency.symbol] [service.price]</td>
+									<td class="hide-on-mobile" >[service.min]</td>
+									<td class="hide-on-mobile" >[service.max]</td>
+									<td class="hide-on-mobile average_time-value" >[service.average_time]</td>
+									<td class="col-md-2 service-description"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#open_details_[service.id]">View Details</button>
+<div class="modal fade" id="open_details_[service.id]" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">[service.name]</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        [service.details]
+		<hr><span class="btn btn-primary btn-block placeorder-btn" data-href="/?select_service_id=[service.id]" onclick="window.location.href='/?select_service_id=[service.id]';" >Create Order</span>
+      </div>
+    </div>
+  </div>
+</div></td>					</tr>

@@ -1,0 +1,5 @@
+<li class="[page.active_class]">
+												<a href="[page.url]" aria-label="Next" [page.disabled_link] >
+													<span aria-hidden="true">[page.keyword]</span>
+												</a>
+											</li>

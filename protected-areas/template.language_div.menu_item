@@ -1,0 +1,6 @@
+<li class="nav-item [language-menu.menu_item.active_class] language_menu_item_[language-menu.menu_item.id]">
+												<a class="nav-link" href="/[language-menu.menu_item.abbrivation]"> 
+													
+													<span class="language-icon-span">[language-menu.menu_item.icon]</span> <span class="language-name-span">[language-menu.menu_item.name]</span><span class="language-abbrivation-span [language-menu.menu_item.abbrivation-class]"> ( [language-menu.menu_item.abbrivation] )</span>
+												</a>
+											</li>

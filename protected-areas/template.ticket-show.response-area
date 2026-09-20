@@ -1,0 +1,87 @@
+<div class="row">
+												<div class="col-md-12">
+													<form method="post" action="">
+														<div class="form-group panel-border-top">
+															<input type="hidden" name="ticket_id" value="[ticket.id]" />
+															<label for="message" class="control-label">[tickets.replyform.message]</label>
+															<textarea id="message" rows="5" class="form-control" ></textarea>
+															
+															<p id="upload_status"></p>
+															<input id="inp" type="file"    >
+															
+															<input id="hmessage" name="message" type="hidden"  />
+															
+															<br><br>
+															
+														</div>
+														<input name="add_response" value="add_response" type="hidden">
+														[panel.csrf_protection]
+														<button type="submit" class="btn btn-primary" onclick="this.style.display='none';">[tickets.replyform.submit_button]</button>
+													</form>
+												</div>
+											</div>
+											
+											
+<script>
+
+document.querySelector("#message").addEventListener("input", update_input);
+
+function update_input(e) {
+    var a = document.getElementById("message").value;
+	var message_old_value = document.getElementsByName("message")[0].value;
+	document.getElementsByName("message")[0].value =  a; 
+}
+
+function readFile() {
+
+  if (!this.files || !this.files[0]) return;
+  
+	document.getElementById("upload_status").innerHTML = "Please wait! We are uploading your image.";
+		  
+  const FR = new FileReader();
+   
+  FR.addEventListener("load", function(evt) {
+		var message_old_value = document.getElementsByName("message")[0].value;
+		console.log(evt.target.result);
+		var post_data = "key=[user.username]&image=" encodeURIComponent(evt.target.result);
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				var response_back = JSON.parse(this.responseText);
+				
+				if (typeof response_back.image !== "undefined") {
+					document.getElementsByName("message")[0].value = message_old_value   " "  response_back.image; 
+
+					
+					
+					var elementExists = document.getElementById("message");
+					if( elementExists ){
+						document.getElementById("message").value = document.getElementById("message").value   " "  response_back.image;
+					}
+					
+					document.getElementById("upload_status").innerHTML = "Image is uploaded. You can create ticket";
+				}else{
+					document.getElementById("upload_status").innerHTML = "Image uploading failed. Try again after refreshing page";
+				
+				}
+				
+				
+				
+			}
+		};
+		xhttp.open("POST", "https://panelupdates.com/uploader/api", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.send( post_data );
+	
+  }); 
+    
+  FR.readAsDataURL(this.files[0]);
+  
+}
+
+var input = document.getElementById("inp");
+input.addEventListener("change", readFile);
+		
+		</script>

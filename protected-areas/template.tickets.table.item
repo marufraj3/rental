@@ -1,0 +1,6 @@
+<tr >
+											<td>[ticket.id]</td>
+											<td class="[ticket.active_class]"><a href="?show=[ticket.id]">[ticket.name]</a></td>
+											<td>[ticket.status]</td>
+											<td>[ticket.date]</td>
+										</tr>

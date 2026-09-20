@@ -1,0 +1,53 @@
+	<div class="paddingbody"></div>
+	<div class="container-fluid container-fluid-spacious">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="well well-float table-responsive">
+					<table class="table ">
+						<thead>
+							<tr>
+								<th>[affiliates.table.affiliate_link]</th>
+								<th>[affiliates.table.comission_rate]</th>
+								<th>[affiliates.table.minimum_payout]</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>[user.affiliate_link]</td>
+								<td>[affiliates.settings.comission_rate]%</td>
+								<td>[panel.currency.symbol] [affiliates.settings.minimum_payout]</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="well well-float table-responsive">
+					<table class="table ">
+						<thead>
+							<tr>
+								<th>[affiliates.table.total_visits]</th>
+								<th>[affiliates.table.total_unpaid_refferals]</th>
+								<th>[affiliates.table.total_paid_refferals]</th>
+								<th>[affiliates.table.conversion_rate]</th>
+								<th>[affiliates.table.total_earning]</th>
+								<th>[affiliates.table.unpaid_earnings]</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>[user.affiliates.total_visits]</td>
+								<td>[user.affiliates.unpaid_refferals]</td>
+								<td>[user.affiliates.paid_refferals]</td>
+								<td>[user.affiliates.conversion_rate]%</td>
+								<td>[panel.currency.symbol] [user.affiliates.total_earning]</td>
+								<td>[panel.currency.symbol] [user.affiliates.unpaid_earning]</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	

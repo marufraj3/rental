@@ -1,0 +1,5 @@
+<li class="nav-item [menu.menu_item.active_class] menu_item_[menu.menu_item.id] " id="menu_item_[menu.menu_item.id]">
+												<a class="nav-link" href="[menu.menu_item.url]">
+													[menu.menu_item.icon] [menu.menu_item.name] [menu.menu_item.counter]
+												</a>
+											</li>

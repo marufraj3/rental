@@ -1,0 +1,5 @@
+<li class="nav-item [currency-menu.menu_item.active_class]">
+												<a href="?currency=[currency-menu.menu_item.id]">
+													<span class="currency-icon-span "  >[currency-menu.menu_item.icon]</span> <span class="currency-name-span">[currency-menu.menu_item.abbrivation]</span>
+												</a>
+											</li>

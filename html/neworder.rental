@@ -1,0 +1,225 @@
+	<div class="paddingbody"></div>
+	<div class="container-fluid container-fluid-spacious">
+		<div class="row">
+			<div class="col-md-12">
+				[rentalpanel.refferal.code]
+				<div  class="well well-float table-responsive">
+					[addorder.top-content]
+				</div>
+				
+				<p></p>
+				<div class=" row card-divs">	
+					<div class="col-md-4">
+					  <div class="cards">
+						<div class="card-body">
+						  <h3 class="card-title">Total Spent</h3>
+						  <h3 class="card-text text-right">[panel.currency.symbol] [user.total_spent]</h3>
+						  
+						</div>
+					  </div>
+					</div>
+					<div class="col-md-4">
+					  <div class="cards">
+						<div class="card-body">
+						  <h3 class="card-title">Total Orders</h3>
+						  <h3 class="card-text text-right"> [panel.last_order_id]</h3>
+						  
+						</div>
+					  </div>
+					</div>
+					<div class="col-md-4">
+					  <div class="cards">
+						<div class="card-body">
+						  <h3 class="card-title">Total Balance</h3>
+						  <h3 class="card-text text-right">[panel.currency.symbol] [user.available_funds]</h3>
+						</div>
+					  </div>
+					</div>
+				</div>
+				<p></p>
+				<div class="row">
+					<div class="col-md-12">
+						<nav>
+							<ul class="nav nav-pills " id="pills-tab" role="tablist">
+								<li class="nav-item active">
+									<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#new-order" role="tab" aria-controls="pills-home" aria-selected="true">[addorder.tab.NewOrder]</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#check-updates" role="tab" aria-controls="pills-home" aria-selected="true">[addorder.tab.checkUpdate]</a>
+								</li>
+								<li class="nav-item">
+									<a  class="nav-link" id="pills-home-tab" data-toggle="pill" href="#all" role="tab" aria-controls="pills-home" aria-selected="true">[addorder.tab.others]</a>
+								</li>
+							</ul>
+							<select name="page_Category" id="page_Category" class="custom-select w-full">
+								<option value="0">[addorder.tab.NewOrder]</option>
+								<option value="1">[addorder.tab.checkUpdate]</option>
+								<option value="2">[addorder.tab.others]</option>
+							</select>
+						</nav>
+					</div>
+					<div class="col-md-12">
+					<!-- Tab Conetent Starts here -->
+						<div class="tab-content" id="pills-tabContent">
+							<!-- New Order Tab -->
+							<div class="tab-pane fade active in" id="new-order" role="tabpanel" aria-labelledby="pills-home-tab">
+								<div id="main-page" class="well well-float table-responsive">
+									[error_message]
+									<form method="post" action="">
+										<div class="form-hidden form-group" >
+											<label class="control-label" for="orderCategory">[addorder.form.category]</label>
+											<select name="category" id="orderCategory" class="custom-select w-full form-control">
+												[addorder.form.category.list]
+											</select>
+										</div>
+										<div class="form-group">
+											<label class="control-label" for="OrderService">[addorder.form.service]</label>
+											<select name="service_id" onchange="addon_details(event)" id="OrderService" class="form-control custom-select w-full">
+												[addorder.form.services.list]
+											</select>
+										</div>
+										<div id="orders_type_order_13" class="description_div" >
+											<div class="form-group" id="description_style" >
+												<label class="control-label" for="description">[addorder.form.description]</label>
+												<div class="panel-body border-solid border-rounded description" id="description" ></div>
+											</div>
+										</div>
+										<div class="form-group" id="order_link">
+										  <label class="control-label" for="link">[addorder.form.link]</label>
+										  <input class="form-control" name="order_url" type="text">
+										</div>
+										<p id="addon">
+											<div class="form-group" id="have_comment" style="display:none;" >
+												<label>[addorder.form.comments]</label>
+												<textarea name="comments" id="service_comments" class="form-control" rows="6" placeholder="1 comment per line" style="width: 100%;"></textarea>
+											</div>
+											
+											<div class="form-group" id="order_quantity" style="display:none" >
+											  <label class="control-label" for="quantity">[addorder.form.amount]</label>
+											  <input class="form-control" id="order_count" name="order_amount" type="text" >
+											  <small class="help-block min-max" id="small_min_max_div">Min: <span class="min_amount_span"></span> - Max: <span class="max_amount_span"></span></small>
+											</div>
+											
+											<div class="form-group" id="have_username" style="display:none;" >
+												<label for="service_usernames">[addorder.form.usernames]</label>
+												<textarea name="usernames" id="service_usernames" class="form-control" rows="6" placeholder="1 username per line" style="width: 100%; height: 30%;"></textarea>
+											</div>
+											
+											<div class="form-group" id="have_hashtag" style="display:none;" >
+												<label>[addorder.form.hashtags]</label>
+												<textarea name="hashtags" id="service_hashtags" class="form-control" rows="6" placeholder="1 hashtag per line" style="width: 100%; height: 30%;"></textarea>
+											</div>
+											
+											<div class="form-group" id="have_media" style="display:none;" >
+												<label>[addorder.form.medias]</label>
+												<textarea name="medias" id="service_medias" class="form-control" rows="6" placeholder="1 Media per line" style="width: 100%; height: 30%;"></textarea>
+											</div>
+											
+											<div class="form-group" id="order_posts" style="display:none;" >
+											  <label class="control-label" for="total_posts">[addorder.form.newposts]</label>
+											  <input class="form-control" id="total_posts" name="total_posts" type="text" >
+											</div>
+											
+											<div class="form-group fields" id="order_min" style="display:none;" >
+												<label class="control-label" for="order_count_extra">[addorder.form.newposts.quantity]</label>
+												<div class="row">
+													<div class="col-xs-6" id='have_min' style="display:none;">
+														<input class="form-control" id="order_count_extra" name="min_amount" value="" placeholder="[addorder.form.min]" type="text">
+													</div>
+
+													<div class="col-xs-6" id='have_max' style="display:none;">
+														<input class="form-control" id="order_count_extra" name="max_amount" value="" placeholder="[addorder.form.max]" type="text">
+													</div>
+												</div>
+											</div>
+											
+											
+											<div id="dripfeed" style="display:none;" >
+												<div class="form-group fields" id="order_check">
+													<label class="control-label has-depends " for="field-orderform-fields-check">
+													<input name="drip_feed_check" onclick="drip_feed_css()" value="1" id="field-orderform-fields-check" type="checkbox">[addorder.form.dripfeed]</label>
+													<div class="depend-fields" id="dripfeed-options" data-depend="field-orderform-fields-check">
+														<div class="form-group">
+															<label class="control-label" for="field-orderform-fields-runs">[addorder.form.runs]</label>
+															<input class="form-control" name="runs" value="" id="field-orderform-fields-runs" type="text">
+														</div>
+														<div class="form-group">
+															<label class="control-label" for="field-orderform-fields-interval">[addorder.form.interval]</label>
+															<input class="form-control" name="interval" value="" id="field-orderform-fields-interval" type="text">
+														</div>
+														<div class="form-group">
+															<label class="control-label" for="field-orderform-fields-total-quantity">[addorder.form.total_quantity]</label>
+															<input class="form-control" name="total_quantity" value="" id="field-orderform-fields-total-quantity" readonly="" type="text">
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											
+											<div class="form-group fields" id="order_delay" style="display:none;" >
+												<div class="row">
+													<div class="col-xs-6">
+														<label class="control-label" for="field-orderform-fields-delay">[addorder.form.delay]</label>
+														<select class="form-control" name="delay" id="field-orderform-fields-delay">
+															<option value="0">No delay</option>
+															<option value="300">5 minutes</option>
+															<option value="600">10 minutes</option>
+															<option value="900">15 minutes</option>
+															<option value="1800">30 minutes</option>
+															<option value="3600">60 minutes</option>
+															<option value="5400">90 minutes</option>
+														</select>
+													</div>
+													<div class="col-xs-6">
+														<label for="field-orderform-fields-expiry">[addorder.form.expiry]</label>
+														<div class="input-group">
+															<input class="form-control datetime" name="expiry" value="" id="field-orderform-fields-expiry" type="text">
+															<span class="input-group-btn">
+																<button class="btn btn-default clear-datetime" onclick="remove_date()" type="button" data-rel="#field-orderform-fields-expiry"><span class="fa fa-trash-o"></span></button>
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</p>
+										<div class="form-group" id="order_charge">
+										  <label class="control-label" for="charge">[addorder.form.charge]</label>
+										  <input class="form-control" id="charge" name="charge" disabled type="text" >
+										</div>
+										[panel.csrf_protection]
+										<input type="hidden" name="place_order" value="place_order">
+										<button type="submit" class="btn btn-primary" name="place_order">[addorder.form.submit_button]</button>
+									</form>
+									
+								</div>
+								
+							</div>
+							
+							<!-- Check Updates Tab -->
+							<div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="pills-profile-tab">
+								<div id="main-page" class="well well-float table-responsive">
+									[addorder.middle-content]
+								</div>
+							</div>
+							
+							<!-- All Tab -->
+							<div class="tab-pane fade" id="check-updates" role="tabpanel" aria-labelledby="pills-contact-tab">
+								<div id="main-page" class="well well-float table-responsive">
+									[addorder.bottom-content]
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					[addorder.javascript-assets]
+				
+				
+				
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	

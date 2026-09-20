@@ -1,0 +1,3 @@
+<div class="refill-btn-div" id="order_refill_[order.id]">
+														<a onclick="send_refill( '[order.service_id]','[order.id]' )" class="btn btn-xs btn-primary refill-btn">Refill</a>
+													</div>

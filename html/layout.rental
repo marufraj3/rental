@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>[panel.title]</title>
+		<meta property="og:title" content="[panel.title]" />
+		[panel.header]
+		[panel.theme-assets]
+		[panel.css-assets]
+		[panel.google-recaptcha-api]
+	</head>
+	<body id="[panel.module_key]" class="[panel.page.class]">
+		[template.panel.nav.without-login]
+		[template.panel.nav.with-login]
+		
+		
+		[yield]
+		
+	</body>
+	[panel.javascript-assets]
+	[panel.custom-javascript]
+</html>

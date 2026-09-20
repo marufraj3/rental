@@ -1,0 +1,37 @@
+	<div class="paddingbody"></div>
+	<div class="container-fluid container-fluid-spacious">
+		<div class="row">
+			<div class="col-md-12">
+				<div  class="well well-float table-responsive" style="[services.top-content-div]">
+					[services.top-content]
+				</div>
+				
+				<div class="well well-float">
+					<div class="row">
+						<div class="col-md-12">
+								<input type="text" id="searchService" placeholder="Search Services" class="form-control col-md-12" />
+							
+						</div>
+					</div>
+				</div>
+				
+				<div id="order-page" class="well well-float table-responsive">
+					<!--You can customise it from theme editing-->
+					
+					
+					<table class="table ">
+						[services.get-services-list]
+					</table>
+				</div>
+				
+				<div  class="well well-float table-responsive" style="[services.bottom-content-div]">
+					[services.bottom-content]
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	

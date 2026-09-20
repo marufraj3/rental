@@ -1,0 +1,3 @@
+<div class="refill-btn-div" id="order_refill_[order.id]"> 
+		<a [order.refill-active] [order.refill-popup] class="btn btn-xs btn-primary refill-btn">Refill</a>
+	</div>

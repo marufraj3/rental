@@ -1,0 +1,3 @@
+<div class="pause-btn-div" id="order_pause_[order.id]">
+														<a href="?stop_id=[order.id]" class="btn btn-xs btn-primary btn-dripfeed_pause">Pause</a>
+													</div>

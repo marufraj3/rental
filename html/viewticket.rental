@@ -1,0 +1,23 @@
+			<div class="paddingbody"></div>
+			<div class="container-fluid container-fluid-spacious">
+				<div class="col-md-12">
+					[error_message]
+					<div class="well">
+						<div class="titcket-title">
+							<div class="row">
+								<div class="col-md-8">
+									[ticket.subject]
+								</div>
+								<div class="col-md-4">	
+									<a class="pull-right close-button [tickets.close-button.css-class]" href="?close_ticket=[ticket.id]">[tickets.button.close-ticket]</a>
+								</div>
+							</div>
+						</div>
+						[ticket.responses]
+							
+						[template.ticket-show.response-area]
+					</div>
+				</div>
+			</div>
+		
+		

@@ -1,0 +1,31 @@
+		
+		
+		<div class="paddingbody"></div>
+		<div class="container-fluid container-fluid-spacious">
+			<div class="row">
+				
+				<div class="col-md-12">
+					<div id="order-page" class="well well-float table-responsive">
+						<table class="table ">
+							<thead>
+								<tr>
+									<th>[transactions.table.id]</th>
+									<th>[transactions.table.type]</th>
+									<th>[panel.currency.symbol] [transactions.table.amount]</th>
+									<th>[transactions.table.Date]</th>
+									<th>[transactions.table.details]</th>
+								</tr>
+							</thead>
+							<tbody>
+								[template.transactions.table.items]
+							</tbody>
+						</table>
+					</div>
+					
+					<ul class="pagination ">
+						[template.pages.pagination.items]
+					</ul>
+					
+				</div>
+			</div>
+		</div>

@@ -1,0 +1,86 @@
+	
+	
+		<div class="paddingbody"></div>
+		<div class="container-fluid container-fluid-spacious">
+			<div class="row">
+				<div class="col-md-12">
+					<div  class="well well-float table-responsive">
+						[order_history.content.top]	
+					</div>
+					
+					
+					<nav>
+						<ul class="nav nav-pills ">
+							<li class="[order_history.tab.all.active_class]"><a href="[order_history.tab.all.url-query]">[order_history.tab.all]</a></li>
+							<li class="[order_history.tab.pending.active_class]"><a href="[order_history.tab.pending.url-query]">[order_history.tab.pending]</a></li>
+							<li class="[order_history.tab.processing.active_class]"><a href="[order_history.tab.processing.url-query]">[order_history.tab.processing]</a></li>
+							<li class="[order_history.tab.completed.active_class]"><a href="[order_history.tab.completed.url-query]">[order_history.tab.completed]</a></li>
+							<li class="[order_history.tab.partial.active_class]"><a href="[order_history.tab.partial.url-query]">[order_history.tab.partial]</a></li>
+							<li class="[order_history.tab.canceled.active_class]"><a href="[order_history.tab.canceled.url-query]">[order_history.tab.canceled]</a></li>
+							
+										
+						</ul>
+						<div class="col-lg-6 col-xs-12 forced-pull-right-search">
+							<form action="" method="get" id="history-search">
+								<div class="input-group">
+									<input name="search" class="form-control" placeholder="Search orders" type="text">
+									<span class="input-group-btn">
+									<button type="submit" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
+									</span>
+								</div>
+							</form>
+						</div>
+						
+						<select class="custom-select w-full" >
+							<option value="[order_history.tab.all.url-query]" [order_history.tab.all.select_class] >[order_history.tab.all]</option>
+							<option value="[order_history.tab.pending.url-query]" [order_history.tab.pending.select_class] >[order_history.tab.pending]</option>
+							<option value="[order_history.tab.processing.url-query]" [order_history.tab.processing.select_class]  >[order_history.tab.processing]</option>
+							<option value="[order_history.tab.completed.url-query]" [order_history.tab.completed.select_class] >[order_history.tab.completed]</option>
+							<option value="[order_history.tab.partial.url-query]" [order_history.tab.partial.select_class]>[order_history.tab.partial]</option>
+							<option value="[order_history.tab.canceled.url-query]" [order_history.tab.canceled.select_class] >[order_history.tab.canceled]</option>
+						</select>
+						<div class="select-search search">
+							<form action="" method="get" id="history-search-mobile">
+								<div class="input-group">
+									<input name="search" class="form-control" placeholder="Search orders" type="text">
+									<span class="input-group-btn">
+									<button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+									</span>
+								</div>
+							</form>
+						</div>
+					</nav>
+				</div>
+				<div class="col-md-12">
+					<div id="order-page" class="well well-float table-responsive">
+						<table class="table ">
+							<thead>
+								<tr>
+									<th >[order_history.table.id]</th>
+									<th >[order_history.table.Date]</th>
+									<th  class="width-40">[order_history.table.Link]</th>
+									<th >[panel.currency.symbol] [order_history.table.Charge]</th>
+									<th  class="nowrap">[order_history.table.start_count]</th>
+									<th >[order_history.table.quantity]</th>
+									<th >[order_history.table.Service]</th>
+									<th >[order_history.table.status]</th>
+									<th >[order_history.table.remains]</th>
+									<th > </th>
+								</tr>
+							</thead>
+							<tbody>
+								[template.tickets.table.items]
+							</tbody>
+						</table>
+					</div>
+					
+					<ul class="pagination ">
+						[template.pages.pagination.items]
+					</ul>
+					
+					<div  class="well well-float table-responsive">
+						[order_history.content.bottom]
+					</div>	
+				</div>
+			</div>
+		</div>

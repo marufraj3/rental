@@ -1,0 +1,81 @@
+		<div class="paddingbody"></div>
+		<div class="container-fluid container-fluid-spacious">
+			<div class="row">
+				<div class="col-md-12">
+						
+					<nav>
+						<ul class="nav nav-pills ">
+							
+							<li class="[subscription.tab.all.active_class]"><a href="[subscription.tab.all.url-query]">[subscription.tab.all]</a></li>
+							<li class="[subscription.tab.Active.active_class]"><a href="[subscription.tab.Active.url-query]">[subscription.tab.Active]</a></li>
+							<li class="[subscription.tab.Paused.active_class]"><a href="[subscription.tab.Paused.url-query]">[subscription.tab.Paused]</a></li>
+							<li class="[subscription.tab.Completed.active_class]"><a href="[subscription.tab.Completed.url-query]">[subscription.tab.Completed]</a></li>
+							<li class="[subscription.tab.Partial.active_class]"><a href="[subscription.tab.Partial.url-query]">[subscription.tab.Partial]</a></li>
+							<li class="[subscription.tab.Expired.active_class]"><a href="[subscription.tab.Expired.url-query]">[subscription.tab.Expired]</a></li>
+							<li class="[subscription.tab.Canceled.active_class]"><a href="[subscription.tab.Canceled.url-query]">[subscription.tab.Canceled]</a></li>
+										
+						</ul>
+						<div class="col-lg-6 col-xs-12 forced-pull-right-search">
+							<form action="" method="get" id="history-search">
+								<div class="input-group">
+									<input name="search" class="form-control" placeholder="Search orders" type="text" />
+									<span class="input-group-btn">
+									<button type="submit" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
+									</span>
+								</div>
+							</form>
+						</div>
+						
+						<select class="custom-select w-full" >
+							<option value="[subscription.tab.all.url-query]" [subscription.tab.all.select_class] >[subscription.tab.all]</a></option>
+							<option value="[subscription.tab.Active.url-query]" [subscription.tab.Active.select_class] >[subscription.tab.Active]</a></option>
+							<option value="[subscription.tab.Paused.url-query]" [subscription.tab.Paused.select_class] >[subscription.tab.Paused]</a></option>
+							<option value="[subscription.tab.Completed.url-query]" [subscription.tab.Completed.select_class] >[subscription.tab.Completed]</a></option>
+							<option value="[subscription.tab.Partial.url-query]" [subscription.tab.Partial.select_class] >[subscription.tab.Partial]</a></option>
+							<option value="[subscription.tab.Expired.url-query]" [subscription.tab.Expired.select_class] >[subscription.tab.Expired]</a></option>
+							<option value="[subscription.tab.Canceled.url-query]" [subscription.tab.Canceled.select_class] >[subscription.tab.Canceled]</a></option>
+							
+						</select>
+						<div class="select-search search">
+							<form action="" method="get" id="history-search-mobile">
+								<div class="input-group">
+									<input name="search" class="form-control" placeholder="Search orders" type="text">
+									<span class="input-group-btn">
+									<button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+									</span>
+								</div>
+							</form>
+						</div>
+					</nav>
+				</div>
+				<div class="col-md-12">
+					<div id="order-page" class="well well-float table-responsive">
+						<table class="table ">
+							<thead>
+								<tr>
+									<th >[subscription.table.id]</th>
+									<th class="width-40 col-md-2">[subscription.table.Link]</th>
+									<th class="nowrap">[subscription.table.Quantity]</th>
+									<th >[subscription.table.Posts]</th>
+									<th >[subscription.table.Delay]</th>
+									<th >[subscription.table.Service]</th>
+									<th >[subscription.table.Status]</th>
+									<th >[subscription.table.Created]</th>
+									<th >[subscription.table.Updated]</th>
+									<th >[subscription.table.Expiry]</th>
+									<th ></th>
+								</tr>
+							</thead>
+							<tbody>
+								[template.subscription.table.items]
+							</tbody>
+						</table>
+					</div>
+					
+					<ul class="pagination ">
+						[template.pages.pagination.items]
+					</ul>
+					
+				</div>
+			</div>
+		</div>
