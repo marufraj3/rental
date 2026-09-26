@@ -1,266 +1,551 @@
-	<div class="paddingbody"></div>
-	<div class="container-fluid container-fluid-spacious">
-		<div class="row">
-			<div class="col-md-12">
-				<div id="main-page" class="well well-float table-responsive">
-					<div class="">
-						<h2 class="m-b-md">API Docs</h2>
-						<table class="table table-bordered">
-								<tbody>
-									<tr>
-										<td class="width-40">HTTP Method</td>
-										<td>POST</td>
-									</tr>
-									<tr>
-										<td>API URL</td>
-										<td>
-											<strong>[panel.url]/[api-docs.api-url]</strong>
-										</td>
-									</tr>
-							
-									<tr>
-										<td>API KEY</td>
-										<td><strong>[user.api_key]</strong></td>
-									</tr>
-									
-									<tr>
-										<td>Response format</td>
-										<td>JSON</td>
-									</tr>
-								</tbody>
-						</table>
-						<h4 class="m-t-md"><strong>Add order</strong></h4>
-						<p>
-						</p>
-						<form class="form-inline">
-							<div class="form-group">
-								<select class="form-control input-sm" id="service_type">
-									<option value="0" selected="selected">Default</option>
-								</select>
-							</div>
-						</form>
-						<p></p>
-						
-						<div id="type_0" style="">
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th class="width-40">Parameters</th>
-										<th>Description</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>[api-docs.key]</td>
-										<td>Your API key</td>
-									</tr>
-									<tr>
-										<td>[api-docs.action]</td>
-										<td>add</td>
-									</tr>
-									<tr>
-										<td>[api-docs.service]</td>
-										<td>Service ID</td>
-									</tr>
-									<tr>
-										<td>[api-docs.url]</td>
-										<td>Link to page</td>
-									</tr>
-									<tr>
-										<td>[api-docs.quantity]</td>
-										<td>Needed quantity</td>
-									</tr>
-									<tr>
-										<td>[api-docs.comments]</td>
-										<td>Comments list (encoded)</td>
-									</tr>
-									<tr>
-										<td>[api-docs.runs]</td>
-										<td>Runs to deliver</td>
-									</tr>
-									<tr>
-										<td>[api-docs.interval]</td>
-										<td>Interval in minutes</td>
-									</tr>
-									
-								</tbody>
-							</table>
-						</div>
-						<p><strong>Example success response</strong></p>
-						<pre>[api-docs.add-order.success]</pre>
-						<p><strong>Example error response</strong></p>
-						<pre>{
-	"error": "incorrect service type"
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style id="rental-api-clone">
+#apPage{
+ --red:#E11020;--red2:#FF3B42;--redD:#A50C16;
+ --grd:linear-gradient(135deg,#A50C16,#E11020 52%,#FF3B42);
+ --soft:rgba(225,16,32,.10);--soft2:rgba(225,16,32,.18);
+ --bg:#050507;--bg2:#0A0A0E;--card:rgba(15,15,20,.84);--card2:rgba(19,19,24,.84);--fld:rgba(8,8,12,.9);
+ --line:rgba(255,255,255,.10);--line2:rgba(225,16,32,.34);
+ --tx:#FFFFFF;--tx2:#B4B4BF;--mut:#7A7A87;--dot:225,16,32;
+ --ok:#22C55E;--wr:#F59E0B;--no:#EF4444;
+ --code:#08080B;--codetx:#C9C9D4;
+ font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--tx);background:transparent;
+ position:relative;z-index:1;overflow-x:clip;display:block;-webkit-font-smoothing:antialiased}
+#apPage[data-thm="light"]{
+ --red:#D40C1C;--red2:#F0303A;--redD:#96060F;
+ --grd:linear-gradient(135deg,#96060F,#D40C1C 52%,#F0303A);
+ --soft:rgba(212,12,28,.07);--soft2:rgba(212,12,28,.13);
+ --bg:#F4F5F8;--bg2:#FFFFFF;--card:rgba(255,255,255,.9);--card2:rgba(250,251,253,.9);--fld:rgba(245,246,249,.95);
+ --line:rgba(12,12,20,.10);--line2:rgba(212,12,28,.26);
+ --tx:#0B0B12;--tx2:#4C4C5A;--mut:#8A8A98;--dot:212,12,28;
+ --code:#0B0B10;--codetx:#D5D5DE}
+body.wr-dark{background:#050507!important}
+body.wr-light{background:#F4F5F8!important}
+
+/* ═══ SHELL TINT (header / footer) ═══ */
+body.wr-dark{
+ --mc:#E11020;--mc-hover:#FF3B42;--mc-trans:rgba(225,16,32,.12);
+ --main-bg:#050507;--second-bg:#0A0A0E;--card-bg:#0F0F14;--title-bg:#0C0C11;
+ --border:rgba(255,255,255,.08);--tc:#FFFFFF;--ts:#C2C2CE;--tw:#8E8E9C;
+ --sky-grad:linear-gradient(135deg,#A50C16,#E11020 52%,#FF3B42);
+ --sky-soft:rgba(225,16,32,.12);--sky-shadow:none;
+ --og-grad:linear-gradient(135deg,#A50C16,#E11020 52%,#FF3B42);
+ --og-soft:rgba(225,16,32,.12);--og-line:rgba(225,16,32,.28);
+ --og-glass:rgba(15,15,20,.72);--og-shadow:none}
+body.wr-light{
+ --mc:#D40C1C;--mc-hover:#F0303A;--mc-trans:rgba(212,12,28,.09);
+ --main-bg:#F4F5F8;--second-bg:#FFFFFF;--card-bg:#FFFFFF;--title-bg:#F8F9FB;
+ --border:rgba(12,12,20,.09);--tc:#0B0B12;--ts:#3E3E4B;--tw:#6E6E7C;
+ --sky-grad:linear-gradient(135deg,#96060F,#D40C1C 52%,#F0303A);
+ --sky-soft:rgba(212,12,28,.08);--sky-shadow:none;
+ --og-grad:linear-gradient(135deg,#96060F,#D40C1C 52%,#F0303A);
+ --og-soft:rgba(212,12,28,.08);--og-line:rgba(212,12,28,.22);
+ --og-glass:rgba(255,255,255,.76);--og-shadow:none}
+
+#apPage *{box-sizing:border-box}
+#apPage .wrp{max-width:1384px;margin:0 auto;padding:0 32px;position:relative;z-index:2}
+#apPage .rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+#apPage .rv.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){ #apPage .rv{opacity:1;transform:none;transition:none}
+ #apPage *{animation:none!important}}
+
+/* ═══ FULL-PAGE PHOTO BACKGROUND ═══
+   Injected as a direct child of <body> (see script below) and fixed to the
+   viewport, so it lives completely outside #apPage's stacking context and
+   DOM box. It can never "run out" early no matter where #apPage's box ends
+   inside the dashboard layout (auth) vs the guest layout, and — unlike a
+   fixed layer nested inside #apPage — it won't get trapped behind #apPage's
+   own stacking context (created by the backdrop-filter/transform on child
+   cards), which is what caused it to bleed over the footer last time. */
+/* FIX 2 (v2): themed — this used to resolve to #050507 in both modes */
+html{background:#050507}
+body.wr-light,html:has(body.wr-light){background:#F4F5F8}
+.pagebg{position:fixed;top:0;left:0;right:0;bottom:0;z-index:0;pointer-events:none;overflow:hidden}
+/* the dashboard's own outer scroll wrapper is div.app-content, which has its
+   own solid background-color:var(--main-bg) painted on it. That solid fill
+   sat in front of our fixed .pagebg in the empty space below #apPage's
+   content, which is exactly the black strip in the screenshots. Making it
+   transparent lets .pagebg show through for the full height of the scroll
+   container. Light mode included, otherwise the extra bottom padding shows a
+   flat grey strip instead of the photo. */
+body.wr-dark .app-content,
+body.wr-dark .app-content::before,
+body.wr-dark .app-content::after,
+body.wr-light .app-content,
+body.wr-light .app-content::before,
+body.wr-light .app-content::after{background-color:transparent!important;background:transparent!important}
+.pagebg .photo{position:absolute;inset:0;
+ background-image:url("https://storage.perfectcdn.com/eq86bz/sjf1cds2zkjk8ofq.png");
+ background-position:center top;background-size:cover;background-repeat:no-repeat;
+ filter:saturate(1.06) contrast(1.02)}
+.pagebg .scrim{position:absolute;inset:0;
+ background:
+  linear-gradient(180deg,rgba(4,4,6,.62) 0%,rgba(4,4,6,.50) 30%,rgba(4,4,6,.66) 72%,rgba(4,4,6,.86) 100%),
+  radial-gradient(80% 55% at 50% 6%,rgba(225,16,32,.20),transparent 70%)}
+.pagebg.thm-light .scrim{
+ background:
+  linear-gradient(180deg,rgba(246,247,250,.70) 0%,rgba(246,247,250,.58) 30%,rgba(246,247,250,.74) 72%,rgba(246,247,250,.90) 100%),
+  radial-gradient(80% 55% at 50% 6%,rgba(212,12,28,.10),transparent 70%)}
+
+/* ═══ HERO ═══ */
+#apPage .hero{position:relative;padding:34px 0 30px}
+/* guests see a taller top nav/announcement bar than logged-in users, so the
+   hero needs extra clearance here or the header sits on top of the card */
+#apPage.guest-top-fix .hero{padding-top:132px}
+#apPage .hcard{width:100%;padding:40px 38px 34px;border-radius:26px;
+ background:var(--card);border:1px solid var(--line);
+ backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+
+#apPage .eyb{display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 14px;border-radius:8px;
+ background:var(--soft);border:1px solid var(--line2);color:var(--red2);
+ font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+#apPage[data-thm="light"] .eyb{color:var(--redD)}
+#apPage .hrow{display:flex;align-items:flex-end;justify-content:space-between;gap:26px;flex-wrap:wrap}
+#apPage .hrow h1{font-size:clamp(29px,4vw,48px);font-weight:800;line-height:1.08;letter-spacing:-.032em;margin:16px 0 14px}
+#apPage .hrow h1 em{font-style:normal;color:var(--red)}
+#apPage .hrow p{color:var(--tx2);font-size:15px;line-height:1.82;max-width:600px;margin:0}
+#apPage .cta-b{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:50px;padding:0 24px;border-radius:12px;
+ background:var(--grd);color:#fff!important;font-weight:800;font-size:14px;text-decoration:none;
+ transition:transform .18s,filter .18s;white-space:nowrap}
+#apPage .cta-b:hover{transform:translateY(-2px);filter:brightness(1.08)}
+#apPage .chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:26px}
+#apPage .chips span{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:10px;
+ background:var(--card);border:1px solid var(--line);font-size:12px;font-weight:800;color:var(--tx2)}
+#apPage .chips i{color:var(--red);font-size:12px}
+
+/* ═══ SPEC STRIP ═══ */
+/* FIX 5 (v2): margin-top was declared twice */
+#apPage .specs{display:grid;grid-template-columns:auto 1fr auto auto;gap:0;margin-top:28px;
+ background:var(--fld);border:1px solid var(--line);border-radius:18px;
+ overflow:hidden;position:relative;z-index:1}
+#apPage .spec{padding:18px 22px;border-right:1px solid var(--line);min-width:0}
+#apPage .spec:last-child{border-right:0}
+#apPage .spec>span{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:800;letter-spacing:.14em;
+ text-transform:uppercase;color:var(--mut);margin-bottom:8px}
+#apPage .spec>span i{color:var(--red)}
+#apPage .spec b{display:block;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--tx);
+ white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#apPage .spec.url{display:flex;align-items:center;gap:12px}
+#apPage .spec.url>div{min-width:0;flex:1}
+#apPage .copy{width:36px;height:36px;min-width:36px;border-radius:10px;background:var(--soft);border:1px solid var(--line2);
+ color:var(--red);cursor:pointer;font-size:13px;display:inline-flex;align-items:center;justify-content:center;transition:.18s}
+#apPage .copy:hover{background:var(--grd);border-color:transparent;color:#fff}
+#apPage .copy.done{background:rgba(34,197,94,.16);border-color:rgba(34,197,94,.34);color:var(--ok)}
+
+/* ═══ BODY ═══ */
+#apPage .body{position:relative;padding:30px 0 70px}
+
+#apPage .tabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;width:100%;margin-bottom:22px}
+#apPage .tab{display:flex;align-items:center;gap:10px;min-width:0;height:56px;padding:0 13px;border-radius:14px;cursor:pointer;
+ background:var(--card);border:1px solid var(--line);color:var(--tx2);font-family:inherit;text-align:left;transition:.18s;
+ backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+#apPage .tab em{width:32px;height:32px;min-width:32px;border-radius:10px;background:var(--soft);border:1px solid var(--line2);
+ color:var(--red);display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-style:normal;transition:.18s}
+#apPage .tab span{flex:1;min-width:0;font-size:12.5px;font-weight:800;color:var(--tx);line-height:1.3;
+ white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#apPage .tab:hover{border-color:var(--line2);transform:translateY(-3px)}
+#apPage .tab.on{background:var(--grd);border-color:transparent}
+#apPage .tab.on em{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.26);color:#fff}
+#apPage .tab.on span{color:#fff}
+#apPage .pane{display:none}
+#apPage .pane.on{display:block;animation:apIn .32s cubic-bezier(.22,1,.36,1)}
+@keyframes apIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+#apPage .doc{position:relative;background:var(--card);border:1px solid var(--line);
+ border-radius:20px;padding:30px 32px 28px;margin-bottom:16px;overflow:hidden;
+ backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+#apPage .doc-h{display:flex;align-items:center;gap:12px;margin:0 0 12px;font-size:17px;font-weight:800;color:var(--tx);letter-spacing:-.015em}
+#apPage .doc-h .dot{width:9px;height:9px;min-width:9px;border-radius:50%;background:var(--grd)}
+#apPage .doc-h .m{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:800;letter-spacing:.1em;
+ padding:5px 10px;border-radius:7px;background:var(--soft);border:1px solid var(--line2);color:var(--red)}
+#apPage .doc p{color:var(--tx2);font-size:13.5px;line-height:1.85;margin:0 0 18px}
+#apPage .doc p:last-child{margin-bottom:0}
+#apPage .doc code{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;color:var(--red);
+ background:var(--soft);border:1px solid var(--line2);border-radius:6px;padding:2px 7px}
+
+#apPage .tbl{width:100%;border-collapse:collapse;border-radius:13px;overflow:hidden;
+ border:1px solid var(--line);margin:0 0 18px}
+#apPage .tbl th{background:var(--soft);text-align:left;padding:11px 14px;font-size:10px;font-weight:800;
+ letter-spacing:.12em;text-transform:uppercase;color:var(--mut);border-bottom:1px solid var(--line)}
+#apPage .tbl td{padding:11px 14px;font-size:12.5px;color:var(--tx2);border-bottom:1px solid var(--line);vertical-align:top;line-height:1.7}
+#apPage .tbl tr:last-child td{border-bottom:0}
+#apPage .tbl td:first-child{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--tx);white-space:nowrap}
+#apPage .tbl .req{display:inline-block;margin-left:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:9px;font-weight:800;
+ letter-spacing:.08em;color:var(--red);background:var(--soft);border:1px solid var(--line2);border-radius:5px;padding:1px 6px;vertical-align:middle}
+#apPage .tbl .opt{display:inline-block;margin-left:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:9px;font-weight:800;
+ letter-spacing:.08em;color:var(--mut);background:rgba(110,110,121,.14);border:1px solid var(--line);border-radius:5px;padding:1px 6px;vertical-align:middle}
+
+#apPage .code{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--code);margin-bottom:6px}
+#apPage .code-b{display:flex;align-items:center;gap:7px;padding:11px 14px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.07)}
+#apPage .code-b i{width:9px;height:9px;border-radius:50%;display:block}
+#apPage .code-b span{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;color:#6C6C79}
+#apPage .code-b .copy{margin-left:auto;width:30px;height:30px;min-width:30px;font-size:11px;
+ background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);color:#A8A8B4}
+#apPage .code-b .copy:hover{background:var(--grd);border-color:transparent;color:#fff}
+#apPage .code pre{margin:0;padding:18px;overflow-x:auto;font-family:'JetBrains Mono',monospace;
+ font-size:11.5px;line-height:1.95;color:var(--codetx)}
+#apPage .code .k{color:#FF6A6F}
+#apPage .code .s{color:#7DD3A0}
+#apPage .code .n{color:#F5B851}
+#apPage .code .c{color:#5A5A67}
+
+#apPage .note{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-radius:13px;
+ background:var(--soft);border:1px solid var(--line2);margin:0 0 18px}
+#apPage .note i{color:var(--red);font-size:14px;margin-top:2px}
+#apPage .note div{font-size:12.5px;line-height:1.75;color:var(--tx2)}
+#apPage .note b{color:var(--tx);font-weight:800}
+
+/* ═══ CTA ═══
+   .end is the last element on the page, so its bottom padding is what sets
+   the gap between the CTA card and the footer. */
+#apPage .end{position:relative;z-index:1;padding:0 0 64px}
+#apPage .cta{position:relative;border-radius:26px;overflow:hidden;padding:48px 34px;text-align:center;
+ background:radial-gradient(120% 130% at 50% 0,rgba(58,6,11,.92),rgba(10,10,14,.92) 70%);border:1px solid rgba(225,16,32,.34);
+ backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+#apPage .cta::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(118deg,rgba(255,255,255,.03) 0 2px,transparent 2px 16px)}
+#apPage .cta::after{content:"";position:absolute;bottom:-120px;left:50%;transform:translateX(-50%);width:520px;height:300px;
+ background:radial-gradient(closest-side,rgba(225,16,32,.4),transparent);filter:blur(30px)}
+#apPage .cta-in{position:relative;z-index:1}
+#apPage .cta h2{font-size:clamp(23px,3.1vw,35px);font-weight:800;color:#fff;margin:14px 0 12px;letter-spacing:-.024em}
+#apPage .cta h2 em{font-style:normal;color:#FF3B42}
+#apPage .cta p{color:rgba(255,255,255,.72);font-size:14.5px;line-height:1.8;max-width:580px;margin:0 auto 24px}
+#apPage .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+#apPage .ghost{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:50px;padding:0 24px;border-radius:12px;
+ background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.2);color:#fff!important;
+ font-weight:800;font-size:14px;text-decoration:none;transition:.2s}
+#apPage .ghost:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.4)}
+
+/* ═══ NO SHADOWS ═══ */
+#apPage,#apPage *,#apPage *::before,#apPage *::after,
+.pagebg,.pagebg *{box-shadow:none!important}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1200px){
+ #apPage .wrp{padding:0 16px}
+ #apPage .tabs{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
-</pre>
-						
-						<h4 class="m-t-md"><strong>Services List</strong></h4>
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th class="width-40">Parameters</th>
-										<th>Description</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>[api-docs.key]</td>
-										<td>Your API key</td>
-									</tr>
-									<tr>
-										<td>[api-docs.action]</td>
-										<td>services</td>
-									</tr>
-								</tbody>
-							</table>
-							<p><strong>Example response</strong></p>
-							<pre>[api-docs.services.success]</pre>
-							
-							<h4 class="m-t-md"><strong>Order status</strong></h4>
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th class="width-40">Parameters</th>
-										<th>Description</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>[api-docs.key]</td>
-										<td>Your API key</td>
-									</tr>
-									<tr>
-										<td>[api-docs.action]</td>
-										<td>status</td>
-									</tr>
-									<tr>
-										<td>[api-docs.status.order]</td>
-										<td>Order ID</td>
-									</tr>
-								</tbody>
-							</table>
-							<p><strong>Example response</strong></p>
-							<pre>[api-docs.status.success]</pre>
-							
-							<h4 class="m-t-md"><strong>Multiple Order status</strong></h4>
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th class="width-40">Parameters</th>
-										<th>Description</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>[api-docs.key]</td>
-										<td>Your API key</td>
-									</tr>
-									<tr>
-										<td>[api-docs.action]</td>
-										<td>[api-docs.mass-status.action]</td>
-									</tr>
-									<tr>
-										<td>[api-docs.mass-status.orders]</td>
-										<td>Order IDs separated by comma(100 orders at once)</td>
-									</tr>
-								</tbody>
-							</table>
-							<p><strong>Example response</strong></p>
-							<pre>[api-docs.mass-status.success]</pre>
-							
-							<h4 class="m-t-md"><strong>Balance</strong></h4>
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th class="width-40">Parameters</th>
-										<th>Description</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>[api-docs.key]</td>
-										<td>Your API key</td>
-									</tr>
-									<tr>
-										<td>[api-docs.action]</td>
-										<td>balance</td>
-									</tr>
-								</tbody>
-							</table>
-							<p><strong>Example response</strong></p>
-							<pre>{
-	"balance": 10000,
-	"currency": "USD",
+@media(max-width:1040px){
+ #apPage .hero{padding:26px 0 26px}
+ #apPage.guest-top-fix .hero{padding-top:118px}
+ #apPage .hcard{padding:32px 26px 28px}
+ #apPage .specs{grid-template-columns:1fr 1fr}
+ #apPage .spec{border-bottom:1px solid var(--line)}
+ #apPage .spec:nth-child(2n){border-right:0}
+ #apPage .spec:nth-child(n+3){border-bottom:0}
+ #apPage .end{padding:0 0 76px}
 }
-</pre>				
-						
-						<h4 class="m-t-md"><strong>Refill</strong></h4>
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th class="width-40">Parameters</th>
-										<th>Description</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>[api-docs.key]</td>
-										<td>Your API key</td>
-									</tr>
-									<tr>
-										<td>[api-docs.action]</td>
-										<td>refill</td>
-									</tr>
-									<tr>
-										<td>[api-docs.status.order]</td>
-										<td>Order ID</td>
-									</tr>
-								</tbody>
-							</table>
-							<p><strong>Example response</strong></p>
-							<pre>{
-	"status": Success,
-	"message": "Your order successfully added for refill. Thank you for patience."
+@media(max-width:680px){
+ #apPage .hero{padding:18px 0 22px}
+ #apPage.guest-top-fix .hero{padding-top:100px}
+ #apPage .wrp{padding:0 15px}
+ #apPage .hcard{padding:26px 20px 24px;border-radius:20px}
+ #apPage .hrow{flex-direction:column;align-items:center;text-align:center}
+ #apPage .hcpy{width:100%}
+ #apPage .hrow p{margin:0 auto}
+ /* chips row centers under the PHP example button on mobile, instead of
+    sitting flush-left under a centered header */
+ #apPage .chips{justify-content:center}
+ /* body padding trimmed and moved onto .end so the extra room lands
+    below the CTA card, not between the docs and the CTA */
+ #apPage .body{padding:24px 0 40px}
+ #apPage .tabs{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ #apPage .tab{height:52px;padding:0 11px;gap:9px}
+ #apPage .tab em{width:29px;height:29px;min-width:29px;border-radius:9px;font-size:12px}
+ #apPage .tab span{font-size:12px}
+ #apPage .specs{grid-template-columns:1fr}
+ #apPage .spec{border-right:0;border-bottom:1px solid var(--line)}
+ #apPage .spec:last-child{border-bottom:0}
+ #apPage .doc{padding:22px 18px;border-radius:16px}
+ #apPage .doc-h{flex-wrap:wrap}
+ #apPage .doc-h .m{margin-left:0}
+ #apPage .tbl{display:block;overflow-x:auto;white-space:nowrap}
+ #apPage .tbl td,#apPage .tbl th{white-space:normal;min-width:110px}
+ #apPage .cta{padding:34px 20px;border-radius:20px}
+ #apPage .end{padding:0 0 90px}
 }
-</pre>
-							
-							<h4 class="m-t-md"><strong>Cancel</strong></h4>
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th class="width-40">Parameters</th>
-										<th>Description</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>[api-docs.key]</td>
-										<td>Your API key</td>
-									</tr>
-									<tr>
-										<td>[api-docs.action]</td>
-										<td>cancel</td>
-									</tr>
-									<tr>
-										<td>[api-docs.status.order]</td>
-										<td>Order ID</td>
-									</tr>
-								</tbody>
-							</table>
-							<p><strong>Example response</strong></p>
-							<pre>{
-	"status": Success,
-	"message": "Your order was successfully marked for cancellation. Thank you for patience."
+
+/* Rental compatibility: retain the target design while resisting live theme overrides. */
+#apPage{width:100%!important;max-width:none!important;float:none!important}
+body.rental-layout #apPage .wrp{display:block!important;float:none!important;width:100%!important;max-width:1384px!important;margin-left:auto!important;margin-right:auto!important}
+body.rental-layout #apPage.guest-top-fix .hero{padding-top:16px!important}
+#apPage button.tab,#apPage button.copy{appearance:none;-webkit-appearance:none}
+#apPage .tab{border:1px solid var(--line)!important}
+#apPage .tab.on{border-color:transparent!important}
+#apPage .code pre{white-space:pre;word-break:normal;overflow-wrap:normal}
+#apPage .code pre:empty::before{content:'No example response is available.';color:#6C6C79}
+#apPage .spec.url b:empty::before{content:'Not available';color:var(--mut)}
+#apPage .tbl thead,#apPage .tbl tbody{width:100%}
+#apPage .tbl th:first-child{width:38%}
+.pagebg{width:100vw!important;height:100vh!important}
+@media(max-width:991.98px){body.rental-layout #apPage.guest-top-fix .hero{padding-top:12px!important}}
+@media(max-width:680px){
+ body.rental-layout #apPage .wrp{max-width:100%!important}
+ #apPage .hrow .cta-b{width:100%;max-width:280px}
+ #apPage .spec.url{min-width:0}
+ #apPage .spec.url b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ #apPage .code pre{font-size:10.5px;padding:15px}
 }
-</pre>
-						
-						<a href="[panel.url]/api.zip" class="btn btn-default m-t" target="_blank">Example of PHP code</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	
-	
-	
+</style>
+
+<main class="api-docs-page" aria-labelledby="apiPageTitle">
+<div class="wr" id="apPage" data-thm="dark">
+
+<section class="hero">
+ <div class="wrp">
+  <div class="hcard rv">
+   <div class="hrow">
+    <div class="hcpy">
+     <span class="eyb"><i class="fas fa-terminal" aria-hidden="true"></i> Developer API</span>
+     <h1 id="apiPageTitle">API <em>Documentation</em></h1>
+     <p>Automate everything — connect your store, bot or child panel and place orders programmatically. POST requests, JSON responses, no SDK required.</p>
+    </div>
+    <a href="[panel.url]/api.zip" class="cta-b" target="_blank" rel="noopener"><i class="fas fa-code" aria-hidden="true"></i> PHP example</a>
+   </div>
+
+   <div class="chips">
+    <span><i class="fas fa-bolt" aria-hidden="true"></i> POST only</span>
+    <span><i class="fas fa-file-code" aria-hidden="true"></i> JSON response</span>
+    <span><i class="fas fa-code-branch" aria-hidden="true"></i> API v2</span>
+    <span><i class="fas fa-shield-alt" aria-hidden="true"></i> API key auth</span>
+    <span><i class="fas fa-lock" aria-hidden="true"></i> HTTPS ready</span>
+   </div>
+
+   <div class="specs">
+    <div class="spec"><span><i class="fas fa-bolt" aria-hidden="true"></i> HTTP method</span><b>POST</b></div>
+    <div class="spec url"><div><span><i class="fas fa-link" aria-hidden="true"></i> API endpoint</span><b id="apEndpointUrl">[panel.url]/[api-docs.api-url]</b></div><button type="button" class="copy" data-copy-btn data-copy-target="apEndpointUrl" aria-label="Copy endpoint"><i class="far fa-copy" aria-hidden="true"></i></button></div>
+    <div class="spec"><span><i class="fas fa-file-code" aria-hidden="true"></i> Response</span><b>JSON</b></div>
+    <div class="spec url"><div><span><i class="fas fa-key" aria-hidden="true"></i> API key</span><b id="apUserKey">[user.api_key]</b></div><button type="button" class="copy" data-copy-btn data-copy-target="apUserKey" aria-label="Copy API key"><i class="far fa-copy" aria-hidden="true"></i></button></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="body" aria-label="API reference">
+ <div class="wrp">
+  <div class="tabs rv" id="apTabs" role="tablist" aria-label="API documentation sections">
+   <button class="tab on" data-t="start" type="button" role="tab" aria-selected="true"><em><i class="fas fa-rocket" aria-hidden="true"></i></em><span>Getting started</span></button>
+   <button class="tab" data-t="orders" type="button" role="tab" aria-selected="false"><em><i class="fas fa-cart-plus" aria-hidden="true"></i></em><span>Orders</span></button>
+   <button class="tab" data-t="status" type="button" role="tab" aria-selected="false"><em><i class="fas fa-satellite-dish" aria-hidden="true"></i></em><span>Order status</span></button>
+   <button class="tab" data-t="refill" type="button" role="tab" aria-selected="false"><em><i class="fas fa-sync-alt" aria-hidden="true"></i></em><span>Refill</span></button>
+   <button class="tab" data-t="cancel" type="button" role="tab" aria-selected="false"><em><i class="fas fa-ban" aria-hidden="true"></i></em><span>Cancel &amp; balance</span></button>
+   <button class="tab" data-t="errors" type="button" role="tab" aria-selected="false"><em><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></em><span>Errors</span></button>
+  </div>
+
+  <div id="apPanes">
+   <div class="pane on" data-t="start" role="tabpanel">
+    <article class="doc rv">
+     <h3 class="doc-h"><span class="dot"></span> Authentication</h3>
+     <p>Every request must include your unique <code>key</code> parameter together with an <code>action</code> parameter. Send every request as a <code>POST</code> to the endpoint above; each response is returned as <code>JSON</code>.</p>
+     <p>Treat the API key like a password. Anyone holding it can place orders using your balance.</p>
+     <div class="note"><i class="fas fa-shield-alt" aria-hidden="true"></i><div><b>Server-side only.</b> Never publish your key in front-end JavaScript, mobile application bundles or a public repository.</div></div>
+    </article>
+
+    <article class="doc rv">
+     <h3 class="doc-h"><span class="dot"></span> Services list <span class="m">POST</span></h3>
+     <p>Returns the live service catalogue with IDs, rates and order limits. Cache the response and refresh it periodically.</p>
+     <table class="tbl"><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody>
+      <tr><td>[api-docs.key]<span class="req">REQUIRED</span></td><td>Your API key</td></tr>
+      <tr><td>[api-docs.action]<span class="req">REQUIRED</span></td><td>services</td></tr>
+     </tbody></table>
+     <div class="code"><div class="code-b"><i style="background:#EF4444"></i><i style="background:#F59E0B"></i><i style="background:#22C55E"></i><span>Example response</span><button type="button" class="copy" data-copy-btn data-copy-target="apServicesResponse" aria-label="Copy response"><i class="far fa-copy"></i></button></div><pre id="apServicesResponse">[api-docs.services.success]</pre></div>
+    </article>
+
+    <article class="doc rv">
+     <h3 class="doc-h"><span class="dot"></span> Request format</h3>
+     <p>Submit parameters as form data. Use only the extra parameters required by the selected service type.</p>
+     <table class="tbl"><thead><tr><th>Type</th><th>Common parameters</th></tr></thead><tbody>
+      <tr><td>Default</td><td>link, quantity</td></tr>
+      <tr><td>Custom comments</td><td>link, comments</td></tr>
+      <tr><td>Drip-feed</td><td>link, quantity, runs, interval</td></tr>
+     </tbody></table>
+    </article>
+   </div>
+
+   <div class="pane" data-t="orders" role="tabpanel">
+    <article class="doc rv">
+     <h3 class="doc-h"><span class="dot"></span> Add order — Default <span class="m">POST</span></h3>
+     <p>Creates a new order. The response returns the order ID when the request is accepted.</p>
+     <table class="tbl"><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody>
+      <tr><td>[api-docs.key]<span class="req">REQUIRED</span></td><td>Your API key</td></tr>
+      <tr><td>[api-docs.action]<span class="req">REQUIRED</span></td><td>add</td></tr>
+      <tr><td>[api-docs.service]<span class="req">REQUIRED</span></td><td>Service ID</td></tr>
+      <tr><td>[api-docs.url]<span class="req">REQUIRED</span></td><td>Public link to the profile, post, video or channel</td></tr>
+      <tr><td>[api-docs.quantity]<span class="req">REQUIRED</span></td><td>Required quantity within the service limits</td></tr>
+      <tr><td>[api-docs.comments]<span class="opt">CONDITIONAL</span></td><td>Comments list, one comment per line</td></tr>
+      <tr><td>[api-docs.runs]<span class="opt">CONDITIONAL</span></td><td>Number of drip-feed runs</td></tr>
+      <tr><td>[api-docs.interval]<span class="opt">CONDITIONAL</span></td><td>Interval between runs in minutes</td></tr>
+     </tbody></table>
+     <div class="code"><div class="code-b"><i style="background:#EF4444"></i><i style="background:#F59E0B"></i><i style="background:#22C55E"></i><span>Success response</span><button type="button" class="copy" data-copy-btn data-copy-target="apAddSuccess" aria-label="Copy response"><i class="far fa-copy"></i></button></div><pre id="apAddSuccess">[api-docs.add-order.success]</pre></div>
+    </article>
+
+    <article class="doc rv">
+     <h3 class="doc-h"><span class="dot"></span> Error response</h3>
+     <p>Invalid or incompatible parameters return a JSON object containing an error message.</p>
+     <div class="code"><div class="code-b"><i style="background:#EF4444"></i><i style="background:#F59E0B"></i><i style="background:#22C55E"></i><span>Example response</span><button type="button" class="copy" data-copy-btn data-copy-target="apAddError" aria-label="Copy response"><i class="far fa-copy"></i></button></div><pre id="apAddError">{
+  "error": "incorrect service type"
+}</pre></div>
+    </article>
+   </div>
+
+   <div class="pane" data-t="status" role="tabpanel">
+    <article class="doc rv">
+     <h3 class="doc-h"><span class="dot"></span> Single order status <span class="m">POST</span></h3>
+     <p>Returns the current state and delivery information for one order.</p>
+     <table class="tbl"><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody>
+      <tr><td>[api-docs.key]<span class="req">REQUIRED</span></td><td>Your API key</td></tr>
+      <tr><td>[api-docs.action]<span class="req">REQUIRED</span></td><td>status</td></tr>
+      <tr><td>[api-docs.status.order]<span class="req">REQUIRED</span></td><td>Order ID</td></tr>
+     </tbody></table>
+     <div class="code"><div class="code-b"><i style="background:#EF4444"></i><i style="background:#F59E0B"></i><i style="background:#22C55E"></i><span>Example response</span><button type="button" class="copy" data-copy-btn data-copy-target="apStatusResponse" aria-label="Copy response"><i class="far fa-copy"></i></button></div><pre id="apStatusResponse">[api-docs.status.success]</pre></div>
+    </article>
+
+    <article class="doc rv">
+     <h3 class="doc-h"><span class="dot"></span> Multiple order status <span class="m">POST</span></h3>
+     <p>Checks up to 100 orders in one call. Separate the order IDs with commas.</p>
+     <table class="tbl"><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody>
+      <tr><td>[api-docs.key]<span class="req">REQUIRED</span></td><td>Your API key</td></tr>
+      <tr><td>[api-docs.action]<span class="req">REQUIRED</span></td><td>[api-docs.mass-status.action]</td></tr>
+      <tr><td>[api-docs.mass-status.orders]<span class="req">REQUIRED</span></td><td>Order IDs separated by commas, maximum 100</td></tr>
+     </tbody></table>
+     <div class="code"><div class="code-b"><i style="background:#EF4444"></i><i style="background:#F59E0B"></i><i style="background:#22C55E"></i><span>Example response</span><button type="button" class="copy" data-copy-btn data-copy-target="apMassStatusResponse" aria-label="Copy response"><i class="far fa-copy"></i></button></div><pre id="apMassStatusResponse">[api-docs.mass-status.success]</pre></div>
+    </article>
+   </div>
+
+   <div class="pane" data-t="refill" role="tabpanel">
+    <article class="doc rv">
+     <h3 class="doc-h"><span class="dot"></span> Create refill <span class="m">POST</span></h3>
+     <p>Requests a refill for an eligible order that has dropped inside its guarantee period.</p>
+     <table class="tbl"><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody>
+      <tr><td>[api-docs.key]<span class="req">REQUIRED</span></td><td>Your API key</td></tr>
+      <tr><td>[api-docs.action]<span class="req">REQUIRED</span></td><td>refill</td></tr>
+      <tr><td>[api-docs.status.order]<span class="req">REQUIRED</span></td><td>Order ID</td></tr>
+     </tbody></table>
+     <div class="code"><div class="code-b"><i style="background:#EF4444"></i><i style="background:#F59E0B"></i><i style="background:#22C55E"></i><span>Example response</span><button type="button" class="copy" data-copy-btn data-copy-target="apRefillResponse" aria-label="Copy response"><i class="far fa-copy"></i></button></div><pre id="apRefillResponse">{
+  "status": "Success",
+  "message": "Your order successfully added for refill. Thank you for patience."
+}</pre></div>
+    </article>
+   </div>
+
+   <div class="pane" data-t="cancel" role="tabpanel">
+    <article class="doc rv">
+     <h3 class="doc-h"><span class="dot"></span> Cancel order <span class="m">POST</span></h3>
+     <p>Marks an eligible order for cancellation before delivery has progressed too far.</p>
+     <table class="tbl"><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody>
+      <tr><td>[api-docs.key]<span class="req">REQUIRED</span></td><td>Your API key</td></tr>
+      <tr><td>[api-docs.action]<span class="req">REQUIRED</span></td><td>cancel</td></tr>
+      <tr><td>[api-docs.status.order]<span class="req">REQUIRED</span></td><td>Order ID</td></tr>
+     </tbody></table>
+     <div class="code"><div class="code-b"><i style="background:#EF4444"></i><i style="background:#F59E0B"></i><i style="background:#22C55E"></i><span>Example response</span><button type="button" class="copy" data-copy-btn data-copy-target="apCancelResponse" aria-label="Copy response"><i class="far fa-copy"></i></button></div><pre id="apCancelResponse">{
+  "status": "Success",
+  "message": "Your order was successfully marked for cancellation. Thank you for patience."
+}</pre></div>
+    </article>
+
+    <article class="doc rv">
+     <h3 class="doc-h"><span class="dot"></span> User balance <span class="m">POST</span></h3>
+     <p>Returns the current panel balance and its currency.</p>
+     <table class="tbl"><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody>
+      <tr><td>[api-docs.key]<span class="req">REQUIRED</span></td><td>Your API key</td></tr>
+      <tr><td>[api-docs.action]<span class="req">REQUIRED</span></td><td>balance</td></tr>
+     </tbody></table>
+     <div class="code"><div class="code-b"><i style="background:#EF4444"></i><i style="background:#F59E0B"></i><i style="background:#22C55E"></i><span>Example response</span><button type="button" class="copy" data-copy-btn data-copy-target="apBalanceResponse" aria-label="Copy response"><i class="far fa-copy"></i></button></div><pre id="apBalanceResponse">{
+  "balance": 10000,
+  "currency": "USD"
+}</pre></div>
+    </article>
+   </div>
+
+   <div class="pane" data-t="errors" role="tabpanel">
+    <article class="doc rv">
+     <h3 class="doc-h"><span class="dot"></span> Error format</h3>
+     <p>API errors are returned as a JSON object with an <code>error</code> key. Always test for this key before processing a successful response.</p>
+     <div class="code"><div class="code-b"><i style="background:#EF4444"></i><i style="background:#F59E0B"></i><i style="background:#22C55E"></i><span>Error shape</span><button type="button" class="copy" data-copy-btn data-copy-target="apErrorShape" aria-label="Copy response"><i class="far fa-copy"></i></button></div><pre id="apErrorShape">{
+  "error": "Incorrect request"
+}</pre></div>
+    </article>
+
+    <article class="doc rv">
+     <h3 class="doc-h"><span class="dot"></span> Common messages</h3>
+     <table class="tbl"><thead><tr><th>Message</th><th>What to check</th></tr></thead><tbody>
+      <tr><td>Incorrect request</td><td>A required parameter is missing or misspelled</td></tr>
+      <tr><td>Invalid API key</td><td>The API key is incorrect or was regenerated</td></tr>
+      <tr><td>Incorrect service ID</td><td>The service no longer exists or the ID is wrong</td></tr>
+      <tr><td>Not enough funds</td><td>The account balance is below the order charge</td></tr>
+      <tr><td>Incorrect link</td><td>The submitted link does not match the service requirements</td></tr>
+      <tr><td>Incorrect order ID</td><td>The order does not exist or belongs to another account</td></tr>
+     </tbody></table>
+     <div class="note"><i class="fas fa-lightbulb" aria-hidden="true"></i><div><b>Avoid duplicate orders.</b> Never retry an add request blindly after a network interruption; confirm the order status first.</div></div>
+    </article>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="end">
+ <div class="wrp">
+  <div class="cta rv"><div class="cta-in">
+   <span class="eyb" style="background:rgba(255,255,255,.06);border-color:rgba(255,59,66,.4);color:#FF6A6F"><i class="fas fa-server" aria-hidden="true"></i> Go Bigger</span>
+   <h2>Want Your Own <em>Branded Panel?</em></h2>
+   <p>A child panel gives you the same API on your own domain, with your own prices and customers.</p>
+   <div class="cta-row"><a href="/childpanel" class="cta-b"><i class="fas fa-rocket" aria-hidden="true"></i> Order Child Panel</a><a href="/tickets" class="ghost"><i class="far fa-comments" aria-hidden="true"></i> Ask a developer</a></div>
+  </div></div>
+ </div>
+</section>
+
+</div>
+</main>
+
+<script>
+(function(){
+ 'use strict';
+ var root=document.getElementById('apPage');if(!root)return;
+ var body=document.body,html=document.documentElement;
+ if(body.classList.contains('rental-guest'))root.classList.add('guest-top-fix');
+
+ var bg=document.querySelector('.pagebg');
+ if(!bg){bg=document.createElement('div');bg.className='pagebg';bg.setAttribute('aria-hidden','true');bg.innerHTML='<span class="photo"></span><span class="scrim"></span>';body.insertBefore(bg,body.firstChild)}
+
+ function luminance(value){
+  if(!value)return null;value=value.trim();var r,g,b,m;
+  if(value.charAt(0)==='#'){var x=value.slice(1);if(x.length===3)x=x[0]+x[0]+x[1]+x[1]+x[2]+x[2];if(x.length<6)return null;r=parseInt(x.substr(0,2),16);g=parseInt(x.substr(2,2),16);b=parseInt(x.substr(4,2),16)}
+  else{m=value.match(/[\d.]+/g);if(!m||m.length<3)return null;if(m[3]!==undefined&&parseFloat(m[3])<.5)return null;r=+m[0];g=+m[1];b=+m[2]}
+  return .2126*r+.7152*g+.0722*b
+ }
+ function currentTheme(){
+  var saved=null;try{saved=localStorage.getItem('lightMode')}catch(error){}
+  if(saved==='light'||saved==='dark')return saved;
+  var classes=(' '+(html.className||'')+' '+(body.className||'')+' ').toLowerCase();
+  if(/\s(dark|dark-mode|darkmode|theme-dark|nightmode)\s/.test(classes))return'dark';
+  if(/\s(light|light-mode|lightmode|theme-light)\s/.test(classes))return'light';
+  var attr=html.getAttribute('data-theme')||html.getAttribute('data-bs-theme')||body.getAttribute('data-theme')||body.getAttribute('data-bs-theme')||'';
+  if(attr==='dark'||attr==='light')return attr;
+  var value=luminance(getComputedStyle(html).getPropertyValue('--main-bg'));if(value===null)value=luminance(getComputedStyle(body).getPropertyValue('--main-bg'));
+  return value!==null&&value>=90?'light':'dark'
+ }
+ function paint(){var theme=currentTheme();root.setAttribute('data-thm',theme);body.classList.toggle('wr-dark',theme==='dark');body.classList.toggle('wr-light',theme==='light');bg.classList.toggle('thm-light',theme==='light')}
+ paint();
+ try{new MutationObserver(paint).observe(html,{attributes:true,attributeFilter:['class','style','data-bs-theme','data-theme']});new MutationObserver(paint).observe(body,{attributes:true,attributeFilter:['class','style','data-bs-theme','data-theme']})}catch(error){}
+ window.addEventListener('storage',paint);
+
+ try{var observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('on');observer.unobserve(entry.target)}})},{threshold:.05});var delay=0;root.querySelectorAll('.rv').forEach(function(element){element.style.transitionDelay=(delay%3)*80+'ms';delay+=1;observer.observe(element)})}catch(error){root.querySelectorAll('.rv').forEach(function(element){element.classList.add('on')})}
+
+ var tabs=document.getElementById('apTabs'),panes=document.getElementById('apPanes');
+ if(tabs&&panes){
+  var tabButtons=Array.prototype.slice.call(tabs.querySelectorAll('.tab'));
+  function activate(button,focus){
+   var selected=button.getAttribute('data-t');
+   tabButtons.forEach(function(tab){var on=tab===button;tab.classList.toggle('on',on);tab.setAttribute('aria-selected',on?'true':'false');tab.setAttribute('tabindex',on?'0':'-1')});
+   panes.querySelectorAll('.pane').forEach(function(pane){var on=pane.getAttribute('data-t')===selected;pane.classList.toggle('on',on);pane.setAttribute('aria-hidden',on?'false':'true');if(on)pane.querySelectorAll('.rv').forEach(function(element){element.classList.add('on')})});
+   if(focus)button.focus()
+  }
+  tabButtons.forEach(function(button){var name=button.getAttribute('data-t'),pane=panes.querySelector('.pane[data-t="'+name+'"]');button.id='apTab-'+name;button.setAttribute('aria-controls','apPane-'+name);if(pane){pane.id='apPane-'+name;pane.setAttribute('aria-labelledby','apTab-'+name)}});
+  activate(tabs.querySelector('.tab.on')||tabButtons[0],false);
+  tabs.addEventListener('click',function(event){var button=event.target.closest('.tab');if(button)activate(button,false)});
+  tabs.addEventListener('keydown',function(event){var button=event.target.closest('.tab');if(!button)return;var index=tabButtons.indexOf(button),next=index;if(event.key==='ArrowRight'||event.key==='ArrowDown')next=(index+1)%tabButtons.length;else if(event.key==='ArrowLeft'||event.key==='ArrowUp')next=(index-1+tabButtons.length)%tabButtons.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=tabButtons.length-1;else return;event.preventDefault();activate(tabButtons[next],true)})
+ }
+
+ root.addEventListener('click',function(event){var button=event.target.closest('[data-copy-btn]');if(!button)return;var value=button.getAttribute('data-copy-text'),id=button.getAttribute('data-copy-target'),element=id?document.getElementById(id):null;if(!value&&element)value=element.innerText;if(!value)return;function done(){button.classList.add('done');var icon=button.querySelector('i');if(icon)icon.className='fas fa-check';setTimeout(function(){button.classList.remove('done');if(icon)icon.className='far fa-copy'},1500)}function fallback(){var area=document.createElement('textarea');area.value=value;area.style.cssText='position:fixed;opacity:0';document.body.appendChild(area);area.select();try{document.execCommand('copy');done()}catch(error){}document.body.removeChild(area)}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(value).then(done).catch(fallback);else fallback()});
+})();
+</script>
