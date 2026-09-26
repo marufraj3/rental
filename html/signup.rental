@@ -1,74 +1,669 @@
-		
-		<div class="paddingbody"></div>
-		<div class="">			
-			<div class="container-fluid container-fluid-spacious">
-				<div class="row">
-					<div class="col-md-6 col-md-offset-3">
-						<div id="main-page" class="well well-float table-responsive">
-							<div class="">
-								[error_message]
-								<form id="yw0" action="" method="post">
-									
-									<div class="form-group" style="[signup.username-field]">
-										<label class="control-label" for="username">[signup.form.full_name]</label>
-										<input class="form-control" name="full_name" id="RegForm_login" type="text">
-										<p class="help-block help-block-error"></p>
-									</div>
-									
-									<div class="form-group">
-										<label class="control-label" for="username">[signup.form.username]</label>
-										<input class="form-control" name="username" id="RegForm_login" required type="text">
-										<p class="help-block help-block-error"></p>
-									</div>
-									
-									<div class="form-group">
-										<label class="control-label" for="email">[signup.form.email]</label>
-										<input class="form-control" name="email" id="email" required type="text">
-										<p class="help-block help-block-error"></p>
-									</div>
-									
-									<div class="form-group" style="[signup.skype-field]" >
-										<label class="control-label" for="skype">[signup.form.skype]</label>
-										<input class="form-control" name="skype" id="RegForm_skype" type="text">
-										<p class="help-block help-block-error"></p>
-									</div>
-									
-									<div class="form-group">
-										<label class="control-label" for="password">[signup.form.password]</label>
-										<input class="form-control" name="password" id="password" type="password">
-										<p class="help-block help-block-error"></p>
-									</div>
-									
-									<div class="form-group">
-										<label class="control-label" for="rpassword">[signup.form.rpassword]</label>
-										<input class="form-control" name="rpassword" id="rpassword" type="password">
-										<p class="help-block help-block-error"></p>
-									</div>
-									
-									
-									<div class="form-group" style="[signup.terms-field]">
-									  <div class="checkbox">
-										<label>
-										  <input type="checkbox" class="terms-accept-checkbox" name="tnc" value="1" />[signup.form.terms] 
-										</label>
-									  </div>
-									</div>
-									
-									[panel.signup.csrf_protection]
-									<div class="g-recaptcha form-group" data-sitekey="[panel.google-sitekey]"></div>
-									<input type="hidden" name="singup" value="Sign Up" />
-									<button type="submit" class="btn btn-default">[signup.form.submit_button]</button>
-								</form>
+<style id="rental-signup-clone">
+body#outside,body#guest,body{overflow-x:hidden!important;max-width:100%!important}
+
+/* ═══ TOKENS (identical to sign-in) ═══ */
+#suPage{
+ --red:#E11020;--red2:#FF3B42;--redD:#A50C16;
+ --grd:linear-gradient(135deg,#A50C16,#E11020 52%,#FF3B42);
+ --soft:rgba(225,16,32,.10);--soft2:rgba(225,16,32,.18);
+ --bg:#050507;--bg2:#0A0A0E;--card:#0F0F14;--card2:#141419;--fld:#0A0A0F;
+ --line:rgba(255,255,255,.075);--line2:rgba(225,16,32,.32);
+ --tx:#FFFFFF;--tx2:#A8A8B4;--mut:#6C6C79;--dot:225,16,32;
+ --sh:none;--shR:none;
+ font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--tx);background:var(--bg);
+ position:relative;z-index:1;overflow-x:clip;-webkit-font-smoothing:antialiased}
+#suPage[data-thm="light"]{
+ --red:#D40C1C;--red2:#F0303A;--redD:#96060F;
+ --grd:linear-gradient(135deg,#96060F,#D40C1C 52%,#F0303A);
+ --soft:rgba(212,12,28,.07);--soft2:rgba(212,12,28,.13);
+ --bg:#F4F5F8;--bg2:#FFFFFF;--card:#FFFFFF;--card2:#F8F9FB;--fld:#F5F6F9;
+ --line:rgba(12,12,20,.09);--line2:rgba(212,12,28,.26);
+ --tx:#0B0B12;--tx2:#4C4C5A;--mut:#8A8A98;--dot:212,12,28;
+ --sh:none;--shR:none}
+body.wr-dark{background:#050507!important}
+body.wr-light{background:#F4F5F8!important}
+
+/* ═══ SHELL TINT (header / footer) — same as sign-in ═══ */
+body#guest.wr-dark{
+ --mc:#E11020;--mc-hover:#FF3B42;--mc-trans:rgba(225,16,32,.12);
+ --main-bg:#050507;--second-bg:#0A0A0E;--card-bg:#0F0F14;--title-bg:#0C0C11;
+ --border:rgba(255,255,255,.08);--tc:#FFFFFF;--ts:#C2C2CE;--tw:#8E8E9C;
+ --sky-grad:linear-gradient(135deg,#A50C16,#E11020 52%,#FF3B42);
+ --sky-soft:rgba(225,16,32,.12);--sky-shadow:none;
+ --og-grad:linear-gradient(135deg,#A50C16,#E11020 52%,#FF3B42);
+ --og-soft:rgba(225,16,32,.12);--og-line:rgba(225,16,32,.28);
+ --og-glass:rgba(15,15,20,.72);--og-shadow:none}
+body#guest.wr-light{
+ --mc:#D40C1C;--mc-hover:#F0303A;--mc-trans:rgba(212,12,28,.09);
+ --main-bg:#F4F5F8;--second-bg:#FFFFFF;--card-bg:#FFFFFF;--title-bg:#F8F9FB;
+ --border:rgba(12,12,20,.09);--tc:#0B0B12;--ts:#3E3E4B;--tw:#6E6E7C;
+ --sky-grad:linear-gradient(135deg,#96060F,#D40C1C 52%,#F0303A);
+ --sky-soft:rgba(212,12,28,.08);--sky-shadow:none;
+ --og-grad:linear-gradient(135deg,#96060F,#D40C1C 52%,#F0303A);
+ --og-soft:rgba(212,12,28,.08);--og-line:rgba(212,12,28,.22);
+ --og-glass:rgba(255,255,255,.76);--og-shadow:none}
+
+#suPage *{box-sizing:border-box}
+#suPage .wrp{max-width:1384px;margin:0 auto;padding:0 32px;position:relative;z-index:3}
+#suPage section{position:relative;padding:80px 0;overflow:hidden}
+#suPage .rv{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+#suPage .rv.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){ #suPage .rv{opacity:1;transform:none;transition:none}
+ #suPage *{animation:none!important}}
+
+/* ═══ ATOMS ═══ */
+#suPage .eyb{display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 14px;border-radius:8px;
+ background:var(--soft);border:1px solid var(--line2);color:var(--red2);
+ font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+#suPage[data-thm="light"] .eyb{color:var(--redD)}
+#suPage h2.st{font-size:clamp(24px,3.2vw,38px);font-weight:800;line-height:1.16;letter-spacing:-.028em;margin:16px 0 12px}
+#suPage h2.st em{font-style:normal;color:var(--red)}
+#suPage .sp{color:var(--tx2);font-size:14.5px;line-height:1.85;max-width:640px}
+#suPage .shd{margin:0 0 42px}
+#suPage .shd.ctr{text-align:center}
+#suPage .shd.ctr .sp{margin:0 auto}
+#suPage .bR,#suPage .bG{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:50px;padding:0 24px;
+ border-radius:12px;font-weight:800;font-size:14px;text-decoration:none;cursor:pointer;border:0;font-family:inherit;
+ transition:transform .2s,filter .2s;position:relative;overflow:hidden}
+#suPage .bR{background:var(--grd);color:#fff!important}
+#suPage .bR::after{content:"";position:absolute;top:0;left:-90%;width:42%;height:100%;
+ background:linear-gradient(100deg,transparent,rgba(255,255,255,.38),transparent);transform:skewX(-20deg);animation:suSh 3.8s ease-in-out infinite}
+@keyframes suSh{0%,64%{left:-90%}100%{left:140%}}
+#suPage .bR:hover{transform:translateY(-2px);filter:brightness(1.08)}
+#suPage .bG{background:var(--card);border:1.5px solid var(--line);color:var(--tx)!important}
+#suPage .bG:hover{border-color:var(--line2);color:var(--red)!important;transform:translateY(-2px)}
+#suPage .cd{position:relative;background:linear-gradient(170deg,var(--card),var(--card2));border:1px solid var(--line);
+ border-radius:18px;overflow:hidden;transition:transform .26s cubic-bezier(.22,1,.36,1),border-color .26s}
+#suPage .cd::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(130% 76% at 100% 0,var(--soft),transparent 62%)}
+#suPage .cd:hover{transform:translateY(-6px);border-color:var(--line2)}
+#suPage .cd>*{position:relative;z-index:1}
+#suPage .ict{width:46px;height:46px;min-width:46px;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;
+ background:var(--soft);border:1px solid var(--line2);color:var(--red);font-size:18px;transition:.26s}
+#suPage .cd:hover .ict{background:var(--grd);border-color:transparent;color:#fff}
+#suPage .hair{position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--line2),transparent);z-index:4}
+
+/* ═══ BACKGROUND — full-bleed photo ═══ */
+#suPage .bgl{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#suPage .photo{position:absolute;inset:-2%;
+ background-image:url("https://storage.perfectcdn.com/eq86bz/gn3bg37d2hsmq26l.png");
+ background-position:center center;background-size:cover;background-repeat:no-repeat;
+ transform:scale(1.03);filter:saturate(1.06) contrast(1.02);
+ animation:suPan 34s ease-in-out infinite alternate}
+@keyframes suPan{0%{transform:scale(1.03) translate3d(0,0,0)}100%{transform:scale(1.09) translate3d(-1.4%,-1%,0)}}
+#suPage .scrim{position:absolute;inset:0;
+ background:
+  linear-gradient(180deg,rgba(4,4,6,.90) 0%,rgba(4,4,6,.70) 34%,rgba(4,4,6,.86) 72%,rgba(4,4,6,.98) 100%),
+  radial-gradient(90% 62% at 50% 12%,rgba(225,16,32,.24),transparent 68%),
+  radial-gradient(60% 50% at 92% 88%,rgba(160,8,20,.20),transparent 70%)}
+#suPage[data-thm="light"] .scrim{
+ background:
+  linear-gradient(180deg,rgba(246,247,250,.94) 0%,rgba(246,247,250,.78) 34%,rgba(246,247,250,.90) 72%,rgba(246,247,250,1) 100%),
+  radial-gradient(90% 62% at 50% 12%,rgba(212,12,28,.13),transparent 68%)}
+#suPage .tx-dot::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+ background:radial-gradient(rgba(var(--dot),.16) 1px,transparent 1px);background-size:26px 26px;opacity:.5;
+ -webkit-mask-image:radial-gradient(80% 70% at 50% 42%,#000,transparent);mask-image:radial-gradient(80% 70% at 50% 42%,#000,transparent)}
+#suPage .tx-grid::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+ background-image:linear-gradient(rgba(var(--dot),.09) 1px,transparent 1px),linear-gradient(90deg,rgba(var(--dot),.09) 1px,transparent 1px);
+ background-size:52px 52px;
+ -webkit-mask-image:radial-gradient(92% 76% at 50% 44%,#000,transparent);mask-image:radial-gradient(92% 76% at 50% 44%,#000,transparent)}
+#suPage .tx-beam::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+ background:radial-gradient(520px 300px at 88% 6%,var(--soft2),transparent 70%),radial-gradient(460px 300px at 6% 96%,var(--soft),transparent 70%)}
+/* photo background — Before You Join */
+#suPage .photo2{position:absolute;inset:-2%;
+ background-image:url("https://storage.perfectcdn.com/eq86bz/t2aowpwam10x783r.png");
+ background-position:center center;background-size:cover;background-repeat:no-repeat;
+ transform:scale(1.03);filter:saturate(1.05);
+ animation:suPan2 36s ease-in-out infinite alternate}
+@keyframes suPan2{0%{transform:scale(1.03) translate3d(0,0,0)}100%{transform:scale(1.08) translate3d(1.4%,-1%,0)}}
+#suPage .scrim2{position:absolute;inset:0;
+ background:
+  linear-gradient(180deg,rgba(4,4,6,.96) 0%,rgba(4,4,6,.80) 30%,rgba(4,4,6,.84) 70%,rgba(4,4,6,.97) 100%),
+  radial-gradient(80% 60% at 50% 10%,rgba(225,16,32,.22),transparent 70%)}
+#suPage[data-thm="light"] .scrim2{
+ background:
+  linear-gradient(180deg,rgba(246,247,250,.97) 0%,rgba(246,247,250,.86) 30%,rgba(246,247,250,.90) 70%,rgba(246,247,250,.99) 100%),
+  radial-gradient(80% 60% at 50% 10%,rgba(212,12,28,.12),transparent 70%)}
+
+/* ═══ HERO ═══ */
+#suPage .hero{padding:148px 0 84px}
+#suPage .hgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,520px);gap:60px;align-items:center;position:relative;z-index:3}
+#suPage .h1{font-size:clamp(31px,4.3vw,52px);font-weight:800;line-height:1.07;letter-spacing:-.032em;margin:16px 0 18px}
+#suPage .h1 em{font-style:normal;color:var(--red)}
+#suPage .hsub{color:var(--tx2);font-size:15.5px;line-height:1.82;max-width:480px;margin-bottom:26px}
+#suPage .hlist{list-style:none;margin:0 0 28px;padding:0;display:flex;flex-direction:column;gap:12px;max-width:460px}
+#suPage .hlist li{display:flex;align-items:flex-start;gap:12px;font-size:13.5px;font-weight:600;color:var(--tx2);line-height:1.6}
+#suPage .hlist li i{width:24px;height:24px;min-width:24px;border-radius:8px;background:var(--soft);border:1px solid var(--line2);
+ color:var(--red);display:inline-flex;align-items:center;justify-content:center;font-size:10px;margin-top:1px}
+#suPage .hlist li b{color:var(--tx);font-weight:800}
+#suPage .hstat{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:460px}
+#suPage .hstat div{padding:14px 12px;border-radius:13px;background:var(--card);border:1px solid var(--line);text-align:center}
+#suPage .hstat b{display:block;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:800;color:var(--red)}
+#suPage .hstat small{display:block;color:var(--mut);font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+
+/* ═══ SIGNUP CARD ═══ */
+#suPage .sucard{position:relative;width:100%;max-width:520px;margin:0 0 0 auto;overflow:hidden;
+ background:linear-gradient(168deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:22px;
+ padding:30px 30px 24px}
+#suPage .sucard>*{position:relative;z-index:1}
+#suPage .su-top{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+#suPage .su-mark{width:46px;height:46px;min-width:46px;border-radius:13px;background:var(--grd);display:flex;align-items:center;justify-content:center;
+ color:#fff;font-size:19px}
+#suPage .su-top h2{font-size:19px;font-weight:800;margin:0;color:var(--tx);letter-spacing:-.02em}
+#suPage .su-top small{display:block;color:var(--mut);font-size:11.5px;font-weight:600;margin-top:2px}
+#suPage .su-free{margin-left:auto;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 11px;border-radius:7px;
+ background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.26);color:#22C55E;font-size:10px;font-weight:800;letter-spacing:.08em}
+
+#suPage .su-alert{border-radius:11px;font-size:13px;font-weight:700;padding:12px 15px;margin-bottom:14px;border:1px solid transparent}
+#suPage .su-alert.err{background:rgba(239,68,68,.12);color:#F87171;border-color:rgba(239,68,68,.3)}
+#suPage .su-alert.ok{background:rgba(34,197,94,.12);color:#4ADE80;border-color:rgba(34,197,94,.3)}
+
+#suPage .su-f{position:relative;margin-bottom:14px}
+#suPage .su-f label{display:block;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:8px}
+#suPage .su-f>i{position:absolute;left:15px;bottom:18px;color:var(--red);font-size:13px;z-index:2;pointer-events:none}
+#suPage .su-f input[type="text"],#suPage .su-f input[type="email"],#suPage .su-f input[type="password"]{
+ display:block;width:100%;height:52px;line-height:52px;background:var(--fld);border:1.5px solid var(--line);color:var(--tx);
+ border-radius:12px;padding:0 46px 0 42px;font-size:14px;font-weight:600;font-family:inherit;outline:0;transition:.18s}
+#suPage .su-f input::placeholder{color:var(--mut);font-weight:500}
+#suPage .su-f input:focus{border-color:var(--red);background:var(--bg2);box-shadow:0 0 0 4px var(--soft)}
+#suPage .su-f .eye{position:absolute;right:10px;bottom:13px;width:34px;height:34px;border-radius:9px;background:transparent;border:0;
+ color:var(--mut);cursor:pointer;font-size:13px;padding:0;transition:.18s}
+#suPage .su-f .eye:hover{color:var(--red);background:var(--soft)}
+#suPage .su-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* terms checkbox — custom, panel-CSS proof */
+#suPage .su-terms{display:flex;align-items:flex-start;gap:10px;margin:4px 0 18px;cursor:pointer;
+ font-size:12.5px;font-weight:600;color:var(--tx2);line-height:1.6}
+#suPage .su-terms .bx{display:none}
+#suPage .su-terms a{color:var(--red);font-weight:800;text-decoration:none}
+#suPage .su-terms input[type="checkbox"]{
+ position:relative!important;display:inline-block!important;visibility:visible!important;opacity:1!important;
+ -webkit-appearance:none!important;appearance:none!important;
+ width:18px!important;height:18px!important;min-width:18px!important;flex:0 0 18px!important;
+ margin:2px 0 0!important;padding:0!important;left:auto!important;top:auto!important;right:auto!important;bottom:auto!important;
+ transform:none!important;clip:auto!important;clip-path:none!important;pointer-events:auto!important;cursor:pointer;
+ border:1.5px solid var(--line)!important;border-radius:5px!important;background:var(--fld)!important;
+ box-sizing:border-box!important;transition:.15s;outline:none!important}
+#suPage .su-terms input[type="checkbox"]:hover{border-color:var(--red)!important}
+#suPage .su-terms input[type="checkbox"]:checked{background:var(--grd)!important;border-color:transparent!important}
+#suPage .su-terms input[type="checkbox"]:checked::after{
+ content:"";position:absolute;left:50%;top:48%;width:4px;height:8px;margin:0;padding:0;
+ border:solid #fff;border-width:0 2px 2px 0;border-radius:1px;
+ transform:translate(-50%,-50%) rotate(45deg)}
+
+#suPage .su-btn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;height:54px;border:0;border-radius:13px;
+ background:var(--grd);color:#fff;font-weight:800;font-size:15px;font-family:inherit;cursor:pointer;
+ position:relative;overflow:hidden;transition:transform .18s,filter .18s}
+#suPage .su-btn::after{content:"";position:absolute;top:0;left:-90%;width:42%;height:100%;
+ background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-20deg);animation:suSh 3.6s ease-in-out infinite}
+#suPage .su-btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+
+#suPage .su-or{display:flex;align-items:center;gap:12px;margin:18px 0 14px;color:var(--mut);
+ font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+#suPage .su-or::before,#suPage .su-or::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* ═══ GOOGLE SIGN-UP · CSS only, no clipping ═══ */
+#suPage #g_id_onload{display:none!important}
+#suPage .su-google{
+ display:flex!important;flex-direction:column;align-items:center!important;justify-content:flex-start!important;
+ width:100%!important;float:none!important;margin:0!important;padding:0!important;
+ background:transparent!important;border:0!important}
+#suPage .g_id_signin{
+ display:flex!important;justify-content:center!important;
+ width:100%!important;float:none!important;margin:0 auto!important;padding:0!important}
+#suPage .g_id_signin>div{margin:0 auto!important}
+
+#suPage .su-foot{text-align:center;color:var(--tx2);font-size:13px;font-weight:600;margin:16px 0 0}
+#suPage .su-foot a{color:var(--red);font-weight:800;text-decoration:none}
+#suPage .su-safe{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+#suPage .su-safe>div{text-align:center}
+#suPage .su-safe i{color:var(--red);font-size:13px}
+#suPage .su-safe b{display:block;font-size:11px;font-weight:800;margin-top:6px;color:var(--tx)}
+#suPage .su-safe small{display:block;color:var(--mut);font-size:9.5px;font-weight:600}
+
+/* ═══ PERKS / STEPS / FAQ ═══ */
+#suPage .pk{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+#suPage .pk-c{padding:24px 20px}
+#suPage .pk-c h4{font-size:14.5px;font-weight:800;margin:0;color:var(--tx);line-height:1.35}
+#suPage .pk-c p{color:var(--tx2);font-size:12.5px;line-height:1.75;margin:14px 0 0}
+#suPage .rs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+#suPage .rs-c{position:relative;padding:30px 22px 26px;border-radius:18px;text-align:center;overflow:hidden;
+ background:linear-gradient(170deg,var(--card),var(--card2));border:1px solid var(--line);transition:.26s}
+#suPage .rs-c:hover{transform:translateY(-7px);border-color:var(--line2)}
+#suPage .rs-n{display:inline-flex;align-items:center;justify-content:center;width:62px;height:62px;border-radius:20px;
+ background:var(--soft);border:1px solid var(--line2);color:var(--red);
+ font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:800;transition:.26s}
+#suPage .rs-c:hover .rs-n{background:var(--grd);border-color:transparent;color:#fff}
+#suPage .rs-c h4{font-size:15.5px;font-weight:800;margin:18px 0 9px;color:var(--tx)}
+#suPage .rs-c p{color:var(--tx2);font-size:12.5px;line-height:1.75;margin:0}
+#suPage .fq-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+#suPage .fq{border-radius:14px;overflow:hidden;background:var(--card);border:1px solid var(--line);transition:.22s}
+#suPage .fq:hover{border-color:var(--line2)}
+#suPage .fq.on{border-color:rgba(225,16,32,.4);background:linear-gradient(150deg,var(--soft),var(--card) 45%)}
+#suPage .fq-q{display:flex;align-items:center;gap:13px;padding:16px 18px;cursor:pointer;user-select:none;font-size:13.5px;font-weight:800;color:var(--tx)}
+#suPage .fq-n{width:29px;height:29px;min-width:29px;border-radius:9px;background:var(--soft);border:1px solid var(--line2);color:var(--red);
+ display:inline-flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;transition:.2s}
+#suPage .fq.on .fq-n{background:var(--grd);border-color:transparent;color:#fff}
+#suPage .fq-q>span:nth-child(2){flex:1;line-height:1.45}
+#suPage .fq-t{width:26px;height:26px;min-width:26px;border-radius:8px;background:var(--soft);border:1px solid var(--line);color:var(--red);
+ display:inline-flex;align-items:center;justify-content:center;font-size:10px;transition:.28s}
+#suPage .fq.on .fq-t{background:var(--grd);border-color:transparent;color:#fff;transform:rotate(180deg)}
+#suPage .fq-a{max-height:0;overflow:hidden;transition:max-height .34s ease}
+#suPage .fq-a div{margin:0 18px;padding:13px 0 17px;color:var(--tx2);font-size:12.5px;line-height:1.85;border-top:1px dashed var(--line)}
+
+/* ═══ CTA ═══ */
+#suPage .cta{position:relative;border-radius:26px;overflow:hidden;padding:50px 34px;text-align:center;
+ background:radial-gradient(120% 130% at 50% 0,#3A060B,#0A0A0E 70%);border:1px solid rgba(225,16,32,.34)}
+#suPage .cta::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(118deg,rgba(255,255,255,.03) 0 2px,transparent 2px 16px)}
+#suPage .cta::after{content:"";position:absolute;bottom:-120px;left:50%;transform:translateX(-50%);width:520px;height:300px;
+ background:radial-gradient(closest-side,rgba(225,16,32,.4),transparent);filter:blur(30px)}
+#suPage .cta-in{position:relative;z-index:1}
+#suPage .cta h2{font-size:clamp(23px,3.1vw,35px);font-weight:800;color:#fff;margin:14px 0 12px;letter-spacing:-.024em}
+#suPage .cta h2 em{font-style:normal;color:#FF3B42}
+#suPage .cta p{color:rgba(255,255,255,.72);font-size:14.5px;line-height:1.8;max-width:580px;margin:0 auto 24px}
+#suPage .cta .bG{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.2);color:#fff!important}
+
+/* ═══ NO SOFT SHADOWS ═══ */
+#suPage *,#suPage *::before,#suPage *::after{box-shadow:none!important;filter:none!important}
+#suPage .photo{filter:saturate(1.06) contrast(1.02)!important}
+#suPage .photo2{filter:saturate(1.05)!important}
+#suPage .cta::after{filter:blur(30px)!important}
+#suPage .su-f input:focus{box-shadow:0 0 0 4px var(--soft)!important}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1240px){ #suPage .wrp{padding:0 24px}}
+@media(max-width:1040px){
+ #suPage .hero{padding:120px 0 62px}
+ #suPage .hgrid{grid-template-columns:1fr;gap:36px}
+ #suPage .sucard{margin:0 auto}
+ #suPage .hgrid>.rv:first-child{text-align:center}
+ #suPage .hsub,#suPage .hlist,#suPage .hstat{margin-left:auto;margin-right:auto}
+ #suPage .hlist li{text-align:left}
+ #suPage .pk{grid-template-columns:repeat(2,1fr)}
+ #suPage .fq-list{grid-template-columns:1fr}
+}
+@media(max-width:680px){
+ #suPage section{padding:54px 0}
+ #suPage .wrp{padding:0 16px}
+ #suPage .hero{padding:92px 0 42px}
+ #suPage .sucard{padding:24px 16px 20px;border-radius:18px}
+ #suPage .photo,#suPage .photo2{animation:none}
+ #suPage .su-row{grid-template-columns:1fr}
+ #suPage .pk,#suPage .rs{grid-template-columns:1fr}
+ #suPage .cta{padding:34px 20px;border-radius:20px}
+ #suPage .eyb{margin-left:auto;margin-right:auto}
+ /* icon + title centred on phones */
+ #suPage .pk-c{text-align:center}
+ #suPage .pk-c .ict{margin:0 auto 14px!important;display:flex!important}
+ #suPage .pk-c h4,#suPage .pk-c p{text-align:center}
+ /* trust strip — one line, 3 columns */
+ #suPage .su-safe{grid-template-columns:repeat(3,1fr);gap:6px;margin-top:16px;padding-top:14px}
+ #suPage .su-safe>div{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;gap:3px}
+ #suPage .su-safe>div>div{display:block;text-align:center}
+ #suPage .su-safe i{font-size:14px;margin:0}
+ #suPage .su-safe b{margin:2px 0 0;font-size:10.5px;line-height:1.25;white-space:nowrap}
+ #suPage .su-safe small{font-size:9px;line-height:1.2;white-space:nowrap}
+ #suPage .fq-q{text-align:left}
+}
+@media(max-width:360px){
+ #suPage .su-safe b{font-size:9.5px}
+ #suPage .su-safe small{font-size:8.5px}
+}
+/* icon + title inline on desktop/tablet */
+@media(min-width:681px){
+ #suPage .pk-c{display:grid;grid-template-columns:auto 1fr;gap:0 14px;align-items:center}
+ #suPage .pk-c .ict{grid-column:1;grid-row:1}
+ #suPage .pk-c h4{grid-column:2;grid-row:1}
+ #suPage .pk-c p{grid-column:1/-1;grid-row:2}
+}
+
+/* Rental form compatibility: keeps backend-rendered errors and optional fields intact. */
+#suPage .su-alert-wrap:empty{display:none}
+#suPage .su-alert-wrap .alert{margin:0 0 14px;padding:12px 15px;border:1px solid transparent;border-radius:11px;background:rgba(239,68,68,.12);color:#F87171;font-size:13px;font-weight:700;box-shadow:none}
+#suPage .su-alert-wrap .alert-success{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.12);color:#4ADE80}
+#suPage .su-f .help-block{margin:6px 0 0;color:#F87171;font-size:11px;line-height:1.45}
+#suPage .su-f .help-block:empty{display:none}
+#suPage .g-recaptcha{max-width:100%;margin:0 0 16px;overflow:hidden;border-radius:12px}
+#suPage .g-recaptcha>div{max-width:100%}
+#suPage .su-hidden-field{display:none}
+#suPage .su-card-form{margin:0}
+#suPage .su-btn.btn{padding:0 20px;line-height:54px;box-shadow:none}
+#suPage .su-btn.btn:hover,#suPage .su-btn.btn:focus{background:var(--grd);color:#fff}
+#suPage .su-foot .btn{min-height:0;margin:0 0 0 4px;padding:0;border:0;background:transparent;color:var(--red);font-size:13px;font-weight:800;line-height:inherit;box-shadow:none}
+#suPage .su-foot .btn:hover,#suPage .su-foot .btn:focus{background:transparent;color:var(--red2)}
+#suPage .su-f input:-webkit-autofill,#suPage .su-f input:-webkit-autofill:hover,#suPage .su-f input:-webkit-autofill:focus{-webkit-text-fill-color:var(--tx);-webkit-box-shadow:0 0 0 1000px var(--fld) inset!important;transition:background-color 9999s ease-out}
+#suPage .su-terms>span{display:block;min-width:0}
+#suPage .su-terms .checkbox{margin:0}
+#suPage .su-terms .checkbox label{display:flex;align-items:flex-start;gap:10px;margin:0;padding:0;color:var(--tx2);font-size:12.5px;font-weight:600;line-height:1.6}
+#suPage .su-terms .checkbox input{position:relative;margin:2px 0 0}
+#suPage .su-card-note{display:flex;align-items:center;gap:8px;margin:0 0 14px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:var(--soft);color:var(--tx2);font-size:11.5px;font-weight:650;line-height:1.55}
+#suPage .su-card-note i{color:var(--red)}
+#suPage .su-page-login{position:relative;z-index:1}
+#suPage button.fq-q{width:100%;margin:0;border:0;outline:0;background:transparent;font-family:inherit;text-align:left}
+#suPage button.fq-q:focus-visible{box-shadow:inset 0 0 0 2px var(--red)!important}
+@media(max-width:680px){#suPage .su-free{height:24px;padding:0 8px;font-size:9px}#suPage .su-top{flex-wrap:wrap}}
+
+</style>
+
+
+<div class="wr" id="suPage" data-thm="dark">
+	<section class="hero" aria-labelledby="signup-page-title">
+		<div class="bgl" aria-hidden="true">
+			<span class="photo"></span>
+			<span class="scrim"></span>
+		</div>
+
+		<div class="wrp hgrid">
+			<div class="rv">
+				<span class="eyb"><i class="fas fa-fire" aria-hidden="true"></i> Join The Community</span>
+				<h1 class="h1" id="signup-page-title">Create Your<br><em>Free</em> Account</h1>
+				<p class="hsub">Join [panel.title] in less than a minute and manage your social media campaigns from one powerful, responsive dashboard.</p>
+
+				<ul class="hlist">
+					<li><i class="fas fa-check" aria-hidden="true"></i><span><b>Complete service access</b> from one simple dashboard</span></li>
+					<li><i class="fas fa-check" aria-hidden="true"></i><span><b>Automated processing</b> designed to start orders quickly</span></li>
+					<li><i class="fas fa-check" aria-hidden="true"></i><span><b>Secure account controls</b> with protected sign-in and payments</span></li>
+					<li><i class="fas fa-check" aria-hidden="true"></i><span><b>API-ready workflow</b> for resellers, agencies and developers</span></li>
+				</ul>
+
+				<div class="hstat">
+					<div><b>Free</b><small>Registration</small></div>
+					<div><b>Fast</b><small>Account setup</small></div>
+					<div><b>Secure</b><small>Protected access</small></div>
+				</div>
+			</div>
+
+			<div class="rv">
+				<div class="sucard">
+					<div class="su-top">
+						<span class="su-mark"><i class="fas fa-user-plus" aria-hidden="true"></i></span>
+						<div>
+							<h2>[signup.form.submit_button]</h2>
+							<small>Create your dashboard account</small>
+						</div>
+						<span class="su-free">FREE</span>
+					</div>
+
+					<div class="su-alert-wrap">[error_message]</div>
+
+					<form id="yw0" class="su-card-form" action="" method="post">
+						<div class="su-f" style="[signup.username-field]">
+							<label for="full_name">[signup.form.full_name]</label>
+							<i class="fas fa-id-card" aria-hidden="true"></i>
+							<input class="form-control" name="full_name" id="full_name" type="text" placeholder="[signup.form.full_name]" autocomplete="name">
+							<p class="help-block help-block-error"></p>
+						</div>
+
+						<div class="su-f">
+							<label for="username">[signup.form.username]</label>
+							<i class="fas fa-user" aria-hidden="true"></i>
+							<input class="form-control" name="username" id="username" required type="text" placeholder="[signup.form.username]" autocomplete="username">
+							<p class="help-block help-block-error"></p>
+						</div>
+
+						<div class="su-f">
+							<label for="email">[signup.form.email]</label>
+							<i class="far fa-envelope" aria-hidden="true"></i>
+							<input class="form-control" name="email" id="email" required type="text" placeholder="[signup.form.email]" autocomplete="email" inputmode="email">
+							<p class="help-block help-block-error"></p>
+						</div>
+
+						<div class="su-f" style="[signup.skype-field]">
+							<label for="skype">[signup.form.skype]</label>
+							<i class="fab fa-skype" aria-hidden="true"></i>
+							<input class="form-control" name="skype" id="skype" type="text" placeholder="[signup.form.skype]" autocomplete="off">
+							<p class="help-block help-block-error"></p>
+						</div>
+
+						<div class="su-row">
+							<div class="su-f">
+								<label for="password">[signup.form.password]</label>
+								<i class="fas fa-lock" aria-hidden="true"></i>
+								<input class="form-control" name="password" id="password" type="password" placeholder="[signup.form.password]" autocomplete="new-password">
+								<button type="button" class="eye" data-password-target="password" aria-label="Show password" aria-pressed="false"><i class="far fa-eye" aria-hidden="true"></i></button>
+								<p class="help-block help-block-error"></p>
+							</div>
+
+							<div class="su-f">
+								<label for="rpassword">[signup.form.rpassword]</label>
+								<i class="fas fa-lock" aria-hidden="true"></i>
+								<input class="form-control" name="rpassword" id="rpassword" type="password" placeholder="[signup.form.rpassword]" autocomplete="new-password">
+								<button type="button" class="eye" data-password-target="rpassword" aria-label="Show password confirmation" aria-pressed="false"><i class="far fa-eye" aria-hidden="true"></i></button>
+								<p class="help-block help-block-error"></p>
 							</div>
 						</div>
-						
-						<div class="text-center m-t">
-							<span>[signup.form.login_button_label]</span>
-							<a href="/login" class="btn btn-default m-l">[signup.form.login_button]</a>
+
+						<div class="su-terms" style="[signup.terms-field]">
+							<span class="checkbox">
+								<label for="signup-terms">
+									<input type="checkbox" class="terms-accept-checkbox" id="signup-terms" name="tnc" value="1">
+									<span>[signup.form.terms]</span>
+								</label>
+							</span>
 						</div>
-						
+
+						[panel.signup.csrf_protection]
+						<div class="g-recaptcha form-group" data-sitekey="[panel.google-sitekey]"></div>
+						<input type="hidden" name="singup" value="Sign Up">
+
+						<button type="submit" class="btn btn-default su-btn">
+							<span>[signup.form.submit_button]</span>
+							<i class="fas fa-arrow-right" aria-hidden="true"></i>
+						</button>
+					</form>
+
+					<p class="su-foot su-page-login">
+						<span>[signup.form.login_button_label]</span>
+						<a href="/login" class="btn btn-default">[signup.form.login_button]</a>
+					</p>
+
+					<div class="su-safe">
+						<div><i class="fas fa-lock" aria-hidden="true"></i><div><b>SSL Secured</b><small>Encrypted signup</small></div></div>
+						<div><i class="fas fa-user-shield" aria-hidden="true"></i><div><b>Protected</b><small>Private details</small></div></div>
+						<div><i class="fas fa-bolt" aria-hidden="true"></i><div><b>Instant</b><small>Account access</small></div></div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
+	</section>
+
+	<section class="tx-dot" aria-labelledby="signup-perks-title">
+		<span class="hair" aria-hidden="true"></span>
+		<div class="wrp">
+			<div class="shd ctr rv">
+				<span class="eyb"><i class="fas fa-gift" aria-hidden="true"></i> Included Free</span>
+				<h2 class="st" id="signup-perks-title">Everything Unlocks <em>The Moment You Join</em></h2>
+				<p class="sp">Every account receives the tools needed to browse services, manage campaigns and track orders.</p>
+			</div>
+
+			<div class="pk">
+				<article class="cd pk-c rv"><span class="ict"><i class="fas fa-layer-group" aria-hidden="true"></i></span><h4>Full Catalogue</h4><p>Browse available services across supported social platforms from one dashboard.</p></article>
+				<article class="cd pk-c rv"><span class="ict"><i class="fas fa-code" aria-hidden="true"></i></span><h4>API Access</h4><p>Connect supported stores, applications and reseller workflows through the panel API.</p></article>
+				<article class="cd pk-c rv"><span class="ict"><i class="fas fa-sync-alt" aria-hidden="true"></i></span><h4>Order Tracking</h4><p>Monitor processing, delivery and order updates without leaving your account.</p></article>
+				<article class="cd pk-c rv"><span class="ict"><i class="fas fa-headset" aria-hidden="true"></i></span><h4>Helpful Support</h4><p>Open a support request whenever you need help with services or account questions.</p></article>
+			</div>
+		</div>
+	</section>
+
+	<section class="tx-grid" aria-labelledby="signup-steps-title">
+		<span class="hair" aria-hidden="true"></span>
+		<div class="wrp">
+			<div class="shd ctr rv">
+				<span class="eyb"><i class="fas fa-route" aria-hidden="true"></i> After Signup</span>
+				<h2 class="st" id="signup-steps-title">From Account To <em>First Order</em></h2>
+				<p class="sp">Create your profile, add account balance and manage your first campaign.</p>
+			</div>
+
+			<div class="rs">
+				<article class="rs-c rv"><span class="rs-n">I</span><h4>Create Your Account</h4><p>Complete the registration form and securely enter your dashboard.</p></article>
+				<article class="rs-c rv"><span class="rs-n">II</span><h4>Add Balance</h4><p>Select an available payment method and fund your account.</p></article>
+				<article class="rs-c rv"><span class="rs-n">III</span><h4>Place Your Order</h4><p>Choose a service, provide the requested public link and track progress.</p></article>
+			</div>
+		</div>
+	</section>
+
+	<section class="faq-sec" aria-labelledby="signup-faq-title">
+		<div class="bgl" aria-hidden="true">
+			<span class="photo2"></span>
+			<span class="scrim2"></span>
+		</div>
+		<span class="hair" aria-hidden="true"></span>
+		<div class="wrp">
+			<div class="shd ctr rv">
+				<span class="eyb"><i class="fas fa-question-circle" aria-hidden="true"></i> Before You Join</span>
+				<h2 class="st" id="signup-faq-title">Quick Answers <em>For New Users</em></h2>
+				<p class="sp">Important information to know before creating your panel account.</p>
+			</div>
+
+			<div class="fq-list rv" id="signup-faq">
+				<article class="fq on"><button type="button" class="fq-q" aria-expanded="true"><span class="fq-n">01</span><span>Does registration cost anything?</span><i class="fas fa-chevron-down fq-t" aria-hidden="true"></i></button><div class="fq-a"><div>No. Creating an account is free. You only pay for the services and orders you choose to purchase.</div></div></article>
+				<article class="fq"><button type="button" class="fq-q" aria-expanded="false"><span class="fq-n">02</span><span>Will you ask for my social password?</span><i class="fas fa-chevron-down fq-t" aria-hidden="true"></i></button><div class="fq-a"><div>No. Orders normally require a public profile, post, video or channel link—not your social account password.</div></div></article>
+				<article class="fq"><button type="button" class="fq-q" aria-expanded="false"><span class="fq-n">03</span><span>How do I add account balance?</span><i class="fas fa-chevron-down fq-t" aria-hidden="true"></i></button><div class="fq-a"><div>After registration, open the payment section in your dashboard and select one of the available funding methods.</div></div></article>
+				<article class="fq"><button type="button" class="fq-q" aria-expanded="false"><span class="fq-n">04</span><span>Can I use the panel as a reseller?</span><i class="fas fa-chevron-down fq-t" aria-hidden="true"></i></button><div class="fq-a"><div>Available API and reseller tools can be accessed from your account according to the services enabled by the panel.</div></div></article>
+			</div>
+		</div>
+	</section>
+
+	<section style="padding-bottom:36px">
+		<div class="wrp">
+			<div class="cta rv">
+				<div class="cta-in">
+					<span class="eyb" style="background:rgba(255,255,255,.06);border-color:rgba(255,59,66,.4);color:#FF6A6F"><i class="fas fa-shield-alt" aria-hidden="true"></i> Ready</span>
+					<h2>Your Account Is <em>One Minute</em> Away</h2>
+					<p>Already registered? Sign in securely and continue managing your campaigns from the dashboard.</p>
+					<a href="/login" class="bG"><i class="fas fa-sign-in-alt" aria-hidden="true"></i> [signup.form.login_button]</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script>
+	(function () {
+		'use strict';
+
+		var page = document.getElementById('suPage');
+		if (!page) {
+			return;
+		}
+
+		var root = document.documentElement;
+		var body = document.body;
+
+		function selectedTheme() {
+			var saved = null;
+			try {
+				saved = localStorage.getItem('lightMode');
+			} catch (error) {}
+			if (saved === 'light' || saved === 'dark') {
+				return saved;
+			}
+			return root.classList.contains('light') || root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+		}
+
+		function paintTheme(theme) {
+			page.setAttribute('data-thm', theme);
+			body.classList.toggle('wr-dark', theme === 'dark');
+			body.classList.toggle('wr-light', theme === 'light');
+		}
+
+		function syncTheme() {
+			var theme = selectedTheme();
+			if (page.getAttribute('data-thm') !== theme) {
+				paintTheme(theme);
+			}
+		}
+
+		paintTheme(selectedTheme());
+		try {
+			new MutationObserver(syncTheme).observe(root, {
+				attributes: true,
+				attributeFilter: ['class', 'data-bs-theme', 'data-theme']
+			});
+		} catch (error) {}
+
+		var passwordButtons = page.querySelectorAll('.eye');
+		for (var passwordIndex = 0; passwordIndex < passwordButtons.length; passwordIndex += 1) {
+			passwordButtons.item(passwordIndex).addEventListener('click', function () {
+				var targetId = this.getAttribute('data-password-target');
+				var input = document.getElementById(targetId);
+				var icon = this.querySelector('i');
+				if (!input) {
+					return;
+				}
+				var visible = input.type === 'text';
+				input.type = visible ? 'password' : 'text';
+				this.setAttribute('aria-pressed', visible ? 'false' : 'true');
+				this.setAttribute('aria-label', visible ? 'Show password' : 'Hide password');
+				if (icon) {
+					icon.className = visible ? 'far fa-eye' : 'far fa-eye-slash';
+				}
+				input.focus();
+			});
+		}
+
+		var revealItems = page.querySelectorAll('.rv');
+		if (!('IntersectionObserver' in window)) {
+			for (var fallbackIndex = 0; fallbackIndex < revealItems.length; fallbackIndex += 1) {
+				revealItems.item(fallbackIndex).classList.add('on');
+			}
+		} else {
+			var revealObserver = new IntersectionObserver(function (entries) {
+				entries.forEach(function (entry) {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('on');
+						revealObserver.unobserve(entry.target);
+					}
+				});
+			}, { threshold: 0.06 });
+			for (var revealIndex = 0; revealIndex < revealItems.length; revealIndex += 1) {
+				revealItems.item(revealIndex).style.transitionDelay = (revealIndex % 4) * 70 + 'ms';
+				revealObserver.observe(revealItems.item(revealIndex));
+			}
+		}
+
+		var faq = document.getElementById('signup-faq');
+		if (faq) {
+			function sizeAnswer(item) {
+				var answer = item.querySelector('.fq-a');
+				var button = item.querySelector('.fq-q');
+				var open = item.classList.contains('on');
+				if (answer) {
+					answer.style.maxHeight = open ? answer.scrollHeight + 'px' : '0px';
+				}
+				if (button) {
+					button.setAttribute('aria-expanded', open ? 'true' : 'false');
+				}
+			}
+
+			var faqItems = faq.querySelectorAll('.fq');
+			for (var faqIndex = 0; faqIndex < faqItems.length; faqIndex += 1) {
+				sizeAnswer(faqItems.item(faqIndex));
+			}
+
+			faq.addEventListener('click', function (event) {
+				var question = event.target.closest ? event.target.closest('.fq-q') : null;
+				if (!question) {
+					return;
+				}
+				var selected = question.parentElement;
+				for (var closeIndex = 0; closeIndex < faqItems.length; closeIndex += 1) {
+					var item = faqItems.item(closeIndex);
+					if (item !== selected) {
+						item.classList.remove('on');
+						sizeAnswer(item);
+					}
+				}
+				selected.classList.toggle('on');
+				sizeAnswer(selected);
+			});
+
+			window.addEventListener('resize', function () {
+				for (var resizeIndex = 0; resizeIndex < faqItems.length; resizeIndex += 1) {
+					if (faqItems.item(resizeIndex).classList.contains('on')) {
+						sizeAnswer(faqItems.item(resizeIndex));
+					}
+				}
+			});
+		}
+	})();
+</script>
