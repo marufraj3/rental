@@ -1,52 +1,1683 @@
-<nav class="navbar navbar-default navbar-static-top">
-												<div class="container-fluid">
-													<div class="navbar-header">
-														<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-															<span class="sr-only"></span>
-															<span class="icon-bar"></span>
-															<span class="icon-bar"></span>
-															<span class="icon-bar"></span>
-														</button>
-														<a class="navbar-brand navbar-brand-emphasized" href="/">
-															[panel.panel_icon]
-														</a>
-													</div>
-													<div id="navbar" class="navbar-collapse collapse" data-nav="navbar-priority" >
-														<ul id="sidebar_menu" class="sidebar-nav">
-															<li class="sidebar-brand">
-																<button id="menu-toggle" href="#">
-																<span class="icon-bar"></span>
-																<span class="icon-bar"></span>
-																<span class="icon-bar"></span>
-																</button>
-															</li>
-														</ul>
-														[panel.language_nav_dropdown]
-														<ul class="nav navbar-nav nav-bar-leftside sidebar-nav">
-															[panel.main_nav_drop_down]
-														</ul>
-														[panel.currency_nav_drop_down]
-														
-														<ul class="nav navbar-nav nav-bar-account navbar-right">
-															<li>
-																<a> 
-																	<span class="badge" >
-																		[panel.currency.symbol] [user.available_funds]
-																	</span> 
-																</a>
-															</li>
-															<li class="dropdown ">
-																<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-																	<i class="fas fa-user"></i>
-																	[user.username]
-																	<span class="caret"></span>
-																</a>
-																<ul class="dropdown-menu">
-																	<li><a href="settings">[menu.settings]</a></li>
-																	<li><a href="?logout">[menu.logout]</a></li>
-																</ul>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</nav>
+<style id="mother-auth-navigation-styles">
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+/* MotherSMM-inspired authenticated shell. Everything is scoped to avoid changing guest navigation. */
+#mother-auth-shell {
+  --ma-red: #ff3350;
+  --ma-red-2: #ff7a3d;
+  --ma-red-soft: rgba(255, 51, 80, 0.11);
+  --ma-red-line: rgba(255, 51, 80, 0.23);
+  --ma-gradient: linear-gradient(120deg, #8e0a1c 0%, #ff3350 52%, #ff7a3d 100%);
+  --ma-bg: #fff6f7;
+  --ma-card: #ffffff;
+  --ma-title: #1a0a0d;
+  --ma-muted: #8a6a70;
+  --ma-border: #f3dadd;
+  --ma-ink: #0c0508;
+  --ma-sidebar-width: 268px;
+  --ma-header-height: 78px;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ma-title);
+}
+
+html.dark #mother-auth-shell,
+body.dark #mother-auth-shell,
+html[data-theme="dark"] #mother-auth-shell {
+  --ma-red: #ff4a63;
+  --ma-red-2: #ff8a57;
+  --ma-red-soft: rgba(255, 74, 99, 0.14);
+  --ma-red-line: rgba(255, 74, 99, 0.25);
+  --ma-bg: #0e0609;
+  --ma-card: #180d11;
+  --ma-title: #f7ebee;
+  --ma-muted: #b09aa0;
+  --ma-border: #2c1a20;
+  --ma-ink: #070305;
+}
+
+body.rental-authenticated {
+  background: #fff6f7 !important;
+  color: #1a0a0d;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+html.dark body.rental-authenticated,
+html[data-theme="dark"] body.rental-authenticated,
+body.rental-authenticated.dark {
+  background: #0e0609 !important;
+  color: #f7ebee;
+}
+
+#mother-auth-shell *,
+#mother-auth-shell *::before,
+#mother-auth-shell *::after {
+  box-sizing: border-box;
+}
+
+#mother-auth-shell a {
+  text-decoration: none;
+}
+
+#mother-auth-shell button,
+#mother-auth-shell a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+#mother-auth-shell .ma-auth-marker {
+  display: none !important;
+}
+
+/* Sidebar */
+#mother-auth-shell .ma-sidebar {
+  position: fixed;
+  z-index: 1060;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: var(--ma-sidebar-width);
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: #fff1f3;
+  background:
+    radial-gradient(420px 300px at 100% -4%, rgba(255, 51, 80, 0.23), transparent 66%),
+    radial-gradient(360px 300px at 0 104%, rgba(255, 122, 61, 0.16), transparent 64%),
+    linear-gradient(180deg, #12040a 0%, #2a0510 34%, #54091c 68%, #7e0f27 100%);
+  box-shadow: 18px 0 48px rgba(43, 4, 15, 0.14);
+}
+
+#mother-auth-shell .ma-sidebar::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(180deg, #ff3350, #ff7a3d);
+  opacity: 0.88;
+}
+
+#mother-auth-shell .ma-sidebar-head {
+  flex: 0 0 78px;
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+#mother-auth-shell .ma-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 208px;
+  color: #fff;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+#mother-auth-shell .ma-brand img {
+  display: block;
+  width: auto;
+  max-width: 208px;
+  max-height: 40px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+#mother-auth-shell .ma-profile {
+  flex: 0 0 auto;
+  margin: 14px 14px 7px;
+}
+
+#mother-auth-shell .ma-identity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 10px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+#mother-auth-shell .ma-avatar {
+  position: relative;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  color: #fff;
+  background: linear-gradient(135deg, #ff3350, #ff7a3d);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+#mother-auth-shell .ma-avatar::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  width: 11px;
+  height: 11px;
+  border: 2px solid #2a0510;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+#mother-auth-shell .ma-identity-copy {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+#mother-auth-shell .ma-user-name {
+  display: block;
+  overflow: hidden;
+  color: #fff1f3;
+  font-size: 13.5px;
+  font-weight: 800;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#mother-auth-shell .ma-user-meta {
+  display: block;
+  margin-top: 3px;
+  overflow: hidden;
+  color: #c3a0a9;
+  font-size: 10.5px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#mother-auth-shell .ma-account-shortcut {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 9px;
+  color: #ff9aaa;
+  background: rgba(255, 255, 255, 0.1);
+  transition: 0.18s ease;
+}
+
+#mother-auth-shell .ma-account-shortcut:hover,
+#mother-auth-shell .ma-account-shortcut:focus {
+  color: #fff;
+  border-color: transparent;
+  background: var(--ma-gradient);
+}
+
+#mother-auth-shell .ma-account-shortcut svg {
+  width: 15px;
+  height: 15px;
+}
+
+#mother-auth-shell .ma-balance {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 2px 10px;
+  margin-top: 9px;
+  padding: 13px 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  color: #fff !important;
+  background: rgba(0, 0, 0, 0.34);
+}
+
+#mother-auth-shell .ma-balance::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(300px 120px at 100% 0%, rgba(255, 51, 80, 0.36), transparent 70%);
+}
+
+#mother-auth-shell .ma-balance-label,
+#mother-auth-shell .ma-balance-value,
+#mother-auth-shell .ma-add-funds {
+  position: relative;
+  z-index: 1;
+}
+
+#mother-auth-shell .ma-balance-label {
+  grid-column: 1;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.35px;
+  text-transform: uppercase;
+}
+
+#mother-auth-shell .ma-balance-value {
+  grid-column: 1;
+  grid-row: 2;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+#mother-auth-shell .ma-add-funds {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 10px;
+  border-radius: 10px;
+  color: #fff;
+  background: linear-gradient(120deg, #ff3350, #ff7a3d);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+#mother-auth-shell .ma-add-funds svg {
+  width: 12px;
+  height: 12px;
+}
+
+#mother-auth-shell .ma-account-state {
+  margin-top: 11px;
+}
+
+#mother-auth-shell .ma-account-state-copy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  color: #c3a0a9;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+}
+
+#mother-auth-shell .ma-account-state-copy b {
+  color: #ff9aaa;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+}
+
+#mother-auth-shell .ma-account-state-bar {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+#mother-auth-shell .ma-account-state-bar span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #ff3350, #ff7a3d);
+}
+
+#mother-auth-shell .ma-sidebar-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 13px 14px 28px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: rgba(255, 255, 255, 0.28) transparent;
+  scrollbar-width: thin;
+}
+
+#mother-auth-shell .ma-sidebar-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+#mother-auth-shell .ma-sidebar-body::-webkit-scrollbar-thumb {
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+#mother-auth-shell .ma-menu-section + .ma-menu-section {
+  margin-top: 16px;
+}
+
+#mother-auth-shell .ma-menu-caption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 4px 8px;
+}
+
+#mother-auth-shell .ma-menu-caption span {
+  flex: 0 0 auto;
+  color: #c3a0a9;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.55px;
+  text-transform: uppercase;
+}
+
+#mother-auth-shell .ma-menu-caption i {
+  flex: 1 1 auto;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#mother-auth-shell .ma-menu-list,
+#mother-auth-shell .ma-menu-list.nav,
+#mother-auth-shell .ma-menu-list.navbar-nav {
+  width: 100%;
+  display: flex !important;
+  flex-direction: column;
+  float: none !important;
+  gap: 2px;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none;
+}
+
+#mother-auth-shell .ma-menu-list > li,
+#mother-auth-shell .ma-menu-list.navbar-nav > li {
+  width: 100%;
+  display: block;
+  float: none !important;
+  margin: 0;
+  padding: 0;
+}
+
+#mother-auth-shell .ma-menu-list > li > a,
+#mother-auth-shell .ma-menu-list.navbar-nav > li > a {
+  position: relative;
+  width: 100%;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 11px 9px 13px !important;
+  border: 0 !important;
+  border-radius: 11px;
+  color: #fff1f3 !important;
+  background: transparent !important;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: left;
+  transition: color 0.16s ease, background 0.16s ease;
+}
+
+#mother-auth-shell .ma-menu-list > li > a:hover,
+#mother-auth-shell .ma-menu-list > li > a:focus {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+#mother-auth-shell .ma-menu-list > li.active > a,
+#mother-auth-shell .ma-menu-list > li.active > a:hover,
+#mother-auth-shell .ma-menu-list > li.active > a:focus {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.13) !important;
+  font-weight: 800;
+}
+
+#mother-auth-shell .ma-menu-bar {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 3px;
+  height: 0;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, #ff3350, #ff9a68);
+  transform: translateY(-50%);
+  transition: height 0.18s ease;
+}
+
+#mother-auth-shell .ma-menu-list > li > a:hover .ma-menu-bar {
+  height: 16px;
+}
+
+#mother-auth-shell .ma-menu-list > li.active > a .ma-menu-bar {
+  height: 23px;
+}
+
+#mother-auth-shell .ma-menu-icon {
+  flex: 0 0 19px;
+  width: 19px;
+  height: 19px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #c3a0a9;
+  font-size: 16px;
+  line-height: 1;
+  transition: color 0.16s ease;
+}
+
+#mother-auth-shell .ma-menu-icon i {
+  width: 19px;
+  margin: 0 !important;
+  color: inherit !important;
+  font-size: 16px;
+  text-align: center;
+}
+
+#mother-auth-shell .ma-menu-list > li > a:hover .ma-menu-icon,
+#mother-auth-shell .ma-menu-list > li.active > a .ma-menu-icon {
+  color: #ff9aaa;
+}
+
+#mother-auth-shell .ma-menu-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#mother-auth-shell .ma-menu-list .badge {
+  flex: 0 0 auto;
+  min-width: 19px;
+  margin: 0 0 0 auto !important;
+  padding: 3px 6px;
+  border-radius: 99px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+}
+
+#mother-auth-shell .ma-menu-dot {
+  flex: 0 0 5px;
+  width: 5px;
+  height: 5px;
+  margin-left: auto;
+  border-radius: 50%;
+  background: #ff7a8d;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: 0.18s ease;
+}
+
+#mother-auth-shell .ma-menu-list > li.active > a .ma-menu-dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#mother-auth-shell .ma-help {
+  position: relative;
+  display: block;
+  margin-top: 18px;
+  padding: 13px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 16px;
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.08);
+  transition: 0.18s ease;
+}
+
+#mother-auth-shell .ma-help:hover,
+#mother-auth-shell .ma-help:focus {
+  border-color: rgba(255, 122, 141, 0.55);
+  background: rgba(255, 51, 80, 0.17);
+}
+
+#mother-auth-shell .ma-help::after {
+  content: '';
+  position: absolute;
+  top: -34px;
+  right: -28px;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--ma-gradient);
+  opacity: 0.18;
+}
+
+#mother-auth-shell .ma-help-top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+#mother-auth-shell .ma-help-icon {
+  flex: 0 0 31px;
+  width: 31px;
+  height: 31px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: linear-gradient(120deg, #ff3350, #ff7a3d);
+}
+
+#mother-auth-shell .ma-help-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+#mother-auth-shell .ma-help b {
+  font-size: 12.5px;
+  font-weight: 800;
+}
+
+#mother-auth-shell .ma-help p {
+  position: relative;
+  z-index: 1;
+  margin: 7px 0 10px;
+  color: #d4b7bd;
+  font-size: 10.5px;
+  line-height: 1.5;
+}
+
+#mother-auth-shell .ma-help-button {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: 8px;
+  border-radius: 10px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.22);
+  font-size: 11px;
+  font-weight: 800;
+  text-align: center;
+}
+
+/* Header */
+#mother-auth-shell .ma-header {
+  position: fixed;
+  z-index: 1040;
+  top: 0;
+  right: 0;
+  left: var(--ma-sidebar-width);
+  height: var(--ma-header-height);
+  color: var(--ma-title);
+  background: color-mix(in srgb, var(--ma-bg) 87%, transparent);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+}
+
+@supports not (background: color-mix(in srgb, #fff 50%, transparent)) {
+  #mother-auth-shell .ma-header {
+    background: rgba(255, 246, 247, 0.94);
+  }
+  html.dark #mother-auth-shell .ma-header,
+  html[data-theme="dark"] #mother-auth-shell .ma-header {
+    background: rgba(14, 6, 9, 0.94);
+  }
+}
+
+#mother-auth-shell .ma-header::after {
+  content: '';
+  position: absolute;
+  right: 18px;
+  bottom: 0;
+  left: 18px;
+  height: 1px;
+  background: var(--ma-border);
+}
+
+#mother-auth-shell .ma-header-row {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 0 20px;
+}
+
+#mother-auth-shell .ma-header-start,
+#mother-auth-shell .ma-header-end {
+  display: flex;
+  align-items: center;
+}
+
+#mother-auth-shell .ma-header-start {
+  min-width: 0;
+  gap: 12px;
+}
+
+#mother-auth-shell .ma-header-end {
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+#mother-auth-shell .ma-sidebar-toggle,
+#mother-auth-shell .ma-icon-button,
+#mother-auth-shell .ma-theme-toggle {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid var(--ma-border);
+  border-radius: 12px;
+  color: var(--ma-title);
+  background: var(--ma-card);
+  box-shadow: none;
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+#mother-auth-shell .ma-sidebar-toggle {
+  display: none;
+}
+
+#mother-auth-shell .ma-sidebar-toggle:hover,
+#mother-auth-shell .ma-icon-button:hover,
+#mother-auth-shell .ma-theme-toggle:hover,
+#mother-auth-shell .ma-sidebar-toggle:focus,
+#mother-auth-shell .ma-icon-button:focus,
+#mother-auth-shell .ma-theme-toggle:focus {
+  color: var(--ma-red);
+  border-color: var(--ma-red);
+  background: var(--ma-red-soft);
+}
+
+#mother-auth-shell .ma-sidebar-toggle svg,
+#mother-auth-shell .ma-icon-button svg,
+#mother-auth-shell .ma-theme-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+#mother-auth-shell .ma-page-heading {
+  min-width: 0;
+}
+
+#mother-auth-shell .ma-page-title {
+  display: block;
+  overflow: hidden;
+  color: var(--ma-title);
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.45px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#mother-auth-shell .ma-page-subtitle {
+  display: block;
+  margin-top: 3px;
+  color: var(--ma-muted);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.15px;
+}
+
+#mother-auth-shell .ma-page-subtitle b {
+  color: var(--ma-red);
+  font-weight: 800;
+}
+
+#mother-auth-shell .ma-header-add {
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 14px;
+  border-radius: 12px;
+  color: #fff !important;
+  background: var(--ma-gradient);
+  box-shadow: 0 10px 22px rgba(168, 12, 34, 0.22);
+  font-size: 12px;
+  font-weight: 800;
+  transition: 0.18s ease;
+}
+
+#mother-auth-shell .ma-header-add:hover,
+#mother-auth-shell .ma-header-add:focus {
+  color: #fff;
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+#mother-auth-shell .ma-header-add svg {
+  width: 14px;
+  height: 14px;
+}
+
+#mother-auth-shell .ma-theme-toggle .ma-sun,
+html.dark #mother-auth-shell .ma-theme-toggle .ma-moon,
+html[data-theme="dark"] #mother-auth-shell .ma-theme-toggle .ma-moon {
+  display: none;
+}
+
+html.dark #mother-auth-shell .ma-theme-toggle .ma-sun,
+html[data-theme="dark"] #mother-auth-shell .ma-theme-toggle .ma-sun {
+  display: block;
+  color: #ffc24a;
+}
+
+#mother-auth-shell .ma-utility:empty {
+  display: none;
+}
+
+#mother-auth-shell .ma-utility > ul,
+#mother-auth-shell .ma-utility > ul.nav,
+#mother-auth-shell .ma-utility > ul.navbar-nav {
+  float: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none;
+}
+
+#mother-auth-shell .ma-utility > ul > li {
+  float: none !important;
+}
+
+#mother-auth-shell .ma-utility > ul > li > a {
+  min-width: 40px;
+  height: 40px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0 11px !important;
+  border: 1px solid var(--ma-border) !important;
+  border-radius: 12px;
+  color: var(--ma-title) !important;
+  background: var(--ma-card) !important;
+  font-size: 11.5px;
+  font-weight: 800;
+}
+
+#mother-auth-shell .ma-utility > ul > li > a:hover,
+#mother-auth-shell .ma-utility > ul > li > a:focus,
+#mother-auth-shell .ma-utility > ul > li.open > a {
+  color: var(--ma-red) !important;
+  border-color: var(--ma-red) !important;
+  background: var(--ma-red-soft) !important;
+}
+
+#mother-auth-shell .ma-utility .language-icon-span,
+#mother-auth-shell .ma-utility .currency-icon-span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ma-red);
+  font-weight: 800;
+}
+
+#mother-auth-shell .ma-utility .language-icon-span img,
+#mother-auth-shell .ma-utility .currency-icon-span img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+#mother-auth-shell .ma-utility .caret {
+  opacity: 0.55;
+}
+
+#mother-auth-shell .ma-utility .dropdown-menu {
+  right: 0 !important;
+  left: auto !important;
+  min-width: 190px;
+  max-height: min(420px, 70vh);
+  margin-top: 9px;
+  padding: 7px;
+  overflow-y: auto;
+  border: 1px solid var(--ma-border);
+  border-radius: 15px;
+  color: var(--ma-title);
+  background: var(--ma-card);
+  box-shadow: 0 22px 55px rgba(34, 6, 14, 0.2);
+}
+
+#mother-auth-shell .ma-utility .dropdown-menu > li > a {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 10px;
+  border-radius: 9px;
+  color: var(--ma-title);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#mother-auth-shell .ma-utility .dropdown-menu > li > a:hover,
+#mother-auth-shell .ma-utility .dropdown-menu > li > a:focus {
+  color: var(--ma-red);
+  background: var(--ma-red-soft);
+}
+
+#mother-auth-shell .ma-account {
+  position: relative;
+}
+
+#mother-auth-shell .ma-account-toggle {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 10px 0 5px;
+  border: 1px solid var(--ma-border);
+  border-radius: 13px;
+  color: var(--ma-title);
+  background: var(--ma-card);
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+#mother-auth-shell .ma-account-toggle:hover,
+#mother-auth-shell .ma-account-toggle:focus,
+#mother-auth-shell .ma-account.open .ma-account-toggle {
+  color: var(--ma-red);
+  border-color: var(--ma-red-line);
+  background: var(--ma-red-soft);
+}
+
+#mother-auth-shell .ma-header-avatar {
+  position: relative;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: #fff;
+  background: var(--ma-gradient);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+#mother-auth-shell .ma-header-avatar::after {
+  content: '';
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--ma-card);
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+#mother-auth-shell .ma-account-name {
+  max-width: 120px;
+  overflow: hidden;
+  font-size: 11.5px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#mother-auth-shell .ma-account-chevron {
+  width: 14px;
+  height: 14px;
+  color: var(--ma-muted);
+  transition: transform 0.18s ease;
+}
+
+#mother-auth-shell .ma-account.open .ma-account-chevron {
+  transform: rotate(180deg);
+}
+
+#mother-auth-shell .ma-account-menu {
+  position: absolute;
+  z-index: 1085;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 278px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--ma-border);
+  border-radius: 20px;
+  background: var(--ma-card);
+  box-shadow: 0 26px 70px rgba(42, 5, 16, 0.25);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(0.98);
+  transform-origin: top right;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+#mother-auth-shell .ma-account.open .ma-account-menu {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+#mother-auth-shell .ma-account-menu-head {
+  position: relative;
+  padding: 18px;
+  overflow: hidden;
+  color: #fff;
+  background: var(--ma-gradient);
+}
+
+#mother-auth-shell .ma-account-menu-head::after {
+  content: '';
+  position: absolute;
+  top: -48px;
+  right: -38px;
+  width: 150px;
+  height: 150px;
+  border: 24px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+}
+
+#mother-auth-shell .ma-account-menu-head strong,
+#mother-auth-shell .ma-account-menu-head span {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+#mother-auth-shell .ma-account-menu-head strong {
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#mother-auth-shell .ma-account-menu-head span {
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+#mother-auth-shell .ma-account-menu-body {
+  padding: 10px;
+}
+
+#mother-auth-shell .ma-account-menu-body a,
+#mother-auth-shell .ma-account-menu-body button {
+  width: 100%;
+  min-height: 41px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 11px;
+  color: var(--ma-title);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+#mother-auth-shell .ma-account-menu-body a:hover,
+#mother-auth-shell .ma-account-menu-body a:focus,
+#mother-auth-shell .ma-account-menu-body button:hover,
+#mother-auth-shell .ma-account-menu-body button:focus {
+  color: var(--ma-red);
+  background: var(--ma-red-soft);
+}
+
+#mother-auth-shell .ma-account-menu-body svg {
+  flex: 0 0 17px;
+  width: 17px;
+  height: 17px;
+}
+
+#mother-auth-shell .ma-account-menu-body .ma-logout {
+  margin-top: 5px;
+  border-top: 1px solid var(--ma-border);
+  border-radius: 0 0 11px 11px;
+  color: #dc2626;
+}
+
+#mother-auth-shell .ma-overlay {
+  position: fixed;
+  z-index: 1055;
+  inset: 0;
+  display: none;
+  padding: 0;
+  border: 0;
+  background: rgba(7, 3, 5, 0.62);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+#mother-auth-shell .ma-bottom-bar {
+  display: none;
+}
+
+/* Integrate the fixed shell with every authenticated Rental page. */
+@media (min-width: 992px) {
+  body.rental-authenticated .paddingbody {
+    height: 94px !important;
+  }
+
+  body.rental-authenticated .container-fluid-spacious {
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding-right: 24px !important;
+    padding-left: 292px !important;
+  }
+
+  body.rental-authenticated > main {
+    width: auto !important;
+    min-height: 100vh;
+    margin-left: 268px !important;
+    padding-top: 78px !important;
+  }
+}
+
+@media (max-width: 1220px) {
+  #mother-auth-shell .ma-header-add span,
+  #mother-auth-shell .ma-account-name {
+    display: none;
+  }
+
+  #mother-auth-shell .ma-header-add {
+    width: 40px;
+    padding: 0;
+  }
+
+  #mother-auth-shell .ma-account-toggle {
+    width: 42px;
+    padding: 0 5px;
+  }
+
+  #mother-auth-shell .ma-account-chevron {
+    display: none;
+  }
+}
+
+@media (max-width: 991.98px) {
+  #mother-auth-shell {
+    --ma-header-height: 60px;
+  }
+
+  #mother-auth-shell .ma-sidebar {
+    width: 284px;
+    max-width: calc(100vw - 44px);
+    transform: translateX(-102%);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  body.ma-sidebar-open #mother-auth-shell .ma-sidebar {
+    transform: translateX(0);
+  }
+
+  body.ma-sidebar-open #mother-auth-shell .ma-overlay {
+    display: block;
+  }
+
+  body.ma-sidebar-open {
+    overflow: hidden !important;
+  }
+
+  #mother-auth-shell .ma-header {
+    left: 0;
+    height: 60px;
+  }
+
+  #mother-auth-shell .ma-header-row {
+    padding: 0 12px;
+  }
+
+  #mother-auth-shell .ma-header::after {
+    right: 12px;
+    left: 12px;
+  }
+
+  #mother-auth-shell .ma-sidebar-toggle {
+    display: inline-flex;
+  }
+
+  #mother-auth-shell .ma-page-title {
+    font-size: 16px;
+  }
+
+  #mother-auth-shell .ma-page-subtitle {
+    display: none;
+  }
+
+  #mother-auth-shell .ma-utility.ma-language {
+    display: none;
+  }
+
+  body.rental-authenticated .paddingbody {
+    height: 74px !important;
+  }
+
+  body.rental-authenticated .container-fluid-spacious,
+  body.rental-authenticated.rental-sidebar-collapsed .container-fluid-spacious {
+    width: 100% !important;
+    margin: 0 !important;
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+  }
+
+  body.rental-authenticated > main {
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding-top: 60px !important;
+  }
+
+  #mother-auth-shell .ma-bottom-bar {
+    position: fixed;
+    z-index: 1038;
+    right: 10px;
+    bottom: calc(9px + env(safe-area-inset-bottom, 0px));
+    left: 10px;
+    height: 64px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    padding: 5px;
+    border: 1px solid var(--ma-border);
+    border-radius: 18px;
+    background: color-mix(in srgb, var(--ma-card) 94%, transparent);
+    box-shadow: 0 -8px 34px rgba(30, 5, 12, 0.17);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
+
+  #mother-auth-shell .ma-bottom-link {
+    min-width: 0;
+    height: 52px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 0 3px;
+    border: 0;
+    border-radius: 13px;
+    color: var(--ma-muted);
+    background: transparent;
+    font-size: 9px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  #mother-auth-shell .ma-bottom-link svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  #mother-auth-shell .ma-bottom-link.active,
+  #mother-auth-shell .ma-bottom-link:hover,
+  #mother-auth-shell .ma-bottom-link:focus {
+    color: var(--ma-red);
+    background: var(--ma-red-soft);
+  }
+
+  body.rental-authenticated {
+    padding-bottom: calc(82px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 640px) {
+  #mother-auth-shell {
+    --ma-header-height: 56px;
+  }
+
+  #mother-auth-shell .ma-header {
+    height: 56px;
+  }
+
+  #mother-auth-shell .ma-header-start {
+    gap: 8px;
+  }
+
+  #mother-auth-shell .ma-header-end {
+    gap: 6px;
+  }
+
+  #mother-auth-shell .ma-sidebar-toggle,
+  #mother-auth-shell .ma-icon-button,
+  #mother-auth-shell .ma-theme-toggle,
+  #mother-auth-shell .ma-account-toggle {
+    flex-basis: 36px;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 11px;
+  }
+
+  #mother-auth-shell .ma-header-avatar {
+    flex-basis: 27px;
+    width: 27px;
+    height: 27px;
+    border-radius: 8px;
+    font-size: 9px;
+  }
+
+  #mother-auth-shell .ma-header-add,
+  #mother-auth-shell .ma-theme-toggle,
+  #mother-auth-shell .ma-utility {
+    display: none;
+  }
+
+  #mother-auth-shell .ma-page-title {
+    max-width: 128px;
+    font-size: 14.5px;
+  }
+
+  body.rental-authenticated .paddingbody {
+    height: 68px !important;
+  }
+
+  body.rental-authenticated > main {
+    padding-top: 56px !important;
+  }
+
+  #mother-auth-shell .ma-account-menu {
+    position: fixed;
+    top: 64px;
+    right: 10px;
+    left: 10px;
+    width: auto;
+    transform-origin: top center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #mother-auth-shell *,
+  #mother-auth-shell *::before,
+  #mother-auth-shell *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+</style>
+
+<div id="mother-auth-shell" class="ma-shell">
+  <!-- This hidden marker keeps Rental's existing authenticated-layout detection intact. -->
+  <nav class="navbar ma-auth-marker" aria-hidden="true"><ul class="nav-bar-account"><li></li></ul></nav>
+
+  <aside class="ma-sidebar" id="maSidebar" aria-label="Account navigation">
+    <div class="ma-sidebar-head">
+      <a class="ma-brand" href="/" aria-label="Home">[panel.panel_icon]</a>
+    </div>
+
+    <div class="ma-profile">
+      <div class="ma-identity">
+        <span class="ma-avatar" data-ma-avatar aria-hidden="true">U</span>
+        <span class="ma-identity-copy">
+          <strong class="ma-user-name" id="maUserName">[user.username]</strong>
+          <span class="ma-user-meta">Member account</span>
+        </span>
+        <a class="ma-account-shortcut" href="settings" aria-label="Account settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.4"></circle><path d="M4.5 20a7.5 7.5 0 0 1 15 0"></path></svg>
+        </a>
+      </div>
+
+      <a class="ma-balance" href="/addfunds">
+        <span class="ma-balance-label">Balance</span>
+        <strong class="ma-balance-value" id="maBalance">[panel.currency.symbol] [user.available_funds]</strong>
+        <span class="ma-add-funds">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+          Add
+        </span>
+      </a>
+
+      <div class="ma-account-state" aria-label="Account status active">
+        <div class="ma-account-state-copy"><span>Account status</span><b>Active</b></div>
+        <div class="ma-account-state-bar"><span></span></div>
+      </div>
+    </div>
+
+    <div class="ma-sidebar-body">
+      <section class="ma-menu-section" aria-labelledby="maMainCaption">
+        <div class="ma-menu-caption" id="maMainCaption"><span>Main</span><i></i></div>
+        <ul class="ma-menu-list nav navbar-nav" id="maMainMenu">
+          [panel.main_nav_drop_down]
+        </ul>
+      </section>
+
+      <section class="ma-menu-section" id="maToolsSection" aria-labelledby="maToolsCaption" hidden>
+        <div class="ma-menu-caption" id="maToolsCaption"><span>Tools &amp; Support</span><i></i></div>
+        <ul class="ma-menu-list nav navbar-nav" id="maToolsMenu"></ul>
+      </section>
+
+      <a class="ma-help" href="/tickets">
+        <span class="ma-help-top">
+          <span class="ma-help-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 16 0"></path><rect x="2.5" y="12" width="4" height="7" rx="2"></rect><rect x="17.5" y="12" width="4" height="7" rx="2"></rect></svg>
+          </span>
+          <b>Need help?</b>
+        </span>
+        <p>Open a support ticket whenever you need assistance.</p>
+        <span class="ma-help-button">Open a ticket</span>
+      </a>
+    </div>
+  </aside>
+
+  <button class="ma-overlay" type="button" data-ma-close aria-label="Close navigation" tabindex="-1"></button>
+
+  <header class="ma-header">
+    <div class="ma-header-row">
+      <div class="ma-header-start">
+        <button class="ma-sidebar-toggle" type="button" data-ma-sidebar-toggle aria-controls="maSidebar" aria-expanded="false" aria-label="Open navigation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h12M3 18h16"></path></svg>
+        </button>
+        <span class="ma-page-heading">
+          <strong class="ma-page-title" id="maPageTitle">New order</strong>
+          <span class="ma-page-subtitle">Welcome back, <b data-ma-user-copy>member</b></span>
+        </span>
+      </div>
+
+      <div class="ma-header-end">
+        <a class="ma-header-add" href="/addfunds">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+          <span>Add funds</span>
+        </a>
+
+        <a class="ma-icon-button" href="/tickets" aria-label="Support tickets" title="Support tickets">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 16 0"></path><rect x="2.5" y="12" width="4" height="7" rx="2"></rect><rect x="17.5" y="12" width="4" height="7" rx="2"></rect><path d="M20 19a3 3 0 0 1-3 3h-3"></path></svg>
+        </a>
+
+        <button class="ma-theme-toggle" type="button" data-ma-theme aria-label="Toggle color theme" title="Toggle color theme">
+          <svg class="ma-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+          <svg class="ma-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4 7 7 0 0 0 20 14.5Z"></path></svg>
+        </button>
+
+        <div class="ma-utility ma-language">[panel.language_nav_dropdown]</div>
+        <div class="ma-utility ma-currency">[panel.currency_nav_drop_down]</div>
+
+        <div class="ma-account" id="maAccount">
+          <button class="ma-account-toggle" type="button" data-ma-account-toggle aria-haspopup="true" aria-expanded="false" aria-controls="maAccountMenu">
+            <span class="ma-header-avatar" data-ma-avatar aria-hidden="true">U</span>
+            <span class="ma-account-name" data-ma-user-copy>member</span>
+            <svg class="ma-account-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+          </button>
+          <div class="ma-account-menu" id="maAccountMenu" role="menu">
+            <div class="ma-account-menu-head">
+              <strong data-ma-user-copy>member</strong>
+              <span>Signed in · account active</span>
+            </div>
+            <div class="ma-account-menu-body">
+              <a href="settings" role="menuitem">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21H9.6v-.09A1.7 1.7 0 0 0 8.5 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3V9.6h.09A1.7 1.7 0 0 0 4.6 8.5a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3h4v.09A1.7 1.7 0 0 0 15.5 4.6a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.4 9c.17.37.4.7.7 1 .3.27.69.42 1.1.4h.09v4h-.09A1.7 1.7 0 0 0 19.4 15Z"></path></svg>
+                [menu.settings]
+              </a>
+              <button type="button" data-ma-theme role="menuitem">
+                <svg class="ma-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4 7 7 0 0 0 20 14.5Z"></path></svg>
+                Toggle theme
+              </button>
+              <a class="ma-logout" href="?logout" role="menuitem">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5M15 12H3"></path><path d="M14 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5"></path></svg>
+                [menu.logout]
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="ma-bottom-bar" aria-label="Quick navigation">
+    <a class="ma-bottom-link" href="/" data-ma-route="home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 10.2A2 2 0 0 1 15.8 20H8.2a2 2 0 0 1-2-1.8L5 8Z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
+      <span>New order</span>
+    </a>
+    <a class="ma-bottom-link" href="/orders" data-ma-route="orders">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5v-9Z"></path><path d="m3 7.5 9 4.5 9-4.5M12 12v9"></path></svg>
+      <span>Orders</span>
+    </a>
+    <a class="ma-bottom-link" href="/addfunds" data-ma-route="addfunds">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="3"></rect><path d="M3 10h18"></path><circle cx="17" cy="14.5" r="1.4"></circle></svg>
+      <span>Funds</span>
+    </a>
+    <a class="ma-bottom-link" href="/tickets" data-ma-route="tickets">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 16 0"></path><rect x="2.5" y="12" width="4" height="7" rx="2"></rect><rect x="17.5" y="12" width="4" height="7" rx="2"></rect></svg>
+      <span>Support</span>
+    </a>
+    <button class="ma-bottom-link" type="button" data-ma-sidebar-toggle aria-controls="maSidebar" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      <span>Menu</span>
+    </button>
+  </nav>
+</div>
+
+<script id="mother-auth-navigation-script">
+(function () {
+  'use strict';
+
+  var shell = document.getElementById('mother-auth-shell');
+  if (!shell || shell.getAttribute('data-ready') === 'true') return;
+  shell.setAttribute('data-ready', 'true');
+
+  var body = document.body;
+  var html = document.documentElement;
+  var sidebar = shell.querySelector('.ma-sidebar');
+  var overlay = shell.querySelector('.ma-overlay');
+  var account = shell.querySelector('.ma-account');
+  var accountToggle = shell.querySelector('[data-ma-account-toggle]');
+  var userSource = shell.querySelector('#maUserName');
+  var mainMenu = shell.querySelector('#maMainMenu');
+  var toolsMenu = shell.querySelector('#maToolsMenu');
+  var toolsSection = shell.querySelector('#maToolsSection');
+  var pageTitle = shell.querySelector('#maPageTitle');
+
+  function cleanPath(value) {
+    var path = (value || '/').split('#')[0].split('?')[0].replace(/\/+$/, '');
+    return path || '/';
+  }
+
+  function initials(value) {
+    var words = (value || 'U').trim().split(/\s+/).filter(Boolean);
+    if (!words.length) return 'U';
+    return (words.length > 1 ? words[0].charAt(0) + words[words.length - 1].charAt(0) : words[0].slice(0, 2)).toUpperCase();
+  }
+
+  function hydrateIdentity() {
+    var username = userSource ? userSource.textContent.replace(/\s+/g, ' ').trim() : 'member';
+    if (!username) username = 'member';
+    shell.querySelectorAll('[data-ma-user-copy]').forEach(function (element) {
+      element.textContent = username;
+    });
+    shell.querySelectorAll('[data-ma-avatar]').forEach(function (element) {
+      element.textContent = initials(username);
+    });
+  }
+
+  function directText(link) {
+    var text = '';
+    Array.prototype.slice.call(link.childNodes).forEach(function (node) {
+      if (node.nodeType === 3) text += ' ' + node.nodeValue;
+    });
+    return text.replace(/\s+/g, ' ').trim();
+  }
+
+  function decorateMenuItem(item) {
+    var link = item.querySelector(':scope > a');
+    if (!link) return;
+
+    var icon = link.querySelector(':scope > i');
+    var badge = link.querySelector(':scope > .badge');
+    var label = directText(link) || link.getAttribute('aria-label') || 'Menu';
+
+    Array.prototype.slice.call(link.childNodes).forEach(function (node) {
+      if (node.nodeType === 3) link.removeChild(node);
+    });
+
+    var bar = document.createElement('span');
+    bar.className = 'ma-menu-bar';
+    bar.setAttribute('aria-hidden', 'true');
+    link.insertBefore(bar, link.firstChild);
+
+    var iconWrap = document.createElement('span');
+    iconWrap.className = 'ma-menu-icon';
+    iconWrap.setAttribute('aria-hidden', 'true');
+    if (icon) iconWrap.appendChild(icon);
+    else iconWrap.innerHTML = '<i class="fas fa-circle"></i>';
+    link.insertBefore(iconWrap, badge || null);
+
+    var labelWrap = document.createElement('span');
+    labelWrap.className = 'ma-menu-label';
+    labelWrap.textContent = label;
+    link.insertBefore(labelWrap, badge || null);
+
+    var dot = document.createElement('span');
+    dot.className = 'ma-menu-dot';
+    dot.setAttribute('aria-hidden', 'true');
+    link.appendChild(dot);
+
+    item.classList.add('ma-menu-item');
+    link.classList.add('ma-menu-link');
+  }
+
+  function isPrimaryRoute(path, index) {
+    var primary = ['/', '/neworder', '/updates', '/orders', '/addfunds', '/tickets', '/services'];
+    if (primary.indexOf(path) !== -1) return true;
+    return index < 6;
+  }
+
+  function prepareMenus() {
+    if (!mainMenu) return;
+    var current = cleanPath(window.location.pathname);
+    var items = Array.prototype.slice.call(mainMenu.children);
+    var activeItem = null;
+
+    items.forEach(function (item, index) {
+      var link = item.querySelector(':scope > a');
+      if (!link) return;
+      var route = cleanPath(link.getAttribute('href'));
+      decorateMenuItem(item);
+
+      if (item.classList.contains('active')) activeItem = item;
+      if (!activeItem && route === current) {
+        item.classList.add('active');
+        activeItem = item;
+      }
+
+      if (!isPrimaryRoute(route, index)) toolsMenu.appendChild(item);
+    });
+
+    if (toolsMenu && toolsMenu.children.length) toolsSection.hidden = false;
+    if (activeItem) {
+      var label = activeItem.querySelector('.ma-menu-label');
+      if (label && pageTitle) pageTitle.textContent = label.textContent.trim();
+      activeItem.setAttribute('aria-current', 'page');
+      var activeLink = activeItem.querySelector('a');
+      if (activeLink) activeLink.setAttribute('aria-current', 'page');
+    }
+  }
+
+  function setSidebar(open, returnFocus) {
+    body.classList.toggle('ma-sidebar-open', open);
+    html.classList.toggle('ma-sidebar-open', open);
+    shell.querySelectorAll('[data-ma-sidebar-toggle]').forEach(function (button) {
+      button.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    if (overlay) overlay.setAttribute('tabindex', open ? '0' : '-1');
+    if (!open && returnFocus) {
+      var firstToggle = shell.querySelector('.ma-header [data-ma-sidebar-toggle]');
+      if (firstToggle) firstToggle.focus();
+    }
+  }
+
+  function setAccount(open) {
+    if (!account || !accountToggle) return;
+    account.classList.toggle('open', open);
+    accountToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  function theme() {
+    return html.classList.contains('dark') || html.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  }
+
+  function setTheme(next) {
+    html.classList.remove('light', 'dark');
+    html.classList.add(next);
+    html.setAttribute('data-theme', next);
+    body.classList.remove('light', 'dark');
+    body.classList.add(next);
+    try { localStorage.setItem('lightMode', next); } catch (error) {}
+    var colorMeta = document.querySelector('meta[name="theme-color"]');
+    if (colorMeta) colorMeta.setAttribute('content', next === 'dark' ? '#0e0609' : '#fff6f7');
+  }
+
+  function markBottomRoute() {
+    var current = cleanPath(window.location.pathname);
+    shell.querySelectorAll('.ma-bottom-link[href]').forEach(function (link) {
+      var route = cleanPath(link.getAttribute('href'));
+      link.classList.toggle('active', route === current || (route !== '/' && current.indexOf(route + '/') === 0));
+    });
+  }
+
+  hydrateIdentity();
+  prepareMenus();
+  markBottomRoute();
+
+  shell.addEventListener('click', function (event) {
+    var sidebarToggle = event.target.closest('[data-ma-sidebar-toggle]');
+    var closeButton = event.target.closest('[data-ma-close]');
+    var themeButton = event.target.closest('[data-ma-theme]');
+
+    if (sidebarToggle) {
+      event.preventDefault();
+      setSidebar(!body.classList.contains('ma-sidebar-open'), false);
+      return;
+    }
+
+    if (closeButton) {
+      setSidebar(false, true);
+      return;
+    }
+
+    if (themeButton) {
+      event.preventDefault();
+      setTheme(theme() === 'dark' ? 'light' : 'dark');
+      return;
+    }
+
+    if (accountToggle && accountToggle.contains(event.target)) {
+      event.preventDefault();
+      setAccount(!account.classList.contains('open'));
+      return;
+    }
+
+    if (window.innerWidth <= 991 && event.target.closest('.ma-menu-list a')) setSidebar(false, false);
+  });
+
+  document.addEventListener('click', function (event) {
+    if (account && account.classList.contains('open') && !account.contains(event.target)) setAccount(false);
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key !== 'Escape') return;
+    if (account && account.classList.contains('open')) {
+      setAccount(false);
+      if (accountToggle) accountToggle.focus();
+    } else if (body.classList.contains('ma-sidebar-open')) {
+      setSidebar(false, true);
+    }
+  });
+
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 991 && body.classList.contains('ma-sidebar-open')) setSidebar(false, false);
+  });
+})();
+</script>
