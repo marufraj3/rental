@@ -480,7 +480,12 @@ html[data-svcdm="dark"] .svc-amb,html.dark .svc-amb,body.dark .svc-amb{backgroun
 .services-page{width:100%;max-width:100%;overflow-x:clip}
 /* Rental keeps the guest header in document flow; avoid the target's second fixed-header offset. */
 body.rental-layout .services-page.sv-guest>.container,
-body.rental-layout .services-page.sv-guest>.container-fluid{padding-top:16px!important}
+body.rental-layout .services-page.sv-guest>.container-fluid{display:block!important;float:none!important;width:calc(100% - 32px)!important;max-width:1560px!important;margin-left:auto!important;margin-right:auto!important;padding-top:16px!important}
+.services-page .svc-bar{min-height:0!important}
+.services-page .ui-dd{position:relative!important;height:48px}
+.services-page .dropdown-menu.dd-menu{position:absolute!important;top:100%!important;right:auto!important;bottom:auto!important;left:0!important;float:none!important;margin:9px 0 0!important;transform:none!important}
+.sv-modal.modal{display:none!important}
+.sv-modal.modal.show,.sv-modal.modal.in{display:block!important}
 .services-page .sv-custom-content{position:relative;margin-bottom:14px;padding:20px 22px;border:1px solid var(--bd);border-radius:18px;background:var(--card);color:var(--tc);overflow:hidden}
 .services-page .sv-custom-content:empty{display:none}
 .services-page .sv-custom-content img{max-width:100%;height:auto}
@@ -506,14 +511,14 @@ body.rental-layout .services-page.sv-guest>.container-fluid{padding-top:16px!imp
 .services-page .sv-card-copy-note{position:fixed;z-index:2200;right:20px;bottom:20px;padding:11px 15px;border-radius:11px;background:var(--ink);color:#fff;font-size:12px;font-weight:800;opacity:0;transform:translateY(8px);pointer-events:none;transition:.2s}
 .services-page .sv-card-copy-note.on{opacity:1;transform:none}
 .services-page #scrollTopBtn>span{color:#fff}
-.services-page .source-service-modal{display:none!important}
+.source-service-modal{display:none!important}
 .sx-body .source-detail-content{font-size:12.8px;line-height:1.8;color:var(--tc);word-break:break-word}
 .sx-body .source-detail-content hr{border:0;border-top:1px solid var(--bd);margin:13px 0}
 .sx-body .dm-buy{margin-top:12px}
 body.sv-overlay-open{overflow:hidden!important}
 @media(max-width:767px){
  body.rental-layout .services-page.sv-guest>.container,
- body.rental-layout .services-page.sv-guest>.container-fluid{padding-top:12px!important}
+ body.rental-layout .services-page.sv-guest>.container-fluid{width:100%!important;max-width:100%!important;margin-left:auto!important;margin-right:auto!important;padding-top:12px!important}
  .services-page .container,.services-page .container-fluid{max-width:100%!important;width:100%!important;padding-left:10px!important;padding-right:10px!important}
  .services-page .svc-deck{width:100%;padding-left:15px;padding-right:15px}
  .services-page .svc-bar{width:100%}
@@ -531,6 +536,7 @@ body.sv-overlay-open{overflow:hidden!important}
  .services-page .dk-stats{gap:6px}
  .services-page .dk-st{padding:10px 5px}
  .services-page .svc-bar{padding:9px}
+ .services-page .ui-dd{height:44px}
  .services-page .svc-cat-btn,.services-page .svc-adv{height:44px;font-size:11.5px;gap:6px}
  .services-page .svc-cat-btn .ccb-t{max-width:92px}
  .services-page .ch-rule{display:none}
