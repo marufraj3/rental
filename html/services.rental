@@ -339,8 +339,7 @@ html[data-svcdm="dark"] .svc-amb,html.dark .svc-amb,body.dark .svc-amb{backgroun
 .services-page #scrollTopBtn{position:fixed;bottom:24px;right:24px;height:44px;padding:0 16px;border-radius:14px;border:none;cursor:pointer;
  background:var(--grad);display:inline-flex;align-items:center;gap:8px;z-index:40;opacity:0;pointer-events:none;transform:translateY(10px);transition:.25s}
 .services-page #scrollTopBtn.show{opacity:1;pointer-events:auto;transform:translateY(0)}
-.services-page #scrollTopBtn span{display:inline-flex;align-items:center;gap:8px;color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.04em}
-.services-page #scrollTopBtn>i{color:#fff;font-size:12px}
+.services-page #scrollTopBtn span{display:inline-flex;align-items:center;gap:8px}
 .services-page #scrollTopBtn svg{width:18px;height:18px}
 .services-page #scrollTopBtn label{margin:0;cursor:pointer;color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.04em}
 @media (max-width:560px){.services-page #scrollTopBtn{bottom:16px;right:16px;padding:0 13px;height:40px}
@@ -476,7 +475,9 @@ html[data-svcdm="dark"] .svc-amb,html.dark .svc-amb,body.dark .svc-amb{backgroun
 .services-page .services-category{content-visibility:auto;contain-intrinsic-size:auto 620px}
 .services-page .sc-fav-btn,.services-page .sc-id-copy,.services-page .sc-buy{will-change:transform}
 
-/* Rental output adapter: the server remains the authority for every category and service value. */
+/* Rental adapter: dynamic backend rows are progressively enhanced into MotherSMM tickets. */
+.services-page,.services-page *{box-sizing:border-box}
+.services-page{width:100%;max-width:100%;overflow-x:clip}
 .services-page .sv-custom-content{position:relative;margin-bottom:14px;padding:20px 22px;border:1px solid var(--bd);border-radius:18px;background:var(--card);color:var(--tc);overflow:hidden}
 .services-page .sv-custom-content:empty{display:none}
 .services-page .sv-custom-content img{max-width:100%;height:auto}
@@ -487,40 +488,70 @@ html[data-svcdm="dark"] .svc-amb,html.dark .svc-amb,body.dark .svc-amb{backgroun
 .services-page .sv-source-table th{background:var(--tbg);color:var(--ts);font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
 .services-page .sv-source-table .service_cat_header td{background:var(--mc-t);color:var(--mc);font-weight:800}
 .services-page .sv-source-table .btn-primary{background:var(--grad)!important;border:0!important;color:#fff!important;border-radius:10px!important;box-shadow:none!important}
-.services-page .svc-chap{width:100%;border:0;background:transparent;font-family:inherit;text-align:left}
-.services-page .svc-chap:focus-visible{outline:2px solid var(--mc);outline-offset:3px;border-radius:12px}
-.services-page .kbq{width:100%;border:0;font-family:inherit;text-align:left}
-.services-page .kbq:focus-visible{outline:2px solid var(--mc);outline-offset:2px}
-.services-page .svc-cat-btn{font-family:inherit}
-.services-page .svc-toolbar-actions{display:flex;align-items:center;gap:9px}
-.services-page .svc-expand{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 16px;border:1.5px solid var(--bd);border-radius:14px;background:var(--bg2);color:var(--tc);font-family:inherit;font-size:12.5px;font-weight:800;white-space:nowrap;cursor:pointer}
-.services-page .svc-expand i{color:var(--mc)}
-.services-page .svc-expand:hover{border-color:var(--mc);background:var(--mc-t)}
-.services-page #guest-service-categories:empty{display:none}
-.services-page #service-list-enhanced:empty{display:none}
+.services-page #guest-service-categories:empty,.services-page #service-list-enhanced:empty{display:none}
 .services-page .nothing-found{margin-bottom:18px}
 .services-page .nothing-found .card-body{padding:34px 20px;text-align:center}
-.services-page .tk-gh{font-family:inherit;text-decoration:none}
-.services-page button.tk-cell{margin:0;background:transparent;border-top:0;border-right:0;border-bottom:0;font-family:inherit;text-align:left}
+.services-page .kbq{width:100%;font-family:inherit;text-align:left}
+.services-page .kbq:focus-visible,.services-page .svc-chap:focus-visible{outline:2px solid var(--mc);outline-offset:3px}
+.services-page .svc-cat-btn,.services-page .svc-adv,.services-page .tk-gh,.services-page .sc-id-copy{font-family:inherit}
 .services-page .tk-mini .tk-gh{flex:1}
-.services-page .tk-mini .tk-gh[data-copy-card]{position:relative}
-.services-page .source-modal-bin{display:none}
-.services-page .sv-card-copy-note{position:fixed;z-index:1200;right:20px;bottom:20px;padding:11px 15px;border-radius:11px;background:var(--ink);color:#fff;font-size:12px;font-weight:800;opacity:0;transform:translateY(8px);pointer-events:none;transition:.2s}
+.services-page .sc-plat>i{font-size:18px}
+.services-page .sc-features-item{position:relative}
+.services-page .filter-actions{margin-left:auto}
+.services-page .filter-item:empty{display:none}
+.services-page .filter-item .badge{display:inline-flex;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:var(--grad);color:#fff;border-radius:8px;padding:6px 9px;font-size:10px}
+.services-page .sv-card-copy-note{position:fixed;z-index:2200;right:20px;bottom:20px;padding:11px 15px;border-radius:11px;background:var(--ink);color:#fff;font-size:12px;font-weight:800;opacity:0;transform:translateY(8px);pointer-events:none;transition:.2s}
 .services-page .sv-card-copy-note.on{opacity:1;transform:none}
-.sv-service-modal .modal-header .close{margin-left:auto;width:34px;height:34px;padding:0;border-radius:11px;z-index:1;cursor:pointer;background:rgba(255,255,255,.20);border:1px solid rgba(255,255,255,.34);color:#fff;font-size:20px;line-height:1;opacity:1;display:flex;align-items:center;justify-content:center}
-.sv-service-modal .modal-header .close:hover{background:rgba(255,255,255,.34);color:#fff;opacity:1}
-.sv-service-modal .modal-body{line-height:1.75;color:var(--tc)}
-.sv-service-modal .placeorder-btn{display:flex;align-items:center;justify-content:center;width:100%;padding:13px 16px;border:0;border-radius:12px;background:var(--grad)!important;color:#fff!important;font-weight:800;cursor:pointer}
-.services-page #guest-action-anchor{display:none}
-@media(max-width:900px){.services-page .svc-toolbar-actions{width:100%}.services-page .svc-expand{flex:1}}
-@media(max-width:600px){.services-page .sv-custom-content{padding:16px;border-radius:15px}.services-page .svc-expand{height:44px;padding:0 11px;font-size:11.5px}}
-
+.services-page #scrollTopBtn>span{color:#fff}
+.services-page .source-service-modal{display:none!important}
+.sx-body .source-detail-content{font-size:12.8px;line-height:1.8;color:var(--tc);word-break:break-word}
+.sx-body .source-detail-content hr{border:0;border-top:1px solid var(--bd);margin:13px 0}
+.sx-body .dm-buy{margin-top:12px}
+body.sv-overlay-open{overflow:hidden!important}
+@media(max-width:767px){
+ .services-page .container,.services-page .container-fluid{max-width:100%!important;width:100%!important;padding-left:10px!important;padding-right:10px!important}
+ .services-page .svc-deck{width:100%;padding-left:15px;padding-right:15px}
+ .services-page .svc-bar{width:100%}
+ .services-page .services-category{width:100%;min-width:0;margin-bottom:20px}
+ .services-page .svc-chap{width:100%;min-width:0;gap:8px}
+ .services-page .st-name{flex:1 1 auto;max-width:none;min-width:0}
+ .services-page .ch-rule{min-width:8px}
+ .services-page .services-card{width:100%;max-width:100%;min-width:0}
+ .services-page .tk-body,.services-page .tk-r1,.services-page .tk-spec{min-width:0}
+ .services-page .dropdown-menu.dd-menu{max-width:calc(100vw - 20px)}
+ .sv-modal .modal-dialog{margin:16px 10px}
+}
+@media(max-width:480px){
+ .services-page .sv-custom-content{padding:15px;border-radius:15px}
+ .services-page .dk-stats{gap:6px}
+ .services-page .dk-st{padding:10px 5px}
+ .services-page .svc-bar{padding:9px}
+ .services-page .svc-cat-btn,.services-page .svc-adv{height:44px;font-size:11.5px;gap:6px}
+ .services-page .svc-cat-btn .ccb-t{max-width:92px}
+ .services-page .ch-rule{display:none}
+ .services-page .st-count{padding:5px 7px;font-size:9px}
+ .services-page .ch-fold{width:28px;height:28px;flex-basis:28px}
+ .services-page .tk-stub{padding-left:5px;padding-right:5px}
+ .services-page .tk-cell{gap:5px;padding-left:5px;padding-right:5px}
+ .services-page .tk-k{font-size:8px}
+ .services-page .tk-v{font-size:11.5px}
+ .services-page .sfc-card .card-body{padding:11px}
+ .services-page .filters-wrapper{flex:1 1 100%}
+ .services-page .filter-actions{width:100%;margin-left:0}
+ .services-page .filter-actions .btn-danger{width:100%;justify-content:center}
+ .sx-box{border-radius:18px}
+}
+@media(max-width:360px){
+ .services-page .services-card{--stub:82px}
+ .services-page .sc-price{font-size:14.5px}
+ .services-page .tk-per{font-size:7.5px}
+ .services-page .st-count{max-width:72px;overflow:hidden;text-overflow:ellipsis}
+}
 </style>
-
 
 <main class="services-page sv-guest" id="rental-services-page">
 	<div class="svc-amb" aria-hidden="true"></div>
-	<div class="container-fluid">
+	<div class="container mt-5">
 		<div class="sv-page">
 			<div class="sv-custom-content" style="[services.top-content-div]">[services.top-content]</div>
 
@@ -528,7 +559,7 @@ html[data-svcdm="dark"] .svc-amb,html.dark .svc-amb,body.dark .svc-amb{backgroun
 				<div class="dk-l">
 					<span class="dk-eye"><i class="fas fa-bolt" aria-hidden="true"></i> Service Catalogue</span>
 					<h1 class="dk-h" id="services-page-title">Wholesale rates.<br><em>Zero guesswork.</em></h1>
-					<p class="dk-p">Search the complete live catalogue, compare limits and rates, inspect service details and continue directly to the order form.</p>
+					<p class="dk-p">Scan live stats before you spend, copy any service ID in one tap, and push an order straight from the ticket. Most services start instantly.</p>
 				</div>
 				<div class="dk-r">
 					<div class="dk-stats">
@@ -536,476 +567,111 @@ html[data-svcdm="dark"] .svc-amb,html.dark .svc-amb,body.dark .svc-amb{backgroun
 						<div class="dk-st"><b id="dkCats">0</b><span>Categories</span></div>
 						<div class="dk-st"><b id="dkMin">—</b><span>From</span></div>
 					</div>
-					<button type="button" class="dk-btn" id="kbToggle" aria-expanded="false" aria-controls="svcKb">
-						<i class="fas fa-book-open" aria-hidden="true"></i> Knowledge Base <i class="fas fa-angle-down chv" aria-hidden="true"></i>
-					</button>
+					<button type="button" class="dk-btn" id="kbToggle" aria-expanded="false" aria-controls="svcKb"><i class="fas fa-book-open" aria-hidden="true"></i> Knowledge Base <i class="fas fa-angle-down chv" aria-hidden="true"></i></button>
 				</div>
 			</section>
 
 			<div class="svc-kb" id="svcKb">
 				<div class="kbx">
-					<div class="kbx-hd"><i class="fas fa-info-circle" aria-hidden="true"></i><div><h3>Knowledge Base</h3><p>Read these notes before placing an order.</p></div></div>
+					<div class="kbx-hd"><i class="fas fa-info-circle" aria-hidden="true"></i><div><h3>Knowledge Base</h3><p>Read this before ordering — it saves you time and money.</p></div></div>
 					<div class="kbl">
-						<div class="kbi"><span class="kdot">01</span><button type="button" class="kbq"><h4>How do I find the right service?</h4><i class="fas fa-angle-down" aria-hidden="true"></i></button><div class="kba"><div class="kbai">Use the search field to find a platform, service name or service ID. You can also choose a category to narrow the catalogue.</div></div></div>
-						<div class="kbi"><span class="kdot">02</span><button type="button" class="kbq"><h4>What should I check before ordering?</h4><i class="fas fa-angle-down" aria-hidden="true"></i></button><div class="kba"><div class="kbai">Review the service name, rate, minimum and maximum quantity, average time and all available details before submitting an order.</div></div></div>
-						<div class="kbi"><span class="kdot">03</span><button type="button" class="kbq"><h4>Where do I find the service ID?</h4><i class="fas fa-angle-down" aria-hidden="true"></i></button><div class="kba"><div class="kbai">Every ticket displays its service ID. Use the copy button to place the exact dynamic ID on your clipboard.</div></div></div>
-						<div class="kbi"><span class="kdot">04</span><button type="button" class="kbq"><h4>Why should I open the details?</h4><i class="fas fa-angle-down" aria-hidden="true"></i></button><div class="kba"><div class="kbai">The details supplied by the panel may contain link format, delivery notes, refill information and other instructions specific to that service.</div></div></div>
+						<div class="kbi"><span class="kdot">01</span><button type="button" class="kbq"><h4>How do I find the right service?</h4><i class="fas fa-angle-down" aria-hidden="true"></i></button><div class="kba"><div class="kbai">Search by platform, service name or exact ID. You can also choose a category or use the advanced price, platform and service-type filters.</div></div></div>
+						<div class="kbi"><span class="kdot">02</span><button type="button" class="kbq"><h4>How do I filter services?</h4><i class="fas fa-angle-down" aria-hidden="true"></i></button><div class="kba"><div class="kbai"><strong>Category</strong> narrows the catalogue immediately. <strong>Advanced</strong> lets you combine a minimum or maximum rate with platform and service-type filters.</div></div></div>
+						<div class="kbi"><span class="kdot">03</span><button type="button" class="kbq"><h4>What does Statistics show?</h4><i class="fas fa-angle-down" aria-hidden="true"></i></button><div class="kba"><div class="kbai">The statistics button shows the live minimum, maximum and average completion time currently supplied by the panel for that service.</div></div></div>
+						<div class="kbi"><span class="kdot">04</span><button type="button" class="kbq"><h4>What is Service Description / Details?</h4><i class="fas fa-angle-down" aria-hidden="true"></i></button><div class="kba"><div class="kbai">Open <strong>Details</strong> to review the panel’s full instructions, required link format, delivery notes and refill information before ordering.</div></div></div>
 					</div>
 				</div>
 			</div>
 
 			<div class="svc-bar" role="search">
-				<label class="svc-find" for="searchService">
-					<i class="fas fa-search mag" aria-hidden="true"></i>
-					<input type="text" class="form-control sv-search-in" id="searchService" placeholder="Search services by name or ID" autocomplete="off">
-					<button type="button" class="svc-x" id="svcClear" aria-label="Clear search"><i class="fas fa-times" aria-hidden="true"></i></button>
-				</label>
-
+				<label class="svc-find" for="searchService"><i class="fas fa-search mag" aria-hidden="true"></i><input type="text" class="sv-search-in" id="searchService" placeholder="Search" autocomplete="off"><button type="button" class="svc-x" id="svcClear" aria-label="Clear search"><i class="fas fa-times" aria-hidden="true"></i></button></label>
 				<div class="dropdown ui-dd">
-					<button type="button" class="svc-cat-btn dropdown-toggle" id="dropdownFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<i class="fas fa-layer-group" aria-hidden="true"></i><span class="ccb-t">Category</span><i class="fas fa-angle-down cv" aria-hidden="true"></i>
-					</button>
+					<button type="button" class="svc-cat-btn dropdown-toggle" id="dropdownFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-layer-group" aria-hidden="true"></i><span class="ccb-t">Category</span><i class="fas fa-angle-down cv" aria-hidden="true"></i></button>
 					<div class="dropdown-overlay"></div>
-					<div class="dropdown-menu dd-menu" aria-labelledby="dropdownFilter">
-						<div class="dd-head"><i class="fas fa-layer-group" aria-hidden="true"></i><span>Choose a category</span></div>
-						<div class="dd-scroll"><ul class="dropdown-list" id="guest-service-categories"></ul></div>
-					</div>
+					<div class="dropdown-menu dd-menu" aria-labelledby="dropdownFilter"><div class="dd-head"><i class="fas fa-layer-group" aria-hidden="true"></i><span>Choose a category</span></div><div class="dd-scroll"><ul class="dropdown-list" id="guest-service-categories"></ul></div></div>
 				</div>
-
-				<div class="svc-toolbar-actions">
-					<button type="button" class="svc-expand" id="svcExpand"><i class="fas fa-compress-alt" aria-hidden="true"></i><span>Collapse all</span></button>
-					<div class="svc-tally"><i class="fas fa-satellite-dish" aria-hidden="true"></i><span id="svcCount">0</span><small>shown</small></div>
-				</div>
+				<button type="button" class="svc-adv" data-toggle="modal" data-target="#filter-box"><i class="fas fa-sliders-h" aria-hidden="true"></i> Advanced</button>
+				<span class="svc-tally"><i class="fas fa-layer-group" aria-hidden="true"></i><span id="svcCount">0</span> <small>shown</small></span>
 			</div>
 
-			<div class="nothing-found" id="servicesNothingFound" style="display:none">
-				<div class="card card-bg"><div class="card-body"><i class="fas fa-satellite-dish" aria-hidden="true"></i><h3>Sorry, we couldn’t find anything.</h3><p>Try another keyword or choose a different category.</p></div></div>
+			<div class="card sfc-card hidden" id="appliedFilters">
+				<div class="card-body"><div class="filter-title"><div class="sf-icon"><i class="fas fa-filter" aria-hidden="true"></i></div><div class="title"><strong>Filters:</strong></div></div><div class="filters-wrapper"><div class="filter-item" id="rangeFilterItem"><span class="title">Price Range:</span><span class="badge" id="ff-range"></span></div><div class="filter-item" id="platformFilterItem"><span class="title">Platform:</span><span class="badge" id="ff-platform"></span></div><div class="filter-item" id="typeFilterItem"><span class="title">Services:</span><span class="badge" id="ff-services"></span></div></div><div class="filter-actions"><button type="button" class="btn btn-danger btn-xs" id="reset-filter"><i class="fas fa-redo" aria-hidden="true"></i><span>Reset Filters</span></button></div></div>
 			</div>
 
+			<div class="nothing-found" id="servicesNothingFound" style="display:none"><div class="card card-bg"><div class="card-body p-4 p-lg-5 text-center"><div style="font-size:60px"><i class="fas fa-satellite-dish" aria-hidden="true"></i></div><h3>Sorry, we couldn’t find anything.</h3><p>Try different keywords or remove some filters.</p></div></div></div>
 			<div class="services-wrapper" id="service-list-enhanced"></div>
 
-			<div class="sv-source-area" id="order-page">
-				<table class="table sv-source-table" id="service-table">
-					[services.get-services-list]
-				</table>
-			</div>
-
+			<div class="sv-source-area" id="order-page"><table class="table sv-source-table" id="service-table">[services.get-services-list]</table></div>
 			<div class="sv-custom-content" style="[services.bottom-content-div]">[services.bottom-content]</div>
-		</div>
-	</div>
 
-	<button type="button" id="scrollTopBtn" aria-label="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i><span>Top</span></button>
-	<div class="sv-card-copy-note" id="serviceCopyNote" role="status" aria-live="polite">Service ID copied</div>
-
-	<div class="sx-ov" id="serviceStatsModal" role="dialog" aria-modal="true" aria-labelledby="serviceStatsTitle">
-		<div class="sx-bd" data-close-stats></div>
-		<div class="sx-box">
-			<div class="sx-hd"><span class="sx-ic"><i class="fas fa-chart-bar" aria-hidden="true"></i></span><h5 id="serviceStatsTitle">Service statistics</h5><button type="button" class="sx-close" data-close-stats aria-label="Close statistics"><i class="fas fa-times" aria-hidden="true"></i></button></div>
-			<div class="sx-body">
-				<div class="stats-summary-row">
-					<div class="stats-sum-card"><div class="ss-label">Service ID</div><div class="ss-val" id="statsServiceId">—</div></div>
-					<div class="stats-sum-card blue"><div class="ss-label">Average completion</div><div class="ss-val" id="statsAverage">—</div></div>
-				</div>
-				<div class="stats-order-list">
-					<div class="stats-order-row"><div class="stats-order-cell"><span class="soc-label">Minimum order</span><span class="soc-val green" id="statsMinimum">—</span></div><div class="stats-order-cell"><span class="soc-label">Maximum order</span><span class="soc-val blue" id="statsMaximum">—</span></div></div>
-				</div>
-				<div class="stats-note"><i class="fas fa-info-circle" aria-hidden="true"></i> Live catalogue limits and average time supplied by the panel.</div>
+			<div class="modal fade sv-modal" id="filter-box" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-lg"><div class="modal-content">
+					<div class="modal-header"><div class="modal-icon"><i class="fas fa-sliders-h" aria-hidden="true"></i></div><h5 class="modal-title">Filter Services</h5><button type="button" class="mx" data-dismiss="modal" aria-label="Close filters"><i class="fas fa-times" aria-hidden="true"></i></button></div>
+					<div class="modal-body"><div id="filter-form">
+						<div class="sfc-item"><div class="sfc-head"><div class="modal-icon"><i class="fas fa-dollar-sign" aria-hidden="true"></i></div><div class="sfc-title">Price Range</div></div><div class="sfc-content"><div class="sfc-price"><input type="number" class="form-control" placeholder="Min" id="price-min" min="0" step="0.0001"><input type="number" class="form-control" placeholder="Max" id="price-max" min="0" step="0.0001"></div></div></div>
+						<div class="sfc-item"><div class="sfc-head"><div class="modal-icon"><i class="fas fa-share-alt" aria-hidden="true"></i></div><div class="sfc-title">Platforms</div></div><div class="sfc-checkbox-container" id="platformFilters"></div></div>
+						<div class="sfc-item"><div class="sfc-head"><div class="modal-icon"><i class="fas fa-tags" aria-hidden="true"></i></div><div class="sfc-title">Services</div></div><div class="sfc-checkbox-container" id="serviceTypeFilters"></div></div>
+					</div></div>
+					<div class="modal-footer"><div class="sfc-buttons"><button type="button" class="btn btn-primary w-100" id="add-filter"><i class="fas fa-check mr-1" aria-hidden="true"></i> Apply</button><button type="button" class="btn btn-light w-100" id="remove-filter"><i class="fas fa-redo mr-1" aria-hidden="true"></i> Remove Filters</button></div></div>
+				</div></div>
 			</div>
+
+			<button type="button" id="scrollTopBtn" aria-label="Back to top"><span><svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none" aria-hidden="true"><path d="M11.5007 1.8335C6.44982 1.8335 2.33398 5.94933 2.33398 11.0002C2.33398 16.051 6.44982 20.1668 11.5007 20.1668C16.5515 20.1668 20.6673 16.051 20.6673 11.0002C20.6673 5.94933 16.5515 1.8335 11.5007 1.8335ZM15.2223 12.641C15.0848 12.7785 14.9107 12.8427 14.7365 12.8427C14.5623 12.8427 14.3882 12.7785 14.2507 12.641L11.5007 9.891L8.75065 12.641C8.48482 12.9068 8.04482 12.9068 7.77898 12.641C7.51315 12.3752 7.51315 11.9352 7.77898 11.6693L11.0148 8.4335C11.2807 8.16766 11.7207 8.16766 11.9865 8.4335L15.2223 11.6693C15.4882 11.9443 15.4882 12.3752 15.2223 12.641Z" fill="white"></path></svg><label>Top</label></span></button>
+			<div class="sv-card-copy-note" id="serviceCopyNote" role="status" aria-live="polite">Service ID copied</div>
 		</div>
 	</div>
 </main>
 
+<div class="sx-ov" id="serviceStatsModal" role="dialog" aria-modal="true" aria-labelledby="serviceStatsTitle"><div class="sx-bd" data-close-overlay></div><div class="sx-box"><div class="sx-hd"><div class="sx-ic"><i class="fas fa-chart-bar" aria-hidden="true"></i></div><h5 id="serviceStatsTitle">Statistics</h5><button type="button" class="sx-close" data-close-overlay aria-label="Close statistics"><i class="fas fa-times" aria-hidden="true"></i></button></div><div class="sx-body"><div class="stats-summary-row"><div class="stats-sum-card"><div class="ss-label">Service ID</div><div class="ss-val" id="statsServiceId">—</div></div><div class="stats-sum-card blue"><div class="ss-label">Average Time</div><div class="ss-val" id="statsAverage">—</div></div></div><div class="stats-order-list"><div class="stats-order-row"><div class="stats-order-cell"><span class="soc-label">Minimum order</span><span class="soc-val green" id="statsMinimum">—</span></div><div class="stats-order-cell"><span class="soc-label">Maximum order</span><span class="soc-val blue" id="statsMaximum">—</span></div></div></div><div class="stats-note"><i class="fas fa-info-circle" aria-hidden="true"></i> Live values supplied by the panel.</div></div></div></div>
+<div class="sx-ov" id="serviceDescModal" role="dialog" aria-modal="true" aria-labelledby="serviceDescTitle"><div class="sx-bd" data-close-overlay></div><div class="sx-box"><div class="sx-hd"><div class="sx-ic"><i class="fas fa-info-circle" aria-hidden="true"></i></div><h5 id="serviceDescTitle">Service Description</h5><button type="button" class="sx-close" data-close-overlay aria-label="Close description"><i class="fas fa-times" aria-hidden="true"></i></button></div><div class="sx-body"><div class="source-detail-content" id="serviceDescBody"></div><div id="serviceDescBuy"></div></div></div></div>
+
 <script>
-	(function () {
-		'use strict';
-
-		var page = document.getElementById('rental-services-page');
-		if (!page) {
-			return;
-		}
-
-		var root = document.documentElement;
-		var source = document.getElementById('service-table');
-		var target = document.getElementById('service-list-enhanced');
-		var categoryList = document.getElementById('guest-service-categories');
-		var search = document.getElementById('searchService');
-		var clearSearch = document.getElementById('svcClear');
-		var nothingFound = document.getElementById('servicesNothingFound');
-		var tally = document.getElementById('svcCount');
-		var activeCategory = 'all';
-		var categoryCounter = 0;
-		var serviceCounter = 0;
-		var cheapestValue = null;
-		var cheapestText = '—';
-
-		function escapeHtml(value) {
-			var node = document.createElement('div');
-			node.textContent = value == null ? '' : String(value);
-			return node.innerHTML;
-		}
-
-		function cleanText(node) {
-			return node ? (node.textContent || '').replace(/\s+/g, ' ').trim() : '';
-		}
-
-		function platformIcon(value) {
-			value = (value || '').toLowerCase();
-			if (value.indexOf('instagram') !== -1) return 'fab fa-instagram';
-			if (value.indexOf('youtube') !== -1) return 'fab fa-youtube';
-			if (value.indexOf('tiktok') !== -1) return 'fab fa-tiktok';
-			if (value.indexOf('facebook') !== -1) return 'fab fa-facebook-f';
-			if (value.indexOf('telegram') !== -1) return 'fab fa-telegram-plane';
-			if (value.indexOf('twitter') !== -1 || value === 'x') return 'fab fa-twitter';
-			if (value.indexOf('spotify') !== -1) return 'fab fa-spotify';
-			if (value.indexOf('discord') !== -1) return 'fab fa-discord';
-			if (value.indexOf('linkedin') !== -1) return 'fab fa-linkedin-in';
-			if (value.indexOf('soundcloud') !== -1) return 'fab fa-soundcloud';
-			return 'fas fa-hashtag';
-		}
-
-		function categoryKey(value, index) {
-			var key = (value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-			return key || 'category-' + index;
-		}
-
-		function createCategory(name, index, sourceHeader) {
-			var section = document.createElement('section');
-			var key = categoryKey(name, index);
-			section.className = 'services-category';
-			section.setAttribute('data-category-key', key);
-			section.setAttribute('data-category-name', name);
-
-			var iconMarkup = '<i class="' + platformIcon(name) + '"></i>';
-			if (sourceHeader) {
-				var sourceIcon = sourceHeader.querySelector('td > img, td > i, td svg');
-				if (sourceIcon) {
-					iconMarkup = sourceIcon.outerHTML;
-				}
-			}
-
-			section.innerHTML = '<button type="button" class="svc-chap" aria-expanded="true">' +
-				'<span class="ch-ix">' + String(index) + '</span>' +
-				'<span class="ch-ic">' + iconMarkup + '</span>' +
-				'<span class="st-name">' + escapeHtml(name) + '</span>' +
-				'<span class="ch-rule"></span><span class="st-count">0 services</span>' +
-				'<span class="ch-fold"><i class="fas fa-angle-down"></i></span></button>' +
-				'<div class="cat-body"></div>';
-			target.appendChild(section);
-			return section;
-		}
-
-		function createCategoryOption(name, key, iconClass) {
-			var item = document.createElement('li');
-			var link = document.createElement('a');
-			link.className = 'dropdown-link';
-			link.href = '#';
-			link.setAttribute('data-category-key', key);
-			link.innerHTML = '<span class="dd-tile"><i class="' + iconClass + '"></i></span><span class="text">' + escapeHtml(name) + '</span>';
-			item.appendChild(link);
-			categoryList.appendChild(item);
-		}
-
-		function extractPrice(text) {
-			var match = (text || '').replace(/,/g, '').match(/\d+(?:\.\d+)?/);
-			return match ? parseFloat(match[0]) : null;
-		}
-
-		function createServiceCard(row, categoryName, categoryKeyValue) {
-			var cells = row.children;
-			if (cells.length < 3) {
-				return null;
-			}
-
-			var serviceId = row.getAttribute('data-id') || cleanText(cells.item(0)).replace(/[^0-9A-Za-z_-]/g, '');
-			var serviceName = cleanText(cells.item(1));
-			var price = cleanText(cells.item(2));
-			var minimum = cells.length > 3 ? cleanText(cells.item(3)) : '—';
-			var maximum = cells.length > 4 ? cleanText(cells.item(4)) : '—';
-			var average = cells.length > 5 ? cleanText(cells.item(5)) : '—';
-			var detailCell = cells.length > 6 ? cells.item(6) : null;
-			var detailSource = detailCell ? detailCell.querySelector('button[data-target]') : null;
-			var modal = detailCell ? detailCell.querySelector('.modal') : null;
-			var orderSource = modal ? modal.querySelector('.placeorder-btn') : null;
-			var orderHref = orderSource ? (orderSource.getAttribute('data-href') || '/?select_service_id=' + encodeURIComponent(serviceId)) : '/?select_service_id=' + encodeURIComponent(serviceId);
-			var detailTarget = detailSource ? detailSource.getAttribute('data-target') : '';
-			var icon = platformIcon(categoryName + ' ' + serviceName);
-			var priceValue = extractPrice(price);
-
-			if (priceValue !== null && (cheapestValue === null || priceValue < cheapestValue)) {
-				cheapestValue = priceValue;
-				cheapestText = price;
-			}
-
-			if (modal) {
-				modal.classList.add('sv-modal', 'sv-service-modal');
-				var modalHeader = modal.querySelector('.modal-header');
-				var modalClose = modal.querySelector('.modal-header .close');
-				if (modalHeader && !modalHeader.querySelector('.modal-icon')) {
-					modalHeader.insertAdjacentHTML('afterbegin', '<span class="modal-icon"><i class="fas fa-info-circle" aria-hidden="true"></i></span>');
-				}
-				if (modalClose) modalClose.classList.add('mx');
-				document.body.appendChild(modal);
-			}
-
-			var card = document.createElement('article');
-			card.className = 'services-card';
-			card.setAttribute('data-service-id', serviceId);
-			card.setAttribute('data-category-key', categoryKeyValue);
-			card.setAttribute('data-search', (serviceId + ' ' + serviceName + ' ' + categoryName).toLowerCase());
-			card.setAttribute('data-price', price);
-
-			var detailsButton = detailTarget ? '<button type="button" class="tk-gh" data-toggle="modal" data-target="' + escapeHtml(detailTarget) + '"><i class="fas fa-info-circle"></i><span>Details</span></button>' : '';
-			card.innerHTML = '<div class="tk-stub"><span class="sc-plat"><i class="' + icon + '"></i></span><span class="tk-pw"><span class="sc-price">' + escapeHtml(price) + '</span><span class="tk-per">Per 1000</span></span></div>' +
-				'<div class="tk-body"><div class="tk-r1"><span class="tk-id"><span class="sc-id-num">ID ' + escapeHtml(serviceId) + '</span><button type="button" class="sc-id-copy" data-copy-id="' + escapeHtml(serviceId) + '" title="Copy ID"><i class="far fa-copy"></i></button><span class="copy-tooltip">Copied!</span></span><span class="sc-feat"></span><div class="sc-name" title="' + escapeHtml(serviceName) + '">' + escapeHtml(serviceName) + '</div></div>' +
-				'<div class="tk-spec"><span class="tk-cell"><span class="tk-k">Min</span><span class="tk-v min">' + escapeHtml(minimum || '—') + '</span></span><span class="tk-cell"><span class="tk-k">Max</span><span class="tk-v max">' + escapeHtml(maximum || '—') + '</span></span><button type="button" class="tk-cell avg" data-stats-id="' + escapeHtml(serviceId) + '"><span class="tk-k">Avg Complete</span><span class="tk-v avg-val">' + escapeHtml(average || '—') + '</span></button></div></div>' +
-				'<div class="tk-act"><div class="tk-mini"><button type="button" class="tk-gh" data-stats-id="' + escapeHtml(serviceId) + '"><i class="fas fa-chart-bar"></i><span>Stats</span></button>' + detailsButton + '</div><a href="' + escapeHtml(orderHref) + '" class="sc-buy"><span>Order Now</span><i class="fas fa-arrow-right"></i></a></div>';
-			return card;
-		}
-
-		function enhanceServices() {
-			if (!source || !target || !categoryList) {
-				return;
-			}
-
-			var rows = source.querySelectorAll('tbody tr');
-			var currentCategory = null;
-			var currentName = 'Services';
-			var currentKey = 'services';
-			var currentCount = 0;
-			var categoryCounts = {};
-
-			createCategoryOption('All Categories', 'all', 'fas fa-th');
-			var allOption = categoryList.querySelector('.dropdown-link');
-			if (allOption) allOption.classList.add('on');
-
-			for (var rowIndex = 0; rowIndex < rows.length; rowIndex += 1) {
-				var row = rows.item(rowIndex);
-				if (row.classList.contains('service_cat_header')) {
-					if (currentCategory) {
-						currentCategory.querySelector('.st-count').textContent = currentCount + (currentCount === 1 ? ' service' : ' services');
-					}
-					currentName = row.getAttribute('data-category') || cleanText(row.querySelector('strong')) || cleanText(row);
-					categoryCounter += 1;
-					currentKey = categoryKey(currentName, categoryCounter);
-					currentCategory = createCategory(currentName, categoryCounter, row);
-					currentCount = 0;
-					categoryCounts[currentKey] = 0;
-					createCategoryOption(currentName, currentKey, platformIcon(currentName));
-					continue;
-				}
-
-				if (!row.classList.contains('service-row')) {
-					continue;
-				}
-				if (!currentCategory) {
-					categoryCounter += 1;
-					currentCategory = createCategory(currentName, categoryCounter, null);
-					createCategoryOption(currentName, currentKey, platformIcon(currentName));
-					categoryCounts[currentKey] = 0;
-				}
-
-				var card = createServiceCard(row, currentName, currentKey);
-				if (card) {
-					currentCategory.querySelector('.cat-body').appendChild(card);
-					currentCount += 1;
-					serviceCounter += 1;
-					categoryCounts[currentKey] += 1;
-				}
-			}
-
-			if (currentCategory) {
-				currentCategory.querySelector('.st-count').textContent = currentCount + (currentCount === 1 ? ' service' : ' services');
-			}
-
-			if (serviceCounter > 0) {
-				page.classList.add('sv-enhanced');
-				document.getElementById('dkServices').textContent = String(serviceCounter);
-				document.getElementById('dkCats').textContent = String(categoryCounter);
-				document.getElementById('dkMin').textContent = cheapestText;
-			}
-		}
-
-		function copyServiceId(value, button) {
-			function complete() {
-				if (button) {
-					button.classList.add('copied');
-					window.setTimeout(function () { button.classList.remove('copied'); }, 900);
-				}
-				var note = document.getElementById('serviceCopyNote');
-				if (note) {
-					note.classList.add('on');
-					window.setTimeout(function () { note.classList.remove('on'); }, 1200);
-				}
-			}
-			if (navigator.clipboard && navigator.clipboard.writeText) {
-				navigator.clipboard.writeText(value).then(complete).catch(function () {});
-			} else {
-				var helper = document.createElement('textarea');
-				helper.value = value;
-				helper.style.position = 'fixed';
-				helper.style.opacity = '0';
-				document.body.appendChild(helper);
-				helper.select();
-				try { document.execCommand('copy'); complete(); } catch (error) {}
-				document.body.removeChild(helper);
-			}
-		}
-
-		function openStats(card) {
-			var modal = document.getElementById('serviceStatsModal');
-			if (!modal || !card) return;
-			var id = card.getAttribute('data-service-id') || '—';
-			var name = cleanText(card.querySelector('.sc-name'));
-			document.getElementById('serviceStatsTitle').textContent = name || 'Service statistics';
-			document.getElementById('statsServiceId').textContent = id;
-			document.getElementById('statsMinimum').textContent = cleanText(card.querySelector('.tk-v.min')) || '—';
-			document.getElementById('statsMaximum').textContent = cleanText(card.querySelector('.tk-v.max')) || '—';
-			document.getElementById('statsAverage').textContent = cleanText(card.querySelector('.avg-val')) || '—';
-			modal.classList.add('show');
-			document.body.style.overflow = 'hidden';
-			var closeButton = modal.querySelector('.sx-close');
-			if (closeButton) closeButton.focus();
-		}
-
-		function closeStats() {
-			var modal = document.getElementById('serviceStatsModal');
-			if (!modal || !modal.classList.contains('show')) return;
-			modal.classList.remove('show');
-			document.body.style.overflow = '';
-		}
-
-		function filterServices() {
-			var term = search ? search.value.toLowerCase().trim() : '';
-			var categories = target.querySelectorAll('.services-category');
-			var visibleTotal = 0;
-
-			for (var categoryIndex = 0; categoryIndex < categories.length; categoryIndex += 1) {
-				var category = categories.item(categoryIndex);
-				var categoryMatches = activeCategory === 'all' || category.getAttribute('data-category-key') === activeCategory;
-				var cards = category.querySelectorAll('.services-card');
-				var visibleInCategory = 0;
-				for (var cardIndex = 0; cardIndex < cards.length; cardIndex += 1) {
-					var card = cards.item(cardIndex);
-					var matches = categoryMatches && (!term || (card.getAttribute('data-search') || '').indexOf(term) !== -1);
-					card.classList.toggle('hidden', !matches);
-					if (matches) visibleInCategory += 1;
-				}
-				category.classList.toggle('hidden', visibleInCategory === 0);
-				visibleTotal += visibleInCategory;
-			}
-
-			if (tally) tally.textContent = String(visibleTotal);
-			if (nothingFound) nothingFound.style.display = visibleTotal ? 'none' : 'block';
-			if (clearSearch) clearSearch.classList.toggle('on', !!term);
-		}
-
-		enhanceServices();
-		filterServices();
-
-		if (search) {
-			search.addEventListener('input', filterServices);
-		}
-		if (clearSearch) {
-			clearSearch.addEventListener('click', function () {
-				search.value = '';
-				search.focus();
-				filterServices();
-			});
-		}
-
-		if (categoryList) {
-			categoryList.addEventListener('click', function (event) {
-				var link = event.target.closest ? event.target.closest('.dropdown-link') : null;
-				if (!link) return;
-				event.preventDefault();
-				activeCategory = link.getAttribute('data-category-key') || 'all';
-				var links = categoryList.querySelectorAll('.dropdown-link');
-				for (var linkIndex = 0; linkIndex < links.length; linkIndex += 1) links.item(linkIndex).classList.toggle('on', links.item(linkIndex) === link);
-				var title = link.querySelector('.text');
-				var buttonTitle = document.querySelector('#dropdownFilter .ccb-t');
-				if (title && buttonTitle) buttonTitle.textContent = title.textContent.trim();
-				filterServices();
-			});
-		}
-
-		target.addEventListener('click', function (event) {
-			var chapter = event.target.closest ? event.target.closest('.svc-chap') : null;
-			if (chapter) {
-				var category = chapter.closest('.services-category');
-				if (category) {
-					category.classList.toggle('fold');
-					chapter.setAttribute('aria-expanded', category.classList.contains('fold') ? 'false' : 'true');
-				}
-				return;
-			}
-			var stats = event.target.closest ? event.target.closest('[data-stats-id]') : null;
-			if (stats) {
-				openStats(stats.closest('.services-card'));
-				return;
-			}
-			var copy = event.target.closest ? event.target.closest('[data-copy-id], [data-copy-card]') : null;
-			if (copy) {
-				copyServiceId(copy.getAttribute('data-copy-id') || copy.getAttribute('data-copy-card') || '', copy);
-			}
-		});
-
-		var statsModal = document.getElementById('serviceStatsModal');
-		if (statsModal) {
-			statsModal.addEventListener('click', function (event) {
-				if (event.target.closest && event.target.closest('[data-close-stats]')) closeStats();
-			});
-			document.addEventListener('keydown', function (event) {
-				if (event.key === 'Escape') closeStats();
-			});
-		}
-
-		var expandButton = document.getElementById('svcExpand');
-		if (expandButton) {
-			expandButton.addEventListener('click', function () {
-				var categories = target.querySelectorAll('.services-category');
-				var shouldExpand = !!target.querySelector('.services-category.fold');
-				for (var categoryIndex = 0; categoryIndex < categories.length; categoryIndex += 1) {
-					var category = categories.item(categoryIndex);
-					category.classList.toggle('fold', !shouldExpand);
-					var chapter = category.querySelector('.svc-chap');
-					if (chapter) chapter.setAttribute('aria-expanded', shouldExpand ? 'true' : 'false');
-				}
-				var label = expandButton.querySelector('span');
-				var icon = expandButton.querySelector('i');
-				if (label) label.textContent = shouldExpand ? 'Collapse all' : 'Expand all';
-				if (icon) icon.className = shouldExpand ? 'fas fa-compress-alt' : 'fas fa-expand-alt';
-			});
-		}
-
-		var knowledge = document.getElementById('svcKb');
-		var knowledgeButton = document.getElementById('kbToggle');
-		if (knowledge && knowledgeButton) {
-			knowledgeButton.addEventListener('click', function () {
-				knowledge.classList.toggle('open');
-				knowledgeButton.classList.toggle('on');
-				knowledgeButton.setAttribute('aria-expanded', knowledge.classList.contains('open') ? 'true' : 'false');
-			});
-			knowledge.addEventListener('click', function (event) {
-				var question = event.target.closest ? event.target.closest('.kbq') : null;
-				if (!question) return;
-				var item = question.parentElement;
-				var answer = item.querySelector('.kba');
-				item.classList.toggle('on');
-				if (answer) answer.style.maxHeight = item.classList.contains('on') ? answer.scrollHeight + 'px' : '0px';
-			});
-		}
-
-		var scrollButton = document.getElementById('scrollTopBtn');
-		if (scrollButton) {
-			window.addEventListener('scroll', function () { scrollButton.classList.toggle('show', window.pageYOffset > 500); }, { passive: true });
-			scrollButton.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
-		}
-
-		function syncTheme() {
-			var dark = root.classList.contains('dark') || root.getAttribute('data-theme') === 'dark';
-			root.setAttribute('data-svcdm', dark ? 'dark' : 'light');
-		}
-		syncTheme();
-		try { new MutationObserver(syncTheme).observe(root, { attributes: true, attributeFilter: ['class', 'data-theme'] }); } catch (error) {}
-	})();
+(function(){
+'use strict';
+var page=document.getElementById('rental-services-page');if(!page)return;
+var root=document.documentElement,source=document.getElementById('service-table'),target=document.getElementById('service-list-enhanced'),categoryList=document.getElementById('guest-service-categories'),search=document.getElementById('searchService'),clearSearch=document.getElementById('svcClear'),nothingFound=document.getElementById('servicesNothingFound'),tally=document.getElementById('svcCount');
+var activeCategory='all',activePlatforms=[],activeTypes=[],activeMin=null,activeMax=null,categoryCounter=0,serviceCounter=0,cheapestValue=null,cheapestText='—';
+var platformNames={},serviceTypes={};
+var filterModal=document.getElementById('filter-box');if(filterModal)document.body.appendChild(filterModal);
+page.addEventListener('error',function(event){var image=event.target;if(!image||image.tagName!=='IMG')return;var platformTile=image.closest('.sc-plat'),category=image.closest('.services-category'),dropdown=image.closest('.dropdown-link'),hint=platformTile?platformTile.getAttribute('data-plat'):(category?category.getAttribute('data-category-name'):(dropdown?text(dropdown.querySelector('.text')):''));if(platformTile||category||dropdown)image.parentNode.innerHTML='<i class="'+platformFallbackIcon(platformName(hint))+'" aria-hidden="true"></i>'},true);
+function esc(value){var n=document.createElement('div');n.textContent=value==null?'':String(value);return n.innerHTML}
+function text(node){return node?(node.textContent||'').replace(/\s+/g,' ').trim():''}
+function key(value,index){var k=(value||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');return k||'category-'+index}
+function priceNumber(value){var m=(value||'').replace(/,/g,'').match(/\d+(?:\.\d+)?/);return m?parseFloat(m[0]):null}
+function platformName(value){value=(value||'').toLowerCase();var map=[['instagram','Instagram'],['telegram','Telegram'],['youtube','YouTube'],['facebook','Facebook'],['tiktok','TikTok'],['twitter','Twitter'],[' x ','X'],['linkedin','LinkedIn'],['spotify','Spotify'],['discord','Discord'],['whatsapp','WhatsApp'],['snapchat','Snapchat'],['soundcloud','SoundCloud'],['threads','Threads']];for(var i=0;i<map.length;i++)if(value.indexOf(map[i][0])!==-1)return map[i][1];return 'Other'}
+function platformFallbackIcon(platform){var icons={Instagram:'fab fa-instagram',Telegram:'fab fa-telegram-plane',YouTube:'fab fa-youtube',Facebook:'fab fa-facebook-f',TikTok:'fas fa-music',Twitter:'fab fa-twitter',X:'fab fa-twitter',LinkedIn:'fab fa-linkedin-in',Spotify:'fab fa-spotify',Discord:'fab fa-discord',WhatsApp:'fab fa-whatsapp',Snapchat:'fab fa-snapchat',SoundCloud:'fab fa-soundcloud',Threads:'fas fa-at'};return icons[platform]||'fas fa-hashtag'}
+function platformVisual(platform){var images={Instagram:'https://storage.perfectcdn.com/hghbyr/ehxxfmo5f9ph1hrl.gif',Telegram:'https://storage.perfectcdn.com/98b10r/h7j64q32oquy7zt9.gif',YouTube:'https://storage.perfectcdn.com/hghbyr/m1b0yhhu0qprs5tf.gif',Facebook:'https://storage.perfectcdn.com/hghbyr/xcnrixd88alub0ej.gif',TikTok:'https://storage.perfectcdn.com/hghbyr/wmsjone6jr3puwb8.gif',Twitter:'https://storage.perfectcdn.com/hghbyr/ej7swmpsdmz98m74.gif',X:'https://storage.perfectcdn.com/hghbyr/ej7swmpsdmz98m74.gif',LinkedIn:'https://storage.perfectcdn.com/hghbyr/yd1dddcfb2ydbzf5.gif',Spotify:'https://cdn-icons-png.flaticon.com/128/2504/2504940.png'};if(images[platform])return '<img loading="lazy" decoding="async" src="'+images[platform]+'" alt="" class="man">';return '<i class="'+platformFallbackIcon(platform)+'" aria-hidden="true"></i>'}
+function serviceType(name){var v=(name||'').toLowerCase(),types=[['followers','Followers'],['subscribers','Subscribers'],['members','Members'],['likes','Likes'],['views','Views'],['comments','Comments'],['shares','Shares'],['reactions','Reactions'],['saves','Saves'],['watch time','Watch Time'],['impressions','Impressions'],['votes','Votes'],['plays','Plays'],['traffic','Traffic']];for(var i=0;i<types.length;i++)if(v.indexOf(types[i][0])!==-1)return types[i][1];return 'Other'}
+function features(name){var v=(name||'').toLowerCase(),html='';if(v.indexOf('drip')!==-1)html+='<span class="sc-features-item dripfeed" title="Drip-feed"><i class="fas fa-tint"></i></span>';if(v.indexOf('refill')!==-1||v.indexOf('guarantee')!==-1)html+='<span class="sc-features-item guaranteed" title="Refill"><i class="fas fa-shield-alt"></i></span>';if(v.indexOf('cancel')!==-1)html+='<span class="sc-features-item canceled" title="Cancel enabled"><i class="fas fa-ban"></i></span>';return html}
+function categoryIcon(header,name){if(header){var n=header.querySelector('td img,td i,td svg');if(n)return n.outerHTML}return platformVisual(platformName(name))}
+function addCategoryOption(name,categoryKey,iconMarkup){var item=document.createElement('li'),link=document.createElement('a');link.className='dropdown-link';link.href='#';link.setAttribute('data-category-key',categoryKey);link.innerHTML='<span class="dd-tile">'+iconMarkup+'</span><span class="text">'+esc(name)+'</span>';item.appendChild(link);categoryList.appendChild(item)}
+function createCategory(name,index,header){var section=document.createElement('section'),categoryKey=key(name,index),icon=categoryIcon(header,name);section.className='services-category';section.setAttribute('data-category-key',categoryKey);section.setAttribute('data-category-name',name);section.innerHTML='<div class="svc-chap" role="button" tabindex="0" aria-expanded="true"><span class="ch-ix">'+index+'</span><span class="ch-ic">'+icon+'</span><span class="st-name">'+esc(name)+'</span><span class="ch-rule"></span><span class="st-count">0 services</span><span class="ch-fold"><i class="fas fa-angle-down"></i></span></div><div class="cat-body"></div>';target.appendChild(section);return section}
+function createCard(row,categoryName,categoryKey){var c=row.children;if(c.length<3)return null;var id=row.getAttribute('data-id')||text(c.item(0)).replace(/[^0-9A-Za-z_-]/g,''),name=text(c.item(1)),price=text(c.item(2)),minimum=c.length>3?text(c.item(3)):'—',maximum=c.length>4?text(c.item(4)):'—',average=c.length>5?text(c.item(5)):'—',detailCell=c.length>6?c.item(6):null,detailButton=detailCell?detailCell.querySelector('button[data-target]'):null,modal=detailCell?detailCell.querySelector('.modal'):null,order=modal?modal.querySelector('.placeorder-btn'):null,orderHref=order?(order.getAttribute('data-href')||'/?select_service_id='+encodeURIComponent(id)):'/?select_service_id='+encodeURIComponent(id),modalTarget=detailButton?detailButton.getAttribute('data-target'):'',platform=platformName(categoryName+' '+name),type=serviceType(name),numeric=priceNumber(price);
+if(numeric!==null&&(cheapestValue===null||numeric<cheapestValue)){cheapestValue=numeric;cheapestText=price}platformNames[platform]=true;serviceTypes[type]=true;if(modal){modal.classList.add('source-service-modal');document.body.appendChild(modal)}
+var card=document.createElement('article');card.className='services-card';card.setAttribute('data-service-id',id);card.setAttribute('data-category-key',categoryKey);card.setAttribute('data-search',(id+' '+name+' '+categoryName+' '+platform+' '+type).toLowerCase());card.setAttribute('data-price-number',numeric===null?'':String(numeric));card.setAttribute('data-platform',platform.toLowerCase());card.setAttribute('data-service-type',type.toLowerCase());if(modalTarget)card.setAttribute('data-detail-target',modalTarget);
+var details=modalTarget?'<button type="button" class="tk-gh" data-details><i class="fas fa-info-circle"></i><span>Details</span></button>':'';
+card.innerHTML='<div class="tk-stub"><span class="sc-plat" data-plat="'+esc(platform)+'">'+platformVisual(platform)+'</span><span class="tk-pw"><span class="sc-price">'+esc(price)+'</span><span class="tk-per">Per 1000</span></span></div><div class="tk-body"><div class="tk-r1"><span class="tk-id"><span class="sc-id-num">ID '+esc(id)+'</span><button type="button" class="sc-id-copy" data-copy-id="'+esc(id)+'" title="Copy ID"><i class="far fa-copy"></i></button><span class="copy-tooltip">Copied!</span></span><span class="sc-feat">'+features(name)+'</span><div class="sc-name" title="'+esc(name)+'">'+esc(name)+'</div></div><div class="tk-spec"><span class="tk-cell"><span class="tk-k">Min</span><span class="tk-v min">'+esc(minimum||'—')+'</span></span><span class="tk-cell"><span class="tk-k">Max</span><span class="tk-v max">'+esc(maximum||'—')+'</span></span><span class="tk-cell avg" role="button" tabindex="0" data-stats><span class="tk-k">Avg Complete</span><span class="tk-v avg-val">'+esc(average||'—')+'</span></span></div></div><div class="tk-act"><div class="tk-mini"><button type="button" class="tk-gh" data-stats><i class="fas fa-chart-bar"></i><span>Stats</span></button>'+details+'</div><a href="'+esc(orderHref)+'" class="sc-buy"><span>Order Now</span><i class="fas fa-arrow-right"></i></a></div>';return card}
+function populateAdvancedFilters(){var p=document.getElementById('platformFilters'),t=document.getElementById('serviceTypeFilters');Object.keys(platformNames).sort().forEach(function(name){if(name!=='Other')p.insertAdjacentHTML('beforeend','<button type="button" class="sfc-checkbox" data-filter-platform="'+esc(name.toLowerCase())+'">'+esc(name)+'</button>')});Object.keys(serviceTypes).sort().forEach(function(name){t.insertAdjacentHTML('beforeend','<button type="button" class="sfc-checkbox" data-filter-type="'+esc(name.toLowerCase())+'">'+esc(name)+'</button>')})}
+function enhance(){if(!source||!target||!categoryList)return false;var rows=source.querySelectorAll('tbody tr'),current=null,currentName='Services',currentKey='services',count=0;addCategoryOption('All Categories','all','<i class="fas fa-th"></i>');categoryList.querySelector('.dropdown-link').classList.add('on');for(var i=0;i<rows.length;i++){var row=rows.item(i);if(row.classList.contains('service_cat_header')){if(current)current.querySelector('.st-count').textContent=count+(count===1?' service':' services');currentName=row.getAttribute('data-category')||text(row.querySelector('strong'))||text(row);categoryCounter++;currentKey=key(currentName,categoryCounter);current=createCategory(currentName,categoryCounter,row);count=0;addCategoryOption(currentName,currentKey,categoryIcon(row,currentName));continue}if(!row.classList.contains('service-row'))continue;if(!current){categoryCounter++;current=createCategory(currentName,categoryCounter,null);addCategoryOption(currentName,currentKey,categoryIcon(null,currentName))}var card=createCard(row,currentName,currentKey);if(card){current.querySelector('.cat-body').appendChild(card);count++;serviceCounter++}}if(current)current.querySelector('.st-count').textContent=count+(count===1?' service':' services');if(serviceCounter){page.classList.add('sv-enhanced');document.getElementById('dkServices').textContent=serviceCounter;document.getElementById('dkCats').textContent=categoryCounter;document.getElementById('dkMin').textContent=cheapestText;populateAdvancedFilters();return true}return false}
+function copyId(value,button){function done(){button.classList.add('copied');setTimeout(function(){button.classList.remove('copied')},900);var note=document.getElementById('serviceCopyNote');note.classList.add('on');setTimeout(function(){note.classList.remove('on')},1200)}function legacy(){var h=document.createElement('textarea');h.value=value;h.style.cssText='position:fixed;opacity:0';document.body.appendChild(h);h.select();try{document.execCommand('copy');done()}catch(e){}document.body.removeChild(h)}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(value).then(done).catch(legacy);else legacy()}
+function closeOverlay(){document.querySelectorAll('.sx-ov.show').forEach(function(m){m.classList.remove('show')});document.body.classList.remove('sv-overlay-open')}
+function openStats(card){if(!card)return;document.getElementById('serviceStatsTitle').textContent=text(card.querySelector('.sc-name'))||'Statistics';document.getElementById('statsServiceId').textContent=card.getAttribute('data-service-id')||'—';document.getElementById('statsMinimum').textContent=text(card.querySelector('.tk-v.min'))||'—';document.getElementById('statsMaximum').textContent=text(card.querySelector('.tk-v.max'))||'—';document.getElementById('statsAverage').textContent=text(card.querySelector('.avg-val'))||'—';document.getElementById('serviceStatsModal').classList.add('show');document.body.classList.add('sv-overlay-open')}
+function openDetails(card){if(!card)return;var selector=card.getAttribute('data-detail-target'),sourceModal=selector?document.querySelector(selector):null,sourceBody=sourceModal?sourceModal.querySelector('.modal-body'):null,body=document.getElementById('serviceDescBody'),buy=document.getElementById('serviceDescBuy'),href=card.querySelector('.sc-buy').getAttribute('href');document.getElementById('serviceDescTitle').textContent=text(card.querySelector('.sc-name'))||'Service Description';body.innerHTML=sourceBody?sourceBody.innerHTML:'No additional details are available.';body.querySelectorAll('.placeorder-btn,hr').forEach(function(n){n.remove()});buy.innerHTML='<a href="'+esc(href)+'" class="dm-buy"><i class="fas fa-shopping-cart"></i> Buy now</a>';document.getElementById('serviceDescModal').classList.add('show');document.body.classList.add('sv-overlay-open')}
+function updateApplied(){var box=document.getElementById('appliedFilters'),hasRange=activeMin!==null||activeMax!==null,has=hasRange||activePlatforms.length||activeTypes.length;box.classList.toggle('hidden',!has);document.getElementById('rangeFilterItem').style.display=hasRange?'flex':'none';document.getElementById('platformFilterItem').style.display=activePlatforms.length?'flex':'none';document.getElementById('typeFilterItem').style.display=activeTypes.length?'flex':'none';document.getElementById('ff-range').textContent=(activeMin===null?'Any':activeMin)+' — '+(activeMax===null?'Any':activeMax);document.getElementById('ff-platform').textContent=activePlatforms.join(', ');document.getElementById('ff-services').textContent=activeTypes.join(', ')}
+function filter(){var term=search.value.toLowerCase().trim(),categories=target.querySelectorAll('.services-category'),shown=0;categories.forEach(function(category){var categoryMatch=activeCategory==='all'||category.getAttribute('data-category-key')===activeCategory,inside=0;category.querySelectorAll('.services-card').forEach(function(card){var price=priceNumber(card.getAttribute('data-price-number')),platform=card.getAttribute('data-platform'),type=card.getAttribute('data-service-type'),matches=categoryMatch&&(!term||(card.getAttribute('data-search')||'').indexOf(term)!==-1)&&(!activePlatforms.length||activePlatforms.indexOf(platform)!==-1)&&(!activeTypes.length||activeTypes.indexOf(type)!==-1)&&(activeMin===null||price>=activeMin)&&(activeMax===null||price<=activeMax);card.classList.toggle('hidden',!matches);if(matches)inside++});category.classList.toggle('hidden',inside===0);shown+=inside});tally.textContent=shown;nothingFound.style.display=shown?'none':'block';clearSearch.classList.toggle('on',!!term)}
+function resetAdvanced(){activePlatforms=[];activeTypes=[];activeMin=null;activeMax=null;document.getElementById('price-min').value='';document.getElementById('price-max').value='';document.querySelectorAll('#filter-form .sfc-checkbox.active').forEach(function(n){n.classList.remove('active')});updateApplied();filter()}
+function hideFilterModal(){if(window.jQuery&&window.jQuery.fn&&window.jQuery.fn.modal)window.jQuery('#filter-box').modal('hide')}
+var enhanced=enhance();if(enhanced)filter();
+search.addEventListener('input',filter);clearSearch.addEventListener('click',function(){search.value='';search.focus();filter()});
+categoryList.addEventListener('click',function(e){var link=e.target.closest('.dropdown-link');if(!link)return;e.preventDefault();activeCategory=link.getAttribute('data-category-key')||'all';categoryList.querySelectorAll('.dropdown-link').forEach(function(n){n.classList.toggle('on',n===link)});document.querySelector('#dropdownFilter .ccb-t').textContent=text(link.querySelector('.text'));filter()});
+target.addEventListener('click',function(e){var chapter=e.target.closest('.svc-chap');if(chapter){var category=chapter.closest('.services-category');category.classList.toggle('fold');chapter.setAttribute('aria-expanded',category.classList.contains('fold')?'false':'true');return}var stats=e.target.closest('[data-stats]');if(stats){openStats(stats.closest('.services-card'));return}var details=e.target.closest('[data-details]');if(details){openDetails(details.closest('.services-card'));return}var copy=e.target.closest('[data-copy-id]');if(copy)copyId(copy.getAttribute('data-copy-id'),copy)});
+target.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.matches('.svc-chap,[data-stats]')){e.preventDefault();e.target.click()}});
+document.getElementById('filter-form').addEventListener('click',function(e){var box=e.target.closest('.sfc-checkbox');if(box)box.classList.toggle('active')});
+document.getElementById('add-filter').addEventListener('click',function(){var min=document.getElementById('price-min').value,max=document.getElementById('price-max').value;activeMin=min===''?null:parseFloat(min);activeMax=max===''?null:parseFloat(max);activePlatforms=Array.prototype.map.call(document.querySelectorAll('[data-filter-platform].active'),function(n){return n.getAttribute('data-filter-platform')});activeTypes=Array.prototype.map.call(document.querySelectorAll('[data-filter-type].active'),function(n){return n.getAttribute('data-filter-type')});updateApplied();filter();hideFilterModal()});
+document.getElementById('remove-filter').addEventListener('click',function(){resetAdvanced();hideFilterModal()});document.getElementById('reset-filter').addEventListener('click',resetAdvanced);
+document.querySelectorAll('[data-close-overlay]').forEach(function(n){n.addEventListener('click',closeOverlay)});document.addEventListener('keydown',function(e){if(e.key==='Escape')closeOverlay()});
+var kb=document.getElementById('svcKb'),kbBtn=document.getElementById('kbToggle');kbBtn.addEventListener('click',function(){kb.classList.toggle('open');kbBtn.classList.toggle('on');kbBtn.setAttribute('aria-expanded',kb.classList.contains('open')?'true':'false')});kb.addEventListener('click',function(e){var q=e.target.closest('.kbq');if(!q)return;var item=q.parentElement,answer=item.querySelector('.kba'),opening=!item.classList.contains('on');item.parentElement.querySelectorAll('.kbi.on').forEach(function(sibling){sibling.classList.remove('on');sibling.querySelector('.kba').style.maxHeight='0px'});item.classList.toggle('on',opening);answer.style.maxHeight=opening?answer.scrollHeight+'px':'0px'});
+var topBtn=document.getElementById('scrollTopBtn');window.addEventListener('scroll',function(){topBtn.classList.toggle('show',window.pageYOffset>500)},{passive:true});topBtn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+function syncTheme(){var dark=root.classList.contains('dark')||root.getAttribute('data-theme')==='dark';root.setAttribute('data-svcdm',dark?'dark':'light')}syncTheme();try{new MutationObserver(syncTheme).observe(root,{attributes:true,attributeFilter:['class','data-theme']})}catch(e){}
+})();
 </script>
