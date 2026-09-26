@@ -478,6 +478,9 @@ html[data-svcdm="dark"] .svc-amb,html.dark .svc-amb,body.dark .svc-amb{backgroun
 /* Rental adapter: dynamic backend rows are progressively enhanced into MotherSMM tickets. */
 .services-page,.services-page *{box-sizing:border-box}
 .services-page{width:100%;max-width:100%;overflow-x:clip}
+/* Rental keeps the guest header in document flow; avoid the target's second fixed-header offset. */
+body.rental-layout .services-page.sv-guest>.container,
+body.rental-layout .services-page.sv-guest>.container-fluid{padding-top:16px!important}
 .services-page .sv-custom-content{position:relative;margin-bottom:14px;padding:20px 22px;border:1px solid var(--bd);border-radius:18px;background:var(--card);color:var(--tc);overflow:hidden}
 .services-page .sv-custom-content:empty{display:none}
 .services-page .sv-custom-content img{max-width:100%;height:auto}
@@ -509,6 +512,8 @@ html[data-svcdm="dark"] .svc-amb,html.dark .svc-amb,body.dark .svc-amb{backgroun
 .sx-body .dm-buy{margin-top:12px}
 body.sv-overlay-open{overflow:hidden!important}
 @media(max-width:767px){
+ body.rental-layout .services-page.sv-guest>.container,
+ body.rental-layout .services-page.sv-guest>.container-fluid{padding-top:12px!important}
  .services-page .container,.services-page .container-fluid{max-width:100%!important;width:100%!important;padding-left:10px!important;padding-right:10px!important}
  .services-page .svc-deck{width:100%;padding-left:15px;padding-right:15px}
  .services-page .svc-bar{width:100%}
