@@ -1,77 +1,1807 @@
-		
-		<div class="top-content-area">			
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 pull-right">
-						<div class="well">	
-							<h2 class="login-area-head">[login.form.header]</h2>
-							<form method="post" action="">
-									[error_message]
-								<div class="form-group">
-								  <label class="control-label" for="username">[login.form.username]</label>
-								  <input name="username" class="form-control" id="username" type="text" placeholder="[login.form.username]">
-								  <p class="help-block help-block-error"></p>
-								</div>
+<style id="rental-signin-clone">
+	.login-clone {
+		--login-red: #e11020;
+		--login-red-bright: #ff3b42;
+		--login-red-dark: #a50c16;
+		--login-gradient: linear-gradient(135deg, #a50c16 0%, #e11020 52%, #ff3b42 100%);
+		--login-bg: #050507;
+		--login-bg-2: #0a0a0e;
+		--login-card: #0f0f14;
+		--login-card-2: #141419;
+		--login-field: #0a0a0f;
+		--login-line: rgba(255, 255, 255, 0.09);
+		--login-red-line: rgba(225, 16, 32, 0.34);
+		--login-text: #ffffff;
+		--login-text-2: #d0d0dc;
+		--login-muted: #9494a2;
+		position: relative;
+		z-index: 1;
+		margin-top: 0;
+		background: var(--login-bg);
+		color: var(--login-text);
+		font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+		overflow: hidden;
+		-webkit-font-smoothing: antialiased;
+	}
 
-								<div class="form-group">
-									<label class="control-label" for="password">[login.form.password]</label>
-								  <input name="password" class="form-control" id="password" type="password" placeholder="[login.form.password]">
-								  <p class="help-block help-block-error"></p>
-								</div>
-								<div class="checkbox">
-									<label>
-										<input name="remember_me" id="remembered" value='1' type="checkbox"> [login.form.remember_me_text]
-									</label>
-								</div>
-								<div class="formlast">
-									[login.form.csrf_protection]
-									<button type="submit" name="login_btn" class="btn btn-primary">[login.form.submit_button]</button>
-									<a href="reset-password" class="forget-pass">[login.form.reset_password_button]</a>
-								</div>
-								
-								<div class="row">
-									<div class="col-md-12">
-										[login.form.wrong_enter]
-									</div>
-								</div>
-								
-							</form>
-							
-							<div class="row">
-								<div class="col-md-12">
-									<div class="text-center m-t">
+	html.light .login-clone,
+	html[data-theme="light"] .login-clone {
+		--login-red: #d40c1c;
+		--login-red-bright: #f0303a;
+		--login-red-dark: #96060f;
+		--login-gradient: linear-gradient(135deg, #96060f 0%, #d40c1c 52%, #f0303a 100%);
+		--login-bg: #f4f5f8;
+		--login-bg-2: #ffffff;
+		--login-card: #ffffff;
+		--login-card-2: #f8f9fb;
+		--login-field: #f5f6f9;
+		--login-line: rgba(12, 12, 20, 0.10);
+		--login-red-line: rgba(212, 12, 28, 0.28);
+		--login-text: #0b0b12;
+		--login-text-2: #3e3e4b;
+		--login-muted: #6e6e7c;
+	}
 
-										<span>[login.form.signup_text]</span>
+	.login-clone *,
+	.login-clone *::before,
+	.login-clone *::after {
+		box-sizing: border-box;
+	}
 
-										<a href="signup" class="btn btn-primary m-l">[login.form.signup_button]</a>
+	.login-clone a {
+		text-decoration: none;
+	}
 
-									</div>
-								</div>
-							</div>
-						</div>
-						[login.form.allow_refferal]
-					</div>
-			 
-					<div class="col-md-6">
-						
-						<div class="well login m-t-md">
-								
-								[user_contact_us]
-							
-						</div>
-					</div>
-					
+	.login-clone .login-container {
+		position: relative;
+		z-index: 3;
+		width: 100%;
+		max-width: 1384px;
+		margin: 0 auto;
+		padding: 0 32px;
+	}
+
+	.login-clone .login-hero {
+		position: relative;
+		min-height: 820px;
+		padding: 104px 0 94px;
+		isolation: isolate;
+		overflow: hidden;
+		background: var(--login-bg);
+	}
+
+	.login-clone .login-hero::before {
+		position: absolute;
+		z-index: 0;
+		inset: 0;
+		content: "";
+		pointer-events: none;
+		background-image:
+			linear-gradient(90deg, rgba(5, 5, 7, 0.78) 0%, rgba(5, 5, 7, 0.50) 32%, rgba(5, 5, 7, 0.22) 58%, rgba(5, 5, 7, 0.48) 100%),
+			linear-gradient(180deg, rgba(5, 5, 7, 0.16) 0%, rgba(5, 5, 7, 0.08) 48%, rgba(5, 5, 7, 0.48) 100%),
+			url("https://storage.perfectcdn.com/eq86bz/nc7rrd4butroxr1b.png");
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		transform: scale(1.002);
+	}
+
+	.login-clone .login-hero::after {
+		position: absolute;
+		z-index: 0;
+		inset: 0;
+		content: "";
+		pointer-events: none;
+		background:
+			radial-gradient(620px 420px at 86% 14%, rgba(225, 16, 32, 0.22), transparent 68%),
+			radial-gradient(520px 370px at 4% 92%, rgba(255, 59, 66, 0.14), transparent 70%);
+	}
+
+	html.light .login-clone .login-hero::before,
+	html[data-theme="light"] .login-clone .login-hero::before {
+		background-image:
+			linear-gradient(90deg, rgba(249, 250, 252, 0.96) 0%, rgba(249, 250, 252, 0.88) 27%, rgba(249, 250, 252, 0.54) 55%, rgba(249, 250, 252, 0.44) 100%),
+			linear-gradient(180deg, rgba(255, 255, 255, 0.30), rgba(255, 255, 255, 0.38)),
+			url("https://storage.perfectcdn.com/eq86bz/nc7rrd4butroxr1b.png");
+	}
+
+	.login-clone .login-grid-pattern {
+		position: absolute;
+		z-index: 1;
+		inset: 0;
+		pointer-events: none;
+		opacity: 0.34;
+		background-image:
+			linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+		background-size: 52px 52px;
+		-webkit-mask-image: radial-gradient(85% 72% at 50% 48%, #000, transparent);
+		mask-image: radial-gradient(85% 72% at 50% 48%, #000, transparent);
+	}
+
+	html.light .login-clone .login-grid-pattern,
+	html[data-theme="light"] .login-clone .login-grid-pattern {
+		opacity: 0.18;
+		background-image:
+			linear-gradient(rgba(12, 12, 20, 0.08) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(12, 12, 20, 0.08) 1px, transparent 1px);
+	}
+
+	.login-clone .login-hero-frame {
+		position: absolute;
+		z-index: 1;
+		top: 28px;
+		right: 4%;
+		bottom: 28px;
+		left: 4%;
+		border: 1px dashed rgba(225, 16, 32, 0.27);
+		pointer-events: none;
+	}
+
+	.login-clone .login-hero-frame span {
+		position: absolute;
+		width: 17px;
+		height: 17px;
+	}
+
+	.login-clone .login-hero-frame span::before,
+	.login-clone .login-hero-frame span::after {
+		position: absolute;
+		background: var(--login-red-bright);
+		content: "";
+	}
+
+	.login-clone .login-hero-frame span::before {
+		top: 0;
+		left: 8px;
+		width: 1px;
+		height: 17px;
+	}
+
+	.login-clone .login-hero-frame span::after {
+		top: 8px;
+		left: 0;
+		width: 17px;
+		height: 1px;
+	}
+
+	.login-clone .login-hero-frame .corner-1 { top: -9px; left: -9px; }
+	.login-clone .login-hero-frame .corner-2 { top: -9px; right: -9px; }
+	.login-clone .login-hero-frame .corner-3 { bottom: -9px; left: -9px; }
+	.login-clone .login-hero-frame .corner-4 { right: -9px; bottom: -9px; }
+
+	.login-clone .login-hero-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 470px;
+		align-items: center;
+		gap: 64px;
+	}
+
+	.login-clone .login-hero-copy {
+		position: relative;
+		z-index: 3;
+		max-width: 650px;
+	}
+
+	.login-clone .login-trust-pill {
+		display: inline-flex;
+		align-items: center;
+		gap: 11px;
+		min-height: 40px;
+		padding: 7px 15px 7px 8px;
+		border: 1px solid rgba(255, 255, 255, 0.16);
+		border-radius: 999px;
+		background: rgba(12, 12, 16, 0.80);
+		color: #ffffff;
+		font-size: 12px;
+		font-weight: 800;
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+	}
+
+	html.light .login-clone .login-trust-pill,
+	html[data-theme="light"] .login-clone .login-trust-pill {
+		border-color: rgba(12, 12, 20, 0.12);
+		background: rgba(255, 255, 255, 0.92);
+		color: #0b0b12;
+	}
+
+	.login-clone .login-trust-avatars {
+		display: flex;
+	}
+
+	.login-clone .login-trust-avatars span {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 26px;
+		height: 26px;
+		margin-left: -7px;
+		border: 2px solid #101014;
+		border-radius: 50%;
+		background: var(--login-gradient);
+		color: #ffffff;
+		font-family: var(--rental-mono, monospace);
+		font-size: 9px;
+		font-weight: 800;
+	}
+
+	.login-clone .login-trust-avatars span:first-child {
+		margin-left: 0;
+	}
+
+	.login-clone .login-rating {
+		display: flex;
+		align-items: center;
+		gap: 9px;
+		margin-top: 14px;
+		color: #ffffff;
+		font-size: 12px;
+		font-weight: 800;
+	}
+
+	.login-clone .login-rating .stars {
+		display: inline-flex;
+		gap: 3px;
+		color: #ffb020;
+		font-size: 12px;
+	}
+
+	html.light .login-clone .login-rating,
+	html[data-theme="light"] .login-clone .login-rating {
+		color: #0b0b12;
+	}
+
+	.login-clone .login-hero-title {
+		margin: 17px 0 18px;
+		color: #ffffff;
+		font-size: clamp(36px, 4.6vw, 62px);
+		font-weight: 800;
+		letter-spacing: -0.045em;
+		line-height: 1.04;
+		text-shadow: 0 2px 24px rgba(0, 0, 0, 0.85), 0 1px 3px rgba(0, 0, 0, 0.60);
+	}
+
+	.login-clone .login-hero-title em {
+		color: #ff4a50;
+		font-style: normal;
+	}
+
+	.login-clone .login-hero-description {
+		max-width: 555px;
+		margin: 0 0 23px;
+		color: #e6e6ee;
+		font-size: 15.5px;
+		font-weight: 550;
+		line-height: 1.82;
+		text-shadow: 0 1px 12px rgba(0, 0, 0, 0.72);
+	}
+
+	html.light .login-clone .login-hero-title,
+	html[data-theme="light"] .login-clone .login-hero-title {
+		color: #0a0a11;
+		text-shadow: none;
+	}
+
+	html.light .login-clone .login-hero-title em,
+	html[data-theme="light"] .login-clone .login-hero-title em {
+		color: #c40a18;
+	}
+
+	html.light .login-clone .login-hero-description,
+	html[data-theme="light"] .login-clone .login-hero-description {
+		color: #33333f;
+		text-shadow: none;
+	}
+
+	.login-clone .login-hero-custom:empty {
+		display: none;
+	}
+
+	.login-clone .login-hero-custom {
+		max-width: 555px;
+		margin-bottom: 18px;
+		color: #e6e6ee;
+		font-size: 14px;
+		line-height: 1.75;
+	}
+
+	html.light .login-clone .login-hero-custom,
+	html[data-theme="light"] .login-clone .login-hero-custom {
+		color: #33333f;
+	}
+
+	.login-clone .login-checks {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 13px 19px;
+		margin-bottom: 27px;
+	}
+
+	.login-clone .login-checks span {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		color: #f2f2f7;
+		font-size: 12.5px;
+		font-weight: 800;
+	}
+
+	.login-clone .login-checks i {
+		color: #34d77c;
+	}
+
+	html.light .login-clone .login-checks span,
+	html[data-theme="light"] .login-clone .login-checks span {
+		color: #15151f;
+	}
+
+	.login-clone .login-hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		margin-bottom: 31px;
+	}
+
+	.login-clone .login-hero-button {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		height: 52px;
+		padding: 0 25px;
+		border: 1.5px solid transparent;
+		border-radius: 13px;
+		font-size: 13px;
+		font-weight: 800;
+		overflow: hidden;
+		transition: transform 0.18s ease, filter 0.18s ease, border-color 0.18s ease;
+	}
+
+	.login-clone .login-hero-button.primary {
+		background: var(--login-gradient);
+		color: #ffffff;
+	}
+
+	.login-clone .login-hero-button.secondary {
+		border-color: rgba(255, 255, 255, 0.40);
+		background: rgba(255, 255, 255, 0.94);
+		color: #0b0b12;
+	}
+
+	.login-clone .login-hero-button:hover {
+		color: inherit;
+		filter: brightness(1.08);
+		transform: translateY(-2px);
+	}
+
+	.login-clone .login-trust-grid {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 11px;
+		max-width: 590px;
+	}
+
+	.login-clone .login-trust-item {
+		display: flex;
+		align-items: center;
+		gap: 9px;
+		min-width: 0;
+	}
+
+	.login-clone .login-trust-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 33px;
+		height: 33px;
+		min-width: 33px;
+		border: 1px solid rgba(255, 90, 96, 0.52);
+		border-radius: 9px;
+		background: rgba(225, 16, 32, 0.20);
+		color: #ff6a6f;
+		font-size: 12px;
+	}
+
+	.login-clone .login-trust-item b,
+	.login-clone .login-trust-item small {
+		display: block;
+		text-shadow: 0 1px 10px rgba(0, 0, 0, 0.78);
+	}
+
+	.login-clone .login-trust-item b {
+		color: #ffffff;
+		font-size: 11.5px;
+		font-weight: 800;
+		line-height: 1.3;
+	}
+
+	.login-clone .login-trust-item small {
+		margin-top: 1px;
+		color: #c9c9d6;
+		font-size: 9.5px;
+		font-weight: 600;
+	}
+
+	html.light .login-clone .login-trust-item b,
+	html[data-theme="light"] .login-clone .login-trust-item b {
+		color: #0a0a11;
+		text-shadow: none;
+	}
+
+	html.light .login-clone .login-trust-item small,
+	html[data-theme="light"] .login-clone .login-trust-item small {
+		color: #5a5a68;
+		text-shadow: none;
+	}
+
+	.login-clone .login-card-wrap {
+		position: relative;
+		z-index: 4;
+		width: 100%;
+		max-width: 470px;
+		margin-left: auto;
+	}
+
+	.login-clone .login-floating-card {
+		position: absolute;
+		z-index: 5;
+		right: calc(100% + 22px);
+		display: flex;
+		align-items: center;
+		gap: 11px;
+		min-width: 178px;
+		padding: 12px 16px;
+		border: 1px solid rgba(255, 255, 255, 0.13);
+		border-radius: 14px;
+		background: rgba(8, 8, 12, 0.78);
+		color: #ffffff;
+		white-space: nowrap;
+		backdrop-filter: blur(14px);
+		-webkit-backdrop-filter: blur(14px);
+		animation: loginFloat 6s ease-in-out infinite;
+	}
+
+	html.light .login-clone .login-floating-card,
+	html[data-theme="light"] .login-clone .login-floating-card {
+		border-color: rgba(12, 12, 20, 0.10);
+		background: rgba(255, 255, 255, 0.90);
+		color: #0b0b12;
+	}
+
+	.login-clone .login-floating-card.one { top: 8%; }
+	.login-clone .login-floating-card.two { bottom: 8%; animation-delay: 2.4s; }
+
+	.login-clone .login-floating-card > i {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 34px;
+		height: 34px;
+		min-width: 34px;
+		border-radius: 10px;
+		background: var(--login-gradient);
+		color: #ffffff;
+		font-size: 14px;
+	}
+
+	.login-clone .login-floating-card b,
+	.login-clone .login-floating-card small {
+		display: block;
+	}
+
+	.login-clone .login-floating-card b {
+		font-family: var(--rental-mono, monospace);
+		font-size: 13px;
+		font-weight: 800;
+		line-height: 1.25;
+	}
+
+	.login-clone .login-floating-card small {
+		margin-top: 2px;
+		color: #b7b7c3;
+		font-size: 9.5px;
+		font-weight: 700;
+	}
+
+	html.light .login-clone .login-floating-card small,
+	html[data-theme="light"] .login-clone .login-floating-card small {
+		color: #6e6e7c;
+	}
+
+	@keyframes loginFloat {
+		0%, 100% { transform: translateY(0); }
+		50% { transform: translateY(-12px); }
+	}
+
+	.login-clone .login-card {
+		position: relative;
+		width: 100%;
+		padding: 30px 30px 24px;
+		border: 1px solid var(--login-line);
+		border-radius: 22px;
+		background: linear-gradient(168deg, var(--login-card), var(--login-bg-2));
+		overflow: hidden;
+	}
+
+	.login-clone .login-card::before {
+		position: absolute;
+		top: -120px;
+		right: -100px;
+		width: 260px;
+		height: 260px;
+		border-radius: 50%;
+		background: radial-gradient(closest-side, rgba(225, 16, 32, 0.28), transparent);
+		content: "";
+		pointer-events: none;
+	}
+
+	.login-clone .login-card > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.login-clone .login-card-head {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-bottom: 20px;
+	}
+
+	.login-clone .login-card-mark {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 46px;
+		height: 46px;
+		min-width: 46px;
+		border-radius: 13px;
+		background: var(--login-gradient);
+		color: #ffffff;
+		font-size: 20px;
+	}
+
+	.login-clone .login-card-head h2 {
+		margin: 0;
+		color: var(--login-text);
+		font-size: 19px;
+		font-weight: 800;
+		letter-spacing: -0.02em;
+		line-height: 1.25;
+	}
+
+	.login-clone .login-card-head small {
+		display: block;
+		margin-top: 3px;
+		color: var(--login-muted);
+		font-size: 11.5px;
+		font-weight: 600;
+	}
+
+	.login-clone .login-live {
+		display: inline-flex;
+		align-items: center;
+		gap: 7px;
+		min-height: 26px;
+		margin-left: auto;
+		padding: 5px 10px;
+		border: 1px solid rgba(34, 197, 94, 0.28);
+		border-radius: 7px;
+		background: rgba(34, 197, 94, 0.12);
+		color: #22c55e;
+		font-size: 9px;
+		font-weight: 800;
+		letter-spacing: 0.10em;
+	}
+
+	.login-clone .login-live i {
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: #22c55e;
+		animation: loginPulse 1.6s ease-in-out infinite;
+	}
+
+	@keyframes loginPulse {
+		0%, 100% { opacity: 0.5; transform: scale(0.9); }
+		50% { opacity: 1; transform: scale(1.18); }
+	}
+
+	.login-clone .login-card form {
+		width: 100%;
+		margin: 0;
+	}
+
+	.login-clone .login-card .alert {
+		margin: 0 0 14px;
+		padding: 12px 14px;
+		border: 1px solid transparent;
+		border-radius: 11px;
+		font-size: 12.5px;
+		font-weight: 700;
+	}
+
+	.login-clone .login-card .alert-danger {
+		border-color: rgba(239, 68, 68, 0.30);
+		background: rgba(239, 68, 68, 0.12);
+		color: #f87171;
+	}
+
+	.login-clone .login-card .alert-success {
+		border-color: rgba(34, 197, 94, 0.30);
+		background: rgba(34, 197, 94, 0.12);
+		color: #4ade80;
+	}
+
+	.login-clone .login-field {
+		position: relative;
+		width: 100%;
+		margin-bottom: 14px;
+	}
+
+	.login-clone .login-field label {
+		display: block;
+		margin: 0 0 8px;
+		color: var(--login-muted);
+		font-size: 10.5px;
+		font-weight: 800;
+		letter-spacing: 0.12em;
+		line-height: 1.4;
+		text-transform: uppercase;
+	}
+
+	.login-clone .login-field-icon {
+		position: absolute;
+		z-index: 2;
+		bottom: 19px;
+		left: 15px;
+		color: var(--login-red);
+		font-size: 13px;
+		pointer-events: none;
+	}
+
+	.login-clone .login-field .form-control {
+		display: block;
+		width: 100%;
+		height: 52px;
+		padding: 0 46px 0 42px;
+		border: 1.5px solid var(--login-line);
+		border-radius: 12px;
+		outline: 0;
+		background: var(--login-field);
+		color: var(--login-text);
+		font-family: inherit;
+		font-size: 14px;
+		font-weight: 600;
+		line-height: 52px;
+		box-shadow: none;
+		transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+	}
+
+	.login-clone .login-field .form-control::placeholder {
+		color: var(--login-muted);
+		font-weight: 500;
+		opacity: 1;
+	}
+
+	.login-clone .login-field .form-control:focus {
+		border-color: var(--login-red);
+		background: var(--login-bg-2);
+		box-shadow: 0 0 0 3px rgba(225, 16, 32, 0.12);
+	}
+
+	.login-clone .login-password-toggle {
+		position: absolute;
+		z-index: 3;
+		right: 10px;
+		bottom: 9px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 34px;
+		height: 34px;
+		padding: 0;
+		border: 0;
+		border-radius: 9px;
+		outline: 0;
+		background: transparent;
+		color: var(--login-muted);
+		font-size: 13px;
+		cursor: pointer;
+		transition: color 0.16s ease, background 0.16s ease;
+	}
+
+	.login-clone .login-password-toggle:hover,
+	.login-clone .login-password-toggle:focus-visible {
+		background: rgba(225, 16, 32, 0.10);
+		color: var(--login-red);
+	}
+
+	.login-clone .login-help-block {
+		min-height: 0;
+		margin: 5px 0 0;
+		color: #f87171;
+		font-size: 11px;
+	}
+
+	.login-clone .login-options {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+		width: 100%;
+		margin: 5px 0 18px;
+	}
+
+	.login-clone .login-remember {
+		display: inline-flex;
+		align-items: center;
+		gap: 9px;
+		margin: 0;
+		color: var(--login-text);
+		font-size: 12.5px;
+		font-weight: 700;
+		cursor: pointer;
+	}
+
+	.login-clone .login-remember input[type="checkbox"] {
+		position: relative;
+		top: auto;
+		left: auto;
+		display: inline-block;
+		width: 18px;
+		height: 18px;
+		min-width: 18px;
+		margin: 0;
+		padding: 0;
+		border: 1.5px solid var(--login-line);
+		border-radius: 5px;
+		outline: 0;
+		background: var(--login-field);
+		appearance: none;
+		-webkit-appearance: none;
+		clip: auto;
+		opacity: 1;
+		cursor: pointer;
+	}
+
+	.login-clone .login-remember input[type="checkbox"]:hover {
+		border-color: var(--login-red);
+	}
+
+	.login-clone .login-remember input[type="checkbox"]:checked {
+		border-color: transparent;
+		background: var(--login-gradient);
+	}
+
+	.login-clone .login-remember input[type="checkbox"]:checked::after {
+		position: absolute;
+		top: 48%;
+		left: 50%;
+		width: 4px;
+		height: 8px;
+		border: solid #ffffff;
+		border-width: 0 2px 2px 0;
+		content: "";
+		transform: translate(-50%, -50%) rotate(45deg);
+	}
+
+	.login-clone .login-forgot {
+		margin-left: auto;
+		color: var(--login-red);
+		font-size: 12.5px;
+		font-weight: 800;
+		white-space: nowrap;
+	}
+
+	.login-clone .login-forgot:hover {
+		color: var(--login-red-bright);
+	}
+
+	.login-clone .login-submit {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 9px;
+		width: 100%;
+		height: 54px;
+		margin: 0;
+		padding: 0 20px;
+		border: 0;
+		border-radius: 13px;
+		background: var(--login-gradient);
+		color: #ffffff;
+		font-family: inherit;
+		font-size: 15px;
+		font-weight: 800;
+		line-height: 54px;
+		box-shadow: none;
+		overflow: hidden;
+		transition: transform 0.18s ease, filter 0.18s ease;
+	}
+
+	.login-clone .login-submit::after {
+		position: absolute;
+		top: 0;
+		left: -90%;
+		width: 42%;
+		height: 100%;
+		background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.40), transparent);
+		content: "";
+		transform: skewX(-20deg);
+		animation: loginShine 3.6s ease-in-out infinite;
+	}
+
+	.login-clone .login-submit:hover,
+	.login-clone .login-submit:focus {
+		background: var(--login-gradient);
+		color: #ffffff;
+		filter: brightness(1.08);
+		transform: translateY(-2px);
+	}
+
+	@keyframes loginShine {
+		0%, 58% { left: -90%; }
+		82%, 100% { left: 135%; }
+	}
+
+	.login-clone .login-wrong-entry:empty {
+		display: none;
+	}
+
+	.login-clone .login-wrong-entry {
+		margin-top: 13px;
+		color: var(--login-muted);
+		font-size: 12px;
+		text-align: center;
+	}
+
+	.login-clone .login-divider {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin: 18px 0 14px;
+		color: var(--login-muted);
+		font-size: 10px;
+		font-weight: 800;
+		letter-spacing: 0.10em;
+		text-transform: uppercase;
+	}
+
+	.login-clone .login-divider::before,
+	.login-clone .login-divider::after {
+		flex: 1;
+		height: 1px;
+		background: var(--login-line);
+		content: "";
+	}
+
+	.login-clone .login-signup-row {
+		margin: 0;
+		color: var(--login-text-2);
+		font-size: 13px;
+		font-weight: 600;
+		text-align: center;
+	}
+
+	.login-clone .login-signup-row .btn {
+		min-height: 0;
+		margin: 0 0 0 5px;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		color: var(--login-red);
+		font-size: 13px;
+		font-weight: 800;
+		line-height: inherit;
+		box-shadow: none;
+	}
+
+	.login-clone .login-signup-row .btn:hover {
+		background: transparent;
+		color: var(--login-red-bright);
+	}
+
+	.login-clone .login-card-foot {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 8px;
+		margin-top: 20px;
+		padding-top: 18px;
+		border-top: 1px solid var(--login-line);
+	}
+
+	.login-clone .login-card-foot > div {
+		text-align: center;
+	}
+
+	.login-clone .login-card-foot i {
+		color: var(--login-red);
+		font-size: 13px;
+	}
+
+	.login-clone .login-card-foot b,
+	.login-clone .login-card-foot small {
+		display: block;
+	}
+
+	.login-clone .login-card-foot b {
+		margin-top: 6px;
+		color: var(--login-text);
+		font-size: 10.5px;
+		font-weight: 800;
+	}
+
+	.login-clone .login-card-foot small {
+		color: var(--login-muted);
+		font-size: 9px;
+		font-weight: 600;
+	}
+
+	.login-clone .login-referral:empty {
+		display: none;
+	}
+
+	.login-clone .login-referral {
+		margin-top: 14px;
+	}
+
+	.login-clone .login-referral .well {
+		margin: 0;
+		padding: 14px;
+		border-color: var(--login-red-line);
+		border-radius: 14px;
+		background: rgba(225, 16, 32, 0.10);
+		color: var(--login-text);
+		box-shadow: none;
+	}
+
+	/* Platform ticker */
+	.login-clone .login-platforms {
+		position: relative;
+		z-index: 2;
+		padding: 19px 0;
+		border-top: 1px solid var(--login-line);
+		border-bottom: 1px solid var(--login-line);
+		background: var(--login-bg-2);
+		overflow: hidden;
+	}
+
+	.login-clone .login-platform-track {
+		display: flex;
+		align-items: center;
+		gap: 11px;
+		width: max-content;
+		animation: loginTicker 34s linear infinite;
+	}
+
+	.login-clone .login-platforms:hover .login-platform-track {
+		animation-play-state: paused;
+	}
+
+	.login-clone .login-platform {
+		display: inline-flex;
+		align-items: center;
+		gap: 9px;
+		height: 44px;
+		padding: 0 17px;
+		border: 1px solid var(--login-line);
+		border-radius: 11px;
+		background: var(--login-card);
+		color: var(--login-text);
+		font-size: 12.5px;
+		font-weight: 800;
+		white-space: nowrap;
+	}
+
+	.login-clone .login-platform i {
+		font-size: 15px;
+	}
+
+	@keyframes loginTicker {
+		to { transform: translateX(-50%); }
+	}
+
+	/* Shared landing sections */
+	.login-clone .login-section {
+		position: relative;
+		padding: 84px 0;
+		background: var(--login-bg);
+		overflow: hidden;
+	}
+
+	.login-clone .login-section.alternate {
+		background: var(--login-bg-2);
+	}
+
+	.login-clone .login-section::before {
+		position: absolute;
+		z-index: 0;
+		inset: 0;
+		content: "";
+		pointer-events: none;
+		background:
+			radial-gradient(500px 280px at 92% 4%, rgba(225, 16, 32, 0.12), transparent 70%),
+			radial-gradient(430px 290px at 4% 98%, rgba(225, 16, 32, 0.08), transparent 70%);
+	}
+
+	.login-clone .login-section-heading {
+		position: relative;
+		z-index: 2;
+		max-width: 700px;
+		margin: 0 auto 42px;
+		text-align: center;
+	}
+
+	.login-clone .login-eyebrow {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		min-height: 30px;
+		padding: 6px 13px;
+		border: 1px solid var(--login-red-line);
+		border-radius: 8px;
+		background: rgba(225, 16, 32, 0.10);
+		color: #ff6a6f;
+		font-size: 10px;
+		font-weight: 800;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+	}
+
+	html.light .login-clone .login-eyebrow,
+	html[data-theme="light"] .login-clone .login-eyebrow {
+		color: #b00a16;
+	}
+
+	.login-clone .login-section-title {
+		margin: 16px 0 12px;
+		color: var(--login-text);
+		font-size: clamp(26px, 3.2vw, 41px);
+		font-weight: 800;
+		letter-spacing: -0.03em;
+		line-height: 1.16;
+	}
+
+	.login-clone .login-section-title em {
+		color: var(--login-red);
+		font-style: normal;
+	}
+
+	.login-clone .login-section-description {
+		max-width: 650px;
+		margin: 0 auto;
+		color: var(--login-text-2);
+		font-size: 14px;
+		line-height: 1.85;
+	}
+
+	.login-clone .login-feature-grid {
+		position: relative;
+		z-index: 2;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 16px;
+	}
+
+	.login-clone .login-feature-card {
+		position: relative;
+		padding: 25px 23px;
+		border: 1px solid var(--login-line);
+		border-radius: 18px;
+		background: linear-gradient(170deg, var(--login-card), var(--login-card-2));
+		overflow: hidden;
+		transition: border-color 0.22s ease, transform 0.22s ease;
+	}
+
+	.login-clone .login-feature-card::after {
+		position: absolute;
+		top: -90px;
+		right: -90px;
+		width: 190px;
+		height: 190px;
+		border-radius: 50%;
+		background: rgba(225, 16, 32, 0.10);
+		content: "";
+	}
+
+	.login-clone .login-feature-card:hover {
+		border-color: var(--login-red-line);
+		transform: translateY(-5px);
+	}
+
+	.login-clone .login-feature-head {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		align-items: center;
+		gap: 13px;
+	}
+
+	.login-clone .login-feature-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 46px;
+		height: 46px;
+		min-width: 46px;
+		border: 1px solid var(--login-red-line);
+		border-radius: 13px;
+		background: rgba(225, 16, 32, 0.10);
+		color: var(--login-red);
+		font-size: 17px;
+		transition: inherit;
+	}
+
+	.login-clone .login-feature-card:hover .login-feature-icon {
+		border-color: transparent;
+		background: var(--login-gradient);
+		color: #ffffff;
+	}
+
+	.login-clone .login-feature-card h3 {
+		margin: 0;
+		color: var(--login-text);
+		font-size: 15px;
+		font-weight: 800;
+	}
+
+	.login-clone .login-feature-card p {
+		position: relative;
+		z-index: 1;
+		margin: 14px 0 0;
+		color: var(--login-text-2);
+		font-size: 12.5px;
+		line-height: 1.78;
+	}
+
+	.login-clone .login-steps {
+		position: relative;
+		z-index: 2;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 16px;
+	}
+
+	.login-clone .login-step {
+		position: relative;
+		padding: 26px 23px;
+		border: 1px solid var(--login-line);
+		border-radius: 18px;
+		background: var(--login-card);
+		text-align: center;
+	}
+
+	.login-clone .login-step-number {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 48px;
+		height: 48px;
+		border: 1px solid var(--login-red-line);
+		border-radius: 14px;
+		background: rgba(225, 16, 32, 0.10);
+		color: var(--login-red);
+		font-family: var(--rental-mono, monospace);
+		font-size: 15px;
+		font-weight: 800;
+	}
+
+	.login-clone .login-step h3 {
+		margin: 16px 0 8px;
+		color: var(--login-text);
+		font-size: 15px;
+		font-weight: 800;
+	}
+
+	.login-clone .login-step p {
+		margin: 0;
+		color: var(--login-text-2);
+		font-size: 12.5px;
+		line-height: 1.75;
+	}
+
+	/* Rental custom content slots stay dynamic. */
+	.login-clone .login-dynamic-section {
+		position: relative;
+		z-index: 2;
+		padding: 0;
+		background: var(--login-bg);
+	}
+
+	.login-clone .login-dynamic-section.is-empty {
+		display: none;
+	}
+
+	.login-clone .login-dynamic-inner {
+		width: 100%;
+		max-width: 1384px;
+		margin: 0 auto;
+		padding: 34px 32px;
+		color: var(--login-text-2);
+	}
+
+	.login-clone .login-dynamic-inner .well,
+	.login-clone .login-dynamic-inner .panel {
+		border-color: var(--login-line);
+		background: var(--login-card);
+		color: var(--login-text);
+		box-shadow: none;
+	}
+
+	.login-clone .login-final-cta {
+		position: relative;
+		z-index: 2;
+		padding: 78px 0;
+		background: var(--login-bg);
+	}
+
+	.login-clone .login-cta-card {
+		position: relative;
+		padding: 52px 32px;
+		border: 1px solid rgba(225, 16, 32, 0.35);
+		border-radius: 26px;
+		background: linear-gradient(140deg, #08080c 0%, #160408 50%, #310710 100%);
+		text-align: center;
+		overflow: hidden;
+	}
+
+	.login-clone .login-cta-card::before {
+		position: absolute;
+		inset: 0;
+		background: repeating-linear-gradient(118deg, rgba(255, 255, 255, 0.03) 0 2px, transparent 2px 16px);
+		content: "";
+	}
+
+	.login-clone .login-cta-card > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.login-clone .login-cta-card h2 {
+		margin: 16px 0 12px;
+		color: #ffffff;
+		font-size: clamp(25px, 3.2vw, 39px);
+		font-weight: 800;
+		letter-spacing: -0.03em;
+	}
+
+	.login-clone .login-cta-card h2 em {
+		color: #ff4a50;
+		font-style: normal;
+	}
+
+	.login-clone .login-cta-card p {
+		max-width: 620px;
+		margin: 0 auto 25px;
+		color: rgba(255, 255, 255, 0.76);
+		font-size: 14px;
+		line-height: 1.8;
+	}
+
+	.login-clone .login-cta-actions {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 12px;
+	}
+
+	.login-clone .reveal-item {
+		transition: opacity 0.68s cubic-bezier(0.22, 1, 0.36, 1), transform 0.68s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.login-clone.reveal-ready .reveal-item {
+		opacity: 0;
+		transform: translateY(22px);
+	}
+
+	.login-clone.reveal-ready .reveal-item.is-visible {
+		opacity: 1;
+		transform: none;
+	}
+
+	@media (max-width: 1240px) {
+		.login-clone .login-container,
+		.login-clone .login-dynamic-inner {
+			padding-right: 24px;
+			padding-left: 24px;
+		}
+
+		.login-clone .login-hero-grid {
+			grid-template-columns: minmax(0, 1fr) 430px;
+			gap: 44px;
+		}
+
+		.login-clone .login-card-wrap {
+			max-width: 430px;
+		}
+
+		.login-clone .login-floating-card {
+			right: calc(100% - 24px);
+		}
+	}
+
+	@media (max-width: 1040px) {
+		.login-clone .login-hero {
+			min-height: 0;
+			padding: 86px 0 70px;
+		}
+
+		.login-clone .login-hero-grid {
+			grid-template-columns: 1fr;
+			gap: 38px;
+		}
+
+		.login-clone .login-hero-copy {
+			max-width: 760px;
+			margin: 0 auto;
+			text-align: center;
+		}
+
+		.login-clone .login-hero-description,
+		.login-clone .login-hero-custom {
+			margin-right: auto;
+			margin-left: auto;
+		}
+
+		.login-clone .login-rating,
+		.login-clone .login-checks,
+		.login-clone .login-hero-actions {
+			justify-content: center;
+		}
+
+		.login-clone .login-trust-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			max-width: 430px;
+			margin: 0 auto;
+			text-align: left;
+		}
+
+		.login-clone .login-card-wrap {
+			max-width: 520px;
+			margin: 0 auto;
+		}
+
+		.login-clone .login-floating-card {
+			display: none;
+		}
+	}
+
+	@media (max-width: 900px) {
+		.login-clone .login-feature-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 680px) {
+		.login-clone .login-container,
+		.login-clone .login-dynamic-inner {
+			padding-right: 16px;
+			padding-left: 16px;
+		}
+
+		.login-clone .login-hero {
+			padding: 66px 0 34px;
+		}
+
+		.login-clone .login-hero::before {
+			background-image:
+				linear-gradient(180deg, rgba(5, 5, 7, 0.88) 0%, rgba(5, 5, 7, 0.72) 46%, rgba(5, 5, 7, 0.58) 100%),
+				url("https://storage.perfectcdn.com/eq86bz/nc7rrd4butroxr1b.png");
+			background-position: 58% center;
+		}
+
+		html.light .login-clone .login-hero::before,
+		html[data-theme="light"] .login-clone .login-hero::before {
+			background-image:
+				linear-gradient(180deg, rgba(249, 250, 252, 0.95) 0%, rgba(249, 250, 252, 0.88) 46%, rgba(249, 250, 252, 0.78) 100%),
+				url("https://storage.perfectcdn.com/eq86bz/nc7rrd4butroxr1b.png");
+		}
+
+		.login-clone .login-hero-frame {
+			display: none;
+		}
+
+		.login-clone .login-hero-title {
+			font-size: clamp(29px, 9vw, 38px);
+			text-shadow: none;
+		}
+
+		.login-clone .login-hero-description {
+			margin-bottom: 17px;
+			font-size: 14px;
+			line-height: 1.72;
+			text-shadow: none;
+		}
+
+		.login-clone .login-hero-actions,
+		.login-clone .login-trust-grid {
+			display: none;
+		}
+
+		.login-clone .login-checks {
+			gap: 10px 15px;
+			margin-bottom: 0;
+		}
+
+		.login-clone .login-checks span {
+			font-size: 11.5px;
+		}
+
+		.login-clone .login-card {
+			padding: 24px 17px 20px;
+			border-radius: 18px;
+		}
+
+		.login-clone .login-card-head {
+			flex-wrap: wrap;
+		}
+
+		.login-clone .login-card-foot {
+			gap: 6px;
+			margin-top: 16px;
+			padding-top: 14px;
+		}
+
+		.login-clone .login-card-foot b {
+			margin-top: 3px;
+			font-size: 9.5px;
+			white-space: nowrap;
+		}
+
+		.login-clone .login-card-foot small {
+			font-size: 8.5px;
+			white-space: nowrap;
+		}
+
+		.login-clone .login-section,
+		.login-clone .login-final-cta {
+			padding: 56px 0;
+		}
+
+		.login-clone .login-section-heading {
+			margin-bottom: 30px;
+		}
+
+		.login-clone .login-feature-grid,
+		.login-clone .login-steps {
+			grid-template-columns: 1fr;
+		}
+
+		.login-clone .login-feature-card {
+			text-align: center;
+		}
+
+		.login-clone .login-feature-head {
+			flex-direction: column;
+			gap: 11px;
+		}
+
+		.login-clone .login-feature-card p {
+			text-align: center;
+		}
+
+		.login-clone .login-cta-card {
+			padding: 36px 19px;
+			border-radius: 20px;
+		}
+	}
+
+	@media (max-width: 420px) {
+		.login-clone .login-trust-pill {
+			font-size: 10.5px;
+		}
+
+		.login-clone .login-rating {
+			font-size: 11px;
+		}
+
+		.login-clone .login-options {
+			gap: 8px;
+		}
+
+		.login-clone .login-remember,
+		.login-clone .login-forgot {
+			font-size: 11px;
+		}
+
+		.login-clone .login-card-head h2 {
+			font-size: 17px;
+		}
+
+		.login-clone .login-live {
+			padding-right: 8px;
+			padding-left: 8px;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.login-clone *,
+		.login-clone *::before,
+		.login-clone *::after {
+			animation-duration: 0.01ms;
+			animation-iteration-count: 1;
+			transition-duration: 0.01ms;
+		}
+
+		.login-clone .reveal-item {
+			opacity: 1;
+			transform: none;
+		}
+	}
+</style>
+
+<main class="login-clone" id="login-page">
+	<section class="login-hero" aria-labelledby="login-hero-title">
+		<div class="login-grid-pattern" aria-hidden="true"></div>
+		<div class="login-hero-frame" aria-hidden="true">
+			<span class="corner-1"></span>
+			<span class="corner-2"></span>
+			<span class="corner-3"></span>
+			<span class="corner-4"></span>
+		</div>
+
+		<div class="login-container login-hero-grid">
+			<div class="login-hero-copy reveal-item">
+				<div class="login-trust-pill">
+					<span class="login-trust-avatars" aria-hidden="true">
+						<span>R</span><span>S</span><span>M</span><span>A</span>
+					</span>
+					<span>Built for resellers, agencies &amp; creators</span>
 				</div>
-				
-				[content_login_counter]
-				
+
+				<div class="login-rating" aria-label="Excellent service rating">
+					<span class="stars" aria-hidden="true">
+						<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+					</span>
+					<span>Fast, secure and always available</span>
+				</div>
+
+				<h1 class="login-hero-title" id="login-hero-title">Conquer Every<br>Social <em>Platform</em></h1>
+				<p class="login-hero-description">[panel.title] gives resellers, marketers and businesses a fast way to manage social media growth from one powerful dashboard.</p>
+				<div class="login-hero-custom">[user_contact_us]</div>
+
+				<div class="login-checks">
+					<span><i class="fas fa-check-circle" aria-hidden="true"></i> Instant processing</span>
+					<span><i class="fas fa-check-circle" aria-hidden="true"></i> Secure payments</span>
+					<span><i class="fas fa-check-circle" aria-hidden="true"></i> Reliable support</span>
+				</div>
+
+				<div class="login-hero-actions">
+					<a href="signup" class="login-hero-button primary"><i class="fas fa-rocket" aria-hidden="true"></i> [login.form.signup_button]</a>
+					<a href="services" class="login-hero-button secondary"><i class="fas fa-list-ul" aria-hidden="true"></i> View services</a>
+				</div>
+
+				<div class="login-trust-grid">
+					<div class="login-trust-item"><span class="login-trust-icon"><i class="fas fa-bolt"></i></span><div><b>Instant Start</b><small>Automated orders</small></div></div>
+					<div class="login-trust-item"><span class="login-trust-icon"><i class="fas fa-gem"></i></span><div><b>Premium Quality</b><small>Multiple service tiers</small></div></div>
+					<div class="login-trust-item"><span class="login-trust-icon"><i class="fas fa-headset"></i></span><div><b>Active Support</b><small>Help when needed</small></div></div>
+					<div class="login-trust-item"><span class="login-trust-icon"><i class="fas fa-shield-alt"></i></span><div><b>Protected</b><small>Secure account access</small></div></div>
+				</div>
+			</div>
+
+			<div class="login-card-wrap reveal-item">
+				<div class="login-floating-card one" aria-hidden="true">
+					<i class="fas fa-layer-group"></i>
+					<div><b>All-in-one</b><small>Social media services</small></div>
+				</div>
+				<div class="login-floating-card two" aria-hidden="true">
+					<i class="fas fa-headset"></i>
+					<div><b>Always ready</b><small>Dedicated assistance</small></div>
+				</div>
+
+				<div class="login-card" id="home-login">
+					<div class="login-card-head">
+						<span class="login-card-mark"><i class="fas fa-shield-alt" aria-hidden="true"></i></span>
+						<div>
+							<h2>[login.form.header]</h2>
+							<small>Sign in and command your growth</small>
+						</div>
+						<span class="login-live"><i></i> LIVE</span>
+					</div>
+
+					<form method="post" action="" id="rental-login-form">
+						[error_message]
+						[login.form.csrf_protection]
+
+						<div class="login-field">
+							<label for="username">[login.form.username]</label>
+							<i class="fas fa-user login-field-icon" aria-hidden="true"></i>
+							<input name="username" class="form-control" id="username" type="text" placeholder="[login.form.username]" autocomplete="username">
+							<p class="help-block help-block-error login-help-block"></p>
+						</div>
+
+						<div class="login-field">
+							<label for="password">[login.form.password]</label>
+							<i class="fas fa-lock login-field-icon" aria-hidden="true"></i>
+							<input name="password" class="form-control" id="password" type="password" placeholder="[login.form.password]" autocomplete="current-password">
+							<button type="button" class="login-password-toggle" aria-label="Show password" aria-pressed="false">
+								<i class="far fa-eye" aria-hidden="true"></i>
+							</button>
+							<p class="help-block help-block-error login-help-block"></p>
+						</div>
+
+						<div class="login-options">
+							<label class="login-remember" for="remembered">
+								<input name="remember_me" id="remembered" value="1" type="checkbox">
+								<span>[login.form.remember_me_text]</span>
+							</label>
+							<a href="reset-password" class="login-forgot">[login.form.reset_password_button]</a>
+						</div>
+
+						<button type="submit" name="login_btn" class="btn btn-primary login-submit">
+							<i class="fas fa-sign-in-alt" aria-hidden="true"></i>
+							<span>[login.form.submit_button]</span>
+						</button>
+
+						<div class="login-wrong-entry">[login.form.wrong_enter]</div>
+					</form>
+
+					<div class="login-divider">New to the panel?</div>
+					<p class="login-signup-row">
+						<span>[login.form.signup_text]</span>
+						<a href="signup" class="btn btn-primary">[login.form.signup_button]</a>
+					</p>
+
+					<div class="login-card-foot">
+						<div><i class="fas fa-lock" aria-hidden="true"></i><b>SSL Secured</b><small>Encrypted login</small></div>
+						<div><i class="fas fa-user-shield" aria-hidden="true"></i><b>Protected</b><small>Safe account</small></div>
+						<div><i class="fas fa-bolt" aria-hidden="true"></i><b>Fast Access</b><small>Instant dashboard</small></div>
+					</div>
+				</div>
+
+				<div class="login-referral">[login.form.allow_refferal]</div>
 			</div>
 		</div>
-		
-		[content_login_2]
-		
-		[content_login_1]
-		
-		[content_footer]
-		
-	
+	</section>
+
+	<section class="login-platforms" aria-label="Supported social platforms">
+		<div class="login-platform-track" aria-hidden="true">
+			<span class="login-platform"><i class="fab fa-instagram" style="color:#e1306c"></i> Instagram</span>
+			<span class="login-platform"><i class="fab fa-tiktok"></i> TikTok</span>
+			<span class="login-platform"><i class="fab fa-youtube" style="color:#ff0000"></i> YouTube</span>
+			<span class="login-platform"><i class="fab fa-facebook" style="color:#1877f2"></i> Facebook</span>
+			<span class="login-platform"><i class="fab fa-twitter" style="color:#1da1f2"></i> Twitter / X</span>
+			<span class="login-platform"><i class="fab fa-telegram" style="color:#229ed9"></i> Telegram</span>
+			<span class="login-platform"><i class="fab fa-spotify" style="color:#1db954"></i> Spotify</span>
+			<span class="login-platform"><i class="fab fa-linkedin" style="color:#0a66c2"></i> LinkedIn</span>
+			<span class="login-platform"><i class="fab fa-discord" style="color:#5865f2"></i> Discord</span>
+			<span class="login-platform"><i class="fab fa-soundcloud" style="color:#ff5500"></i> SoundCloud</span>
+			<span class="login-platform"><i class="fab fa-instagram" style="color:#e1306c"></i> Instagram</span>
+			<span class="login-platform"><i class="fab fa-tiktok"></i> TikTok</span>
+			<span class="login-platform"><i class="fab fa-youtube" style="color:#ff0000"></i> YouTube</span>
+			<span class="login-platform"><i class="fab fa-facebook" style="color:#1877f2"></i> Facebook</span>
+			<span class="login-platform"><i class="fab fa-twitter" style="color:#1da1f2"></i> Twitter / X</span>
+			<span class="login-platform"><i class="fab fa-telegram" style="color:#229ed9"></i> Telegram</span>
+			<span class="login-platform"><i class="fab fa-spotify" style="color:#1db954"></i> Spotify</span>
+			<span class="login-platform"><i class="fab fa-linkedin" style="color:#0a66c2"></i> LinkedIn</span>
+			<span class="login-platform"><i class="fab fa-discord" style="color:#5865f2"></i> Discord</span>
+			<span class="login-platform"><i class="fab fa-soundcloud" style="color:#ff5500"></i> SoundCloud</span>
+		</div>
+	</section>
+
+	<div class="login-dynamic-section" data-dynamic-slot="counter">
+		<div class="login-dynamic-inner">[content_login_counter]</div>
+	</div>
+
+	<section class="login-section" aria-labelledby="login-features-title">
+		<div class="login-container">
+			<div class="login-section-heading reveal-item">
+				<span class="login-eyebrow"><i class="fas fa-shield-alt"></i> Why choose us</span>
+				<h2 class="login-section-title" id="login-features-title">Built Different. <em>Built For Growth.</em></h2>
+				<p class="login-section-description">Everything you need to manage campaigns, automate orders and support your customers from one responsive panel.</p>
+			</div>
+
+			<div class="login-feature-grid">
+				<article class="login-feature-card reveal-item"><div class="login-feature-head"><span class="login-feature-icon"><i class="fas fa-bolt"></i></span><h3>Fast Processing</h3></div><p>Automated order handling keeps campaigns moving without unnecessary manual queues.</p></article>
+				<article class="login-feature-card reveal-item"><div class="login-feature-head"><span class="login-feature-icon"><i class="fas fa-gem"></i></span><h3>Multiple Quality Tiers</h3></div><p>Choose the service quality, speed and pricing that best fits each campaign.</p></article>
+				<article class="login-feature-card reveal-item"><div class="login-feature-head"><span class="login-feature-icon"><i class="fas fa-tags"></i></span><h3>Competitive Pricing</h3></div><p>Reseller-friendly rates help agencies and panel owners maintain healthy margins.</p></article>
+				<article class="login-feature-card reveal-item"><div class="login-feature-head"><span class="login-feature-icon"><i class="fas fa-user-shield"></i></span><h3>Secure &amp; Private</h3></div><p>Place orders using public links without sharing social account passwords.</p></article>
+				<article class="login-feature-card reveal-item"><div class="login-feature-head"><span class="login-feature-icon"><i class="fas fa-code"></i></span><h3>API Integration</h3></div><p>Connect your own store or application and automate routine panel operations.</p></article>
+				<article class="login-feature-card reveal-item"><div class="login-feature-head"><span class="login-feature-icon"><i class="fas fa-headset"></i></span><h3>Helpful Support</h3></div><p>Get assistance with services, orders and account questions whenever needed.</p></article>
+			</div>
+		</div>
+	</section>
+
+	<div class="login-dynamic-section alternate" data-dynamic-slot="content-2">
+		<div class="login-dynamic-inner">[content_login_2]</div>
+	</div>
+
+	<section class="login-section alternate" aria-labelledby="login-steps-title">
+		<div class="login-container">
+			<div class="login-section-heading reveal-item">
+				<span class="login-eyebrow"><i class="fas fa-route"></i> How it works</span>
+				<h2 class="login-section-title" id="login-steps-title">Start In <em>Three Simple Steps</em></h2>
+				<p class="login-section-description">Create an account, add balance and place your first order from the dashboard.</p>
+			</div>
+
+			<div class="login-steps">
+				<article class="login-step reveal-item"><span class="login-step-number">I</span><h3>Create Your Account</h3><p>Register with your details and access the complete panel dashboard.</p></article>
+				<article class="login-step reveal-item"><span class="login-step-number">II</span><h3>Add Balance</h3><p>Select an available payment method and securely fund your account.</p></article>
+				<article class="login-step reveal-item"><span class="login-step-number">III</span><h3>Place An Order</h3><p>Choose a service, provide the public link and track delivery live.</p></article>
+			</div>
+		</div>
+	</section>
+
+	<div class="login-dynamic-section" data-dynamic-slot="content-1">
+		<div class="login-dynamic-inner">[content_login_1]</div>
+	</div>
+
+	<section class="login-final-cta">
+		<div class="login-container">
+			<div class="login-cta-card reveal-item">
+				<span class="login-eyebrow"><i class="fas fa-rocket"></i> Ready to begin?</span>
+				<h2>Turn Your Social Media Goals Into <em>Real Growth</em></h2>
+				<p>Create your account today and manage every campaign from one fast, secure and responsive dashboard.</p>
+				<div class="login-cta-actions">
+					<a href="signup" class="login-hero-button primary"><i class="fas fa-user-plus"></i> [login.form.signup_button]</a>
+					<a href="services" class="login-hero-button secondary"><i class="fas fa-list"></i> View services</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>
+
+[content_footer]
+
+<script>
+	(function () {
+		'use strict';
+
+		var page = document.getElementById('login-page');
+		if (!page) {
+			return;
+		}
+
+		page.classList.add('reveal-ready');
+
+		var passwordInput = page.querySelector('#password');
+		var passwordToggle = page.querySelector('.login-password-toggle');
+
+		if (passwordInput && passwordToggle) {
+			passwordToggle.addEventListener('click', function () {
+				var showing = passwordInput.type === 'text';
+				var icon = passwordToggle.querySelector('i');
+				passwordInput.type = showing ? 'password' : 'text';
+				passwordToggle.setAttribute('aria-pressed', showing ? 'false' : 'true');
+				passwordToggle.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+				if (icon) {
+					icon.className = showing ? 'far fa-eye' : 'far fa-eye-slash';
+				}
+				passwordInput.focus();
+			});
+		}
+
+		var slots = page.querySelectorAll('[data-dynamic-slot]');
+		for (var slotIndex = 0; slotIndex < slots.length; slotIndex += 1) {
+			var slot = slots.item(slotIndex);
+			var inner = slot.querySelector('.login-dynamic-inner');
+			if (inner && !inner.textContent.trim() && !inner.children.length) {
+				slot.classList.add('is-empty');
+			}
+		}
+
+		var revealItems = page.querySelectorAll('.reveal-item');
+		if (!('IntersectionObserver' in window)) {
+			for (var itemIndex = 0; itemIndex < revealItems.length; itemIndex += 1) {
+				revealItems.item(itemIndex).classList.add('is-visible');
+			}
+			return;
+		}
+
+		var observer = new IntersectionObserver(function (entries) {
+			entries.forEach(function (entry) {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('is-visible');
+					observer.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.10, rootMargin: '0px 0px -28px' });
+
+		for (var revealIndex = 0; revealIndex < revealItems.length; revealIndex += 1) {
+			observer.observe(revealItems.item(revealIndex));
+		}
+	})();
+</script>
