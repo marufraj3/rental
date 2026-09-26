@@ -483,9 +483,14 @@ body.rental-layout .services-page.sv-guest>.container,
 body.rental-layout .services-page.sv-guest>.container-fluid{display:block!important;float:none!important;width:calc(100% - 32px)!important;max-width:1560px!important;margin-left:auto!important;margin-right:auto!important;padding-top:16px!important}
 .services-page .svc-bar{min-height:0!important}
 .services-page .ui-dd{position:relative!important;height:48px}
-.services-page .dropdown-menu.dd-menu{position:absolute!important;top:100%!important;right:auto!important;bottom:auto!important;left:0!important;float:none!important;margin:9px 0 0!important;transform:none!important}
-.sv-modal.modal{display:none!important}
+.services-page .dropdown-menu.dd-menu{display:none!important;position:absolute!important;top:100%!important;right:auto!important;bottom:auto!important;left:0!important;float:none!important;margin:9px 0 0!important;transform:none!important}
+.services-page .ui-dd.open>.dropdown-menu.dd-menu,
+.services-page .dropdown-menu.dd-menu.show{display:block!important}
+.sv-modal.modal{display:none!important;position:fixed!important;inset:0!important;width:100%!important;max-width:none!important;height:100%!important;margin:0!important;padding:0 10px!important;overflow-x:hidden!important;overflow-y:auto!important;z-index:2085!important}
 .sv-modal.modal.show,.sv-modal.modal.in{display:block!important}
+.sv-modal.modal .modal-dialog{position:relative!important;top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;width:auto!important;max-width:800px!important;margin:56px auto 40px!important;transform:none!important}
+body>.modal-backdrop{position:fixed!important;inset:0!important;width:100%!important;height:100%!important;z-index:2080!important}
+body>.modal-backdrop.show,body>.modal-backdrop.in{display:block!important}
 .services-page .sv-custom-content{position:relative;margin-bottom:14px;padding:20px 22px;border:1px solid var(--bd);border-radius:18px;background:var(--card);color:var(--tc);overflow:hidden}
 .services-page .sv-custom-content:empty{display:none}
 .services-page .sv-custom-content img{max-width:100%;height:auto}
@@ -529,7 +534,7 @@ body.sv-overlay-open{overflow:hidden!important}
  .services-page .services-card{width:100%;max-width:100%;min-width:0}
  .services-page .tk-body,.services-page .tk-r1,.services-page .tk-spec{min-width:0}
  .services-page .dropdown-menu.dd-menu{max-width:calc(100vw - 20px)}
- .sv-modal .modal-dialog{margin:16px 10px}
+ .sv-modal.modal .modal-dialog{width:100%!important;max-width:calc(100vw - 20px)!important;margin:16px auto!important}
 }
 @media(max-width:480px){
  .services-page .sv-custom-content{padding:15px;border-radius:15px}
